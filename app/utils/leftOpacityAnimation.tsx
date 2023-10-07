@@ -9,10 +9,8 @@ export const brandVariants = {
         fill: "rgba(29, 29, 29, 1)",
         x: 0,
         transition: {
-        default: {
             duration: 1,
             ease: "easeInOut"
-        }
         }
     }
 };

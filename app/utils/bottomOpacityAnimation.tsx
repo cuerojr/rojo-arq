@@ -9,10 +9,8 @@ export const socialBtnVariants = {
         fill: "rgba(29, 29, 29, 1)",
         y: 0,
         transition: {
-        default: {
-                duration: 0.7,
-                ease: "easeInOut"
-            }
+            duration: 0.75,            
+            ease: "easeInOut"           
         }
     }
 };
