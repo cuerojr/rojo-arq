@@ -33,7 +33,7 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible">
                 <Link 
-                    href="https://www.instagram.com/julirojo90/" 
+                    href="https://www.instagram.com/rojoarqdiseno/" 
                     target="_blank"
                     style={{
                         fontWeight: '600',
