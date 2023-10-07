@@ -11,7 +11,7 @@ export default function Footer() {
             style={{
                 textAlign: 'center',
             }}>
-            <i>"diseñando arquitectura, construyendo espacios."</i>
+            <i>{`"diseñando arquitectura, construyendo espacios."`}</i>
             <p>Web en construcción</p>
         </motion.footer>
     )
