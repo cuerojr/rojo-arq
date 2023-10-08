@@ -7,37 +7,26 @@ export default function Navbar() {
   return (
     <nav>
         <motion.ul 
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                listStyle: 'none',
-                padding: 15,
-                justifyContent: 'end'
-            }}>
+            className="flex justify-end gap-2 p-2">
             <motion.li 
+            className=""
                 variants={socialBtnVariants}
                 initial="hidden"
-                animate="visible"
-                style={{
-                marginRight: '1rem'
-                }}>
+                animate="visible">
                 <Link 
                     href="https://www.linkedin.com/in/julietarojoarq/" 
                     target="_blank"
-                    style={{
-                        fontWeight: '600',
-                    }}>Linkedin</Link>
+                    className="font-bold">Linkedin</Link>
             </motion.li>
             <motion.li
+                className=""
                 variants={socialBtnVariants}
                 initial="hidden"
                 animate="visible">
                 <Link 
                     href="https://www.instagram.com/rojoarqdiseno/" 
                     target="_blank"
-                    style={{
-                        fontWeight: '600',
-                    }}>Instagram</Link>
+                    className="font-bold">Instagram</Link>
             </motion.li>
         </motion.ul>
     </nav>
