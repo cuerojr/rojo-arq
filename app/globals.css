@@ -36,7 +36,7 @@ body {
   background: #555; 
 }
 
-a {
+li a {
   background-image: linear-gradient(
     to right,
     var(--hover-button-color-start),
@@ -48,12 +48,13 @@ a {
   display: inline-block;
   padding: 5px 0;
   position: relative;
+  /*background-clip: text;*/
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;
 }
 
-a:before{
+li a:before{
   content: '';
   background: var(--hover-button-color-end);
   display: block;
@@ -65,10 +66,10 @@ a:before{
   transition: all 0.3s ease-in-out;
 }
 
-a:hover {
+li a:hover {
  background-position: 0;
 }
 
-a:hover::before{
+li a:hover::before{
   width: 100%;
 }

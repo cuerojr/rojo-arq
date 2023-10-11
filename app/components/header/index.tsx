@@ -4,13 +4,16 @@ import { brandVariants } from "@/app/utils/leftOpacityAnimation";
 
 export default function Header() {
   return (
-    <section className="z-10 max-w-2xl w-full items-center font-mono text-sm lg:flex">
+    <section className="flex min-h-screen flex-col items-center justify-between h-full w-full lg:flex">
       <motion.svg
         id="Capa_1"
         data-name="Capa 1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 227.44 117.88"
         overflow="visible"
+        style={{
+          maxWidth: '500px'
+        }}
       >
         <motion.path
           variants={brandVariants}
