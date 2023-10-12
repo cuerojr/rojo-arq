@@ -1,0 +1,32 @@
+.progress {
+    left: 0;
+    right: 0;
+    height: 5rem;
+    background-color: #141414;
+    bottom: 100px;
+  }
+  
+  .parallax {
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    line-height: 1.12;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .parallax .scroller {
+    font-weight: 600;
+    font-size: 4rem;
+    color: #d1d1d1;
+    display: flex;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .parallax span {
+    display: block;
+    margin-right: 30px;
+  }

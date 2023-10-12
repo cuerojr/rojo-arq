@@ -1,10 +1,12 @@
 import Footer from "./components/footer";
 import Header from "./components/header";
+import Slogan from "./components/slogan";
 
 export default function Home() {
   return (
-    <main className=" p-8 md:py-16 md:px-24">
-      <Header />     
+    <main className="">
+      <Header />
+      <Slogan />   
       <Footer />
     </main>
   )

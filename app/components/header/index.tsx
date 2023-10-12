@@ -1,10 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import { brandVariants } from "@/app/utils/leftOpacityAnimation";
+import s from './page.module.scss';
 
 export default function Header() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-between h-full w-full lg:flex">
+    <section className={`p-8 md:py-16 md:px-24 ${s.header_section} flex min-h-screen items-center justify-center h-full w-full lg:flex`}>
       <motion.svg
         id="Capa_1"
         data-name="Capa 1"
@@ -12,7 +13,7 @@ export default function Header() {
         viewBox="0 0 227.44 117.88"
         overflow="visible"
         style={{
-          maxWidth: '500px'
+          maxWidth: '350px'
         }}
       >
         <motion.path

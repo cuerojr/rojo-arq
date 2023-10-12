@@ -10,10 +10,18 @@
   --hover-button-color-end: #464646;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-end-rgb));
   
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
 }
 
 /* width */

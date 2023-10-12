@@ -1,0 +1,7 @@
+.header_section {
+    background: rgb(204,204,204);
+    background: -moz-linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(239,236,236,1) 10%, rgba(241,241,241,1) 20%, rgba(231,231,231,1) 30%, rgba(231,231,231,1) 70%, rgba(243,243,243,1) 80%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(239,236,236,1) 10%, rgba(241,241,241,1) 20%, rgba(231,231,231,1) 30%, rgba(231,231,231,1) 70%, rgba(243,243,243,1) 80%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(90deg, rgba(204,204,204,1) 0%, rgba(239,236,236,1) 10%, rgba(241,241,241,1) 20%, rgba(231,231,231,1) 30%, rgba(231,231,231,1) 70%, rgba(243,243,243,1) 80%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cccccc",endColorstr="#ffffff",GradientType=1); 
+}
