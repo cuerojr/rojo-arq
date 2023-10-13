@@ -19,7 +19,7 @@ interface ParallaxProps {
   baseVelocity: number;
 }
 
-function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
+function ParallaxText({ children, baseVelocity = 200 }: ParallaxProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -83,8 +83,8 @@ export default function Slogan() {
         <section style={{
                 //position: 'relative'
             }} className="h-full w-full">
-          <ParallaxText baseVelocity={-3}>| diseñando arquitectura, construyendo espacios</ParallaxText>
-          <ParallaxText baseVelocity={3}>| diseñando arquitectura, construyendo espacios</ParallaxText>
+          <ParallaxText baseVelocity={-1}>| diseñando arquitectura, construyendo espacios</ParallaxText>
+          <ParallaxText baseVelocity={1}>| diseñando arquitectura, construyendo espacios</ParallaxText>
         </section>
       );
 }
