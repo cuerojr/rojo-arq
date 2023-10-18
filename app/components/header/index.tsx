@@ -5,8 +5,10 @@ import s from './page.module.scss';
 
 export default function Header() {
   return (
-    <section className={`p-8 md:py-16 md:px-24 ${s.header_section} flex min-h-screen items-center justify-center h-full w-full lg:flex`}>
-      <motion.svg
+    <section className={`p-8 md:py-16 md:px-24 ${s.header_section} flex min-h-screen items-center h-full w-full lg:flex`}>
+       <h1 className={`${s.header_title} text-lg`}>Es posible, está llegando.</h1>
+       {/**
+        * <motion.svg
         id="Capa_1"
         data-name="Capa 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +61,8 @@ export default function Header() {
           d="M153.08,32.78a31.89,31.89,0,0,1-31.89,31.89v-8a23.93,23.93,0,0,0,23.92-23.92V.89h8Z"
         />
       </motion.svg>
+        */}
+       
     </section>
   );
 }

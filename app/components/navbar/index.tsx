@@ -1,8 +1,6 @@
 'use client'
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { socialBtnVariants } from '@/app/utils/bottomOpacityAnimation';
 
 export default function Navbar() {
   return (
