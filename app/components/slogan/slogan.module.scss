@@ -2,17 +2,18 @@
   border-top: 2px solid #141414;
   border-bottom: 2px solid #141414;
 }
+
 .progress {
     left: 0;
     right: 0;
-    height: 5rem;
+    height: 2.5rem;
     background-color: #ffffff;
     bottom: 100px;
-  }
+}
   
 .parallax {
   overflow: hidden;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.2px;
   line-height: 1.12;
   margin: 0;
   white-space: nowrap;
@@ -21,8 +22,8 @@
 }
 
 .parallax .scroller {
-  font-weight: 600;
-  font-size: 4rem;
+  font-weight: 400;
+  font-size: 2rem;
   color: #141414;
   display: flex;
   white-space: nowrap;
@@ -32,5 +33,5 @@
 
 .parallax span {
   display: block;
-  margin-right: 30px;
+  margin-right: 12px;
 }
