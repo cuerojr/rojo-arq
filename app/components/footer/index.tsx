@@ -21,9 +21,7 @@ export default function Footer() {
                     </li>
                     <li>
                         <p>Cel./WhatsApp:  
-                            <a target="_blank" aria-label="Chat on WhatsApp" href="https://wa.me/549341153830273">
-                                0341-153830273
-                            </a>
+                            <a target="_blank" aria-label="Chat on WhatsApp" href="https://wa.me/549341153830273">0341-153830273</a>
                         </p>
                     </li>
                     <li>
