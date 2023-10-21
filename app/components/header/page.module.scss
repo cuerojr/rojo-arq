@@ -7,18 +7,28 @@
     background-blend-mode:multiply;
 
     .header_title {
-        font-size: 3rem;
-        line-height: 1;
+        font-size: 4rem;
+        line-height: 1.2;
         transition: .7s ease all;
         font-weight: 600;
+        text-transform: uppercase;
+    }
+    .header_subtitle {
+        font-size: 2.5rem;
+        line-height: 1;
+        transition: .7s ease all;
+        font-weight: 400;
         text-transform: uppercase;
     }
     
 }
 .header_section:hover {
     background-size:63%;
-    //background-image:url('../../../public/header-lg.webp');
+    background-image:url('../../../public/header-bg.webp');
     .header_title {
-        font-size: 3.1rem;
+        font-size: 4.1rem;
+    }
+    .header_subtitle {
+        font-size: 2.6rem;
     }
 }

@@ -6,7 +6,10 @@ import s from './page.module.scss';
 export default function Header() {
   return (
     <section className={`p-8 md:py-16 md:px-24 ${s.header_section} flex min-h-screen items-center h-full w-full lg:flex`}>
-       <h1 className={`${s.header_title} text-lg`}>Es posible, está llegando.</h1>
+       <div>
+        <h1 className={`${ s.header_title } text-lg`}>Es posible</h1>
+        <p className={`${ s.header_subtitle }`}>Estás llegando</p>
+       </div>
        {/**
         * <motion.svg
         id="Capa_1"

@@ -83,7 +83,7 @@ export default function Slogan() {
         <section style={{
                 //position: 'relative'
             }} className={`h-full w-full ${s.slogan_section}`}>
-          <ParallaxText baseVelocity={-1}>diseñando arquitectura, construyendo espacios</ParallaxText>
+          {/**<ParallaxText baseVelocity={-1}>diseñando arquitectura, construyendo espacios</ParallaxText> */}
           <ParallaxText baseVelocity={1}>construyendo espacios diseñando arquitectura,</ParallaxText>
         </section>
       );
