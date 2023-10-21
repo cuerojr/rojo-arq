@@ -1,9 +1,13 @@
 .services_container {
-    max-width: 960px;
-    padding: 3rem 1rem;
-    margin: 2rem auto;
-
+    width: min(800px, 95vw);
+    margin-inline: auto;
     display: grid;
     gap: 1rem;
-    grid-template-columns: [column-1] 1fr [column-2] 1fr;
+
+    .services_area{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
 }

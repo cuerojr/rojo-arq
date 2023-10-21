@@ -1,9 +1,25 @@
 .service_container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem 0;
     padding: 2rem 1rem;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    max-width: 480px;
+    //border: 2px solid black;
+    //border-radius: 5px;
+    h2 {
+        margin-bottom: 1rem;
+    }
+    .box {
+        width: 300px;
+        aspect-ratio: 1 / 1;
+        background-color: blue;
+    }
+}
+  
+.service_container:nth-child(even) {
+    flex-direction: row-reverse;
+}
 
-
+.service_container:nth-child(even) .column {
+    text-align: right;
 }

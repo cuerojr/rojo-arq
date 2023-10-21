@@ -6,31 +6,46 @@ import s from './service.module.scss'
 export default function ServicesList(): any {
     const services: ServiceType[] = [{
         id: "servicio-1",
-        title: "Lorem ipsum dolor sit amet",
+        title: "Acesoramiento personalizado",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe cumque quisquam doloremque rem molestiae, beatae totam dolores deserunt!",
-        images: []
+        images: [{
+            src: '',
+            alt: 'Acesoramiento personalizado'
+        }]
     },
    {
         id: "servicio-2",
-        title: "Lorem ipsum dolor",
+        title: "Diseños y proyectos exclusivos",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe.",
-        images: []
+        images: [{
+            src: '',
+            alt: 'Diseños y proyectos exclusivos'
+        }]
     },{
         id: "servicio-3",
-        title: "Lorem ipsum dolor sit amet",
+        title: "Etapabilidad",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe cumque quisquam doloremque rem molestiae, beatae totam dolores deserunt!",
-        images: []
+        images: [{
+            src: '',
+            alt: 'Etapabilidad'
+        }]
     },
    {
         id: "servicio-4",
-        title: "Lorem ipsum dolor",
+        title: "Informes semanales y seguimiento de obra",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe.",
-        images: []
+        images: [{
+            src: '',
+            alt: 'Informes semanales y seguimiento de obra'
+        }]
     },{
         id: "servicio-5",
-        title: "Lorem ipsum dolor sit amet",
+        title: "Mano de obra",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe cumque quisquam doloremque rem molestiae, beatae totam dolores deserunt!",
-        images: []
+        images: [{
+            src: '',
+            alt: 'Mano de obra'
+        }]
     }];
 
     return (
