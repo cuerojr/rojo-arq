@@ -6,14 +6,25 @@
     padding: 2rem 1rem;
     //border: 2px solid black;
     //border-radius: 5px;
+    .column {
+        width: 50%;
+
+        p {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            display: -webkit-box;
+            overflow: hidden;
+        }
+    }
     h2 {
         margin-bottom: 1rem;
     }
     .box {
-        width: min(300px, 350px);
+        //width: clamp(50%, 300px, 350px);
         position: relative;
         aspect-ratio: 1 / 1;
         background-color: #e4e4e4;
+        
         .image {
             object-fit: cover;
             object-position: center;
@@ -26,5 +37,8 @@
 }
 
 .service_container:nth-child(even) .column {
-    text-align: right;
+    text-align: right;    
+}
+.service_container:nth-child(odd) .column .box {
+    margin-left: auto;  
 }
