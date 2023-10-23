@@ -28,10 +28,9 @@ export default function Service({ props }: { props: ServiceType}): any {
                     <h1>This is a modal.</h1>
                     <button id="closeModal">Close modal</button>
                 </dialog>
-                <button 
-                    type='button' 
+                <a 
                     id="openModal"
-                    className='my-4 bg-transparent hover:bg-black text-black-700 font-semibold hover:text-white py-2 px-4 border border-black-500 hover:border-transparent rounded'>Más</button>
+                    className=''>Más</a>
             </div>
         </article>
     )

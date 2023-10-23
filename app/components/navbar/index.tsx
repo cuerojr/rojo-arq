@@ -24,7 +24,7 @@ export default function Navbar() {
               width={100}
               height={50}
               alt="rojoarq"/>
-            </Link>
+        </Link>
         <ul 
             className="flex justify-end gap-2 p-2">
             <li 
