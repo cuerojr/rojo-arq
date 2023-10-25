@@ -13,8 +13,7 @@ export default function ServicesList(): any {
         Los planos y cómputos es el “LEGAJO DE OBRA” que nos permiten ser rigurosos para llegar al resultado que se desea. Nuestro servicio de construcción incluye la dirección de obra y planificación para gestionar mejor los recursos y el tiempo. Entregamos “INFORMES SEMANALES” en etapa de arquitectura y de obra para que sepas el estado de avance de tu proyecto.
         Podes contratar la mano de obra y materiales por tu cuenta o acceder a nuestro “SISTEMA CONSTRUCTIVO”.`,
         images: [{
-            //src: '/components/services/construccion/visual_construccion.mp4',
-            src: '/header-lg.webp',
+            src: '/components/services/construccion/construccion.jpeg',
             alt: 'Mano de obra'
         }]
     },
@@ -38,7 +37,7 @@ export default function ServicesList(): any {
     },
     {
         id: "servicio-3",
-        title: "Diseños y exclusivos",
+        title: "Diseños exclusivos",
         description: `Podemos hacer realidad tus ideas y que vivas los espacios que soñas.
         Hacemos del lugar más cálido de la casa: la cocina, un lugar funcional.
         Lugares de la casa como este, necesitan una atención especial para aprovechar al máximo su uso. A
@@ -51,7 +50,7 @@ export default function ServicesList(): any {
         y texturas; y mano de obra especializada.`,
         images: [{
             src: '/components/services/diseño/3d.webp',
-            alt: 'Diseños y proyectos exclusivos'
+            alt: 'Diseños exclusivos'
         }]
     },
     {
@@ -71,10 +70,12 @@ export default function ServicesList(): any {
     {
         id: "servicio-5",
         title: "Arquitectura comercial",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum laborum facilis fugit ipsa accusantium ducimus, cum ab impedit consectetur officia saepe.",
+        description: `Arquitectura planificada equivale a negocio más rentable.
+        En la ARQUITECTURA COMERCIAL de un negocio de venta al público, una oficina o un equipamiento urbano, el énfasis debe estar principalmente en la IMAGEN. Por eso contamos con un EQUIPO de DISEÑO, capacitado para asorarte desde el PROYECTO DE ARQUITECTURA y CONSTRUCCIÓN, DISEÑO GRÁFICO y DISEÑO WEB.
+        En el proyecto de tu negocio, es importante definir TU MARCA, y el uso de colores y formas construyen esa identidad que queres proyectar, abarcando la ARQUITECTURA y el DISEÑO en todos los aspectos (funcionales, constructivos y estéticos) te ayudamos a proyectar una imágen de profesionalismo y calidad acorde a tu rubro. Eso lo pudimos lograr mostrado en estos proyectos.`,
         images: [{
-            src: '/header-bg-n.webp',
-            alt: 'Informes semanales y seguimiento de obra'
+            src: '/components/services/comercial/garita.webp',
+            alt: 'Arquitectura comercial'
         }]
     }];
 

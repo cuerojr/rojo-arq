@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion';
 import { socialBtnVariants } from '@/app/utils/bottomOpacityAnimation';
+import s from './style.module.scss'
 
 export default function Footer() {
     return (
@@ -13,7 +14,7 @@ export default function Footer() {
             }}>
                 <h2 style={{
                     fontWeight: '600',
-                    fontSize: 'larger'
+                    fontSize: '2.5rem'
                 }}>Web en construcción</h2>
                 <ul>
                     <li>

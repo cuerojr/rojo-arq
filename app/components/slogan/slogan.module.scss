@@ -36,3 +36,7 @@
   display: block;
   margin-right: 12px;
 }
+.parallax span::selection {
+  color: white;
+  background-color: #141414;
+}
