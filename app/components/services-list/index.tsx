@@ -49,7 +49,7 @@ export default function ServicesList(): any {
         materia prima de primera calidad en melamina mdf de 18 mm marca Faplac con variedad de colores
         y texturas; y mano de obra especializada.`,
         images: [{
-            src: '/components/services/diseño/3d.webp',
+            src: '/components/services/diseño/diseno.jpeg',
             alt: 'Diseños exclusivos'
         }]
     },
