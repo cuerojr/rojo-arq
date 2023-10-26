@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link';
 import Image from 'next/image';
+import s from './style.module.scss'
 
 export default function Navbar() {
   return (
@@ -28,7 +29,7 @@ export default function Navbar() {
         <ul 
             className="flex justify-end gap-2 p-2">
             <li 
-              className="">
+              className={s.navbar_li}>
                 <Link 
                     href="https://www.linkedin.com/in/julietarojoarq/" 
                     target="_blank"
@@ -44,13 +45,10 @@ export default function Navbar() {
                       </svg>
                     </Link>
             </li>
-            <li>
+            <li className={s.navbar_li}>
                 <Link 
                     href="https://www.instagram.com/rojoarqdiseno/" 
-                    target="_blank"
-                    style={{
-                      padding: '.5rem'
-                    }}>
+                    target="_blank">
                       <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         height="1em" 

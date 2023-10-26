@@ -54,10 +54,11 @@
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
+            padding: 0;
             span {
                 display: flex;
                 background-color: #141414;
-                width: 1rem;
+                width: 2rem;
                 height: 3px;
             }
         }
@@ -86,14 +87,12 @@
     flex-direction: row-reverse;
     .divider {
         justify-content: end;
-        padding-right: .5rem;
     }
 }
 
 .service_container:nth-child(odd) {
     .divider {
         justify-content: start;
-        padding-left: .5rem;
     }
 }
 
