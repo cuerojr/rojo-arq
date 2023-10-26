@@ -81,11 +81,7 @@ export default function ServicesList(): any {
 
     return (
         <section className={ `${s.services_container}`}>
-            {
-                services.map(( service: ServiceType ) => (
-                    <Service key={ service.id } props={ service }/>
-                ))
-            }
+            { services.map(( service: ServiceType ) => <Service key={ service.id } props={ service }/>) }
         </section>
     )
 }

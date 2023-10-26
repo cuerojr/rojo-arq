@@ -92,7 +92,8 @@ li a:hover::before{
 }
 
 p {
-  font-size: 20px;
+  /* font-size: 2vw;*/
+  font-size: calc(15px + 0.390625vw);
   line-height: 1.2;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;

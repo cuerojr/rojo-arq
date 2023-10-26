@@ -1,0 +1,28 @@
+.modal_container {
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 0 1rem 2rem 1rem;
+    .modal_description {
+        
+        button {
+            margin-left: auto;
+        }
+
+        h2 {
+            width: 66%;
+            margin-left: auto;
+        }
+        p {
+            display: flex;
+            flex-direction: column;
+            width: 66%;
+            margin-left: auto;
+            font-size: calc(15px + 0.390625vw);
+            line-height: 1.2;
+            font-weight: 500;
+            text-align: justify;
+            line-height: 1.3;
+        }
+    }
+    
+}
