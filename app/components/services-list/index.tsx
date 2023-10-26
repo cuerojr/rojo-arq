@@ -7,11 +7,7 @@ export default function ServicesList(): any {
     const services: ServiceType[] = [{
         id: "servicio-1",
         title: "Construcción",
-        description: `Comenzar una obra nueva o de completamiento sabiendo como queda terminada, es posible.
-        Desde el comienzo del proyecto vas a poder visualizar con nuestro servicio “VISUAL 3D ESPACIAL” opciones de colores, materialidad y espacio.
-        El desafío de esta casa, actualmente en obra, fue continuar un proyecto que habia quedado parado por mucho tiempo. Partiendo de lo existente, se realizaron cambios para mejorar la distribución de la casa y crear los lugares que la familia deseaba.
-        Los planos y cómputos es el “LEGAJO DE OBRA” que nos permiten ser rigurosos para llegar al resultado que se desea. Nuestro servicio de construcción incluye la dirección de obra y planificación para gestionar mejor los recursos y el tiempo. Entregamos “INFORMES SEMANALES” en etapa de arquitectura y de obra para que sepas el estado de avance de tu proyecto.
-        Podes contratar la mano de obra y materiales por tu cuenta o acceder a nuestro “SISTEMA CONSTRUCTIVO”.`,
+        description: `Comenzar una obra nueva o de completamiento sabiendo como queda terminada, es posible.\n Desde el comienzo del proyecto vas a poder visualizar con nuestro servicio “VISUAL 3D ESPACIAL” opciones de colores, materialidad y espacio.\n El desafío de esta casa, actualmente en obra, fue continuar un proyecto que habia quedado parado por mucho tiempo. Partiendo de lo existente, se realizaron cambios para mejorar la distribución de la casa y crear los lugares que la familia deseaba.\n Los planos y cómputos es el “LEGAJO DE OBRA” que nos permiten ser rigurosos para llegar al resultado que se desea. Nuestro servicio de construcción incluye la dirección de obra y planificación para gestionar mejor los recursos y el tiempo. Entregamos “INFORMES SEMANALES” en etapa de arquitectura y de obra para que sepas el estado de avance de tu proyecto. Podes contratar la mano de obra y materiales por tu cuenta o acceder a nuestro “SISTEMA CONSTRUCTIVO”.`,
         images: [{
             src: '/components/services/construccion/construccion.jpeg',
             alt: 'Mano de obra'
@@ -20,15 +16,11 @@ export default function ServicesList(): any {
     {
         id: "servicio-2",
         title: "Asesoramiento personalizado",
-        description: `Querés convertir tu casa en comercio? Vas a necesitar el servicio de “TRANSFORMACIONES
-        ESPACIALES”. Te contamos cómo puede ser una realidad.
-        Estudiamos de forma personalizada cada inmueble para proveer la mejor solución en casos como
-        estos. Esta obra pasó de ser una casa en ruinas a un local comercial de lubricentro. Se adaptaron los
-        ingresos y las áreas para el uso que demandaba. Se demolió y construyó a nuevo lo obsoleto.
-        Si en tu caso debe seguir conviniendo CASA+COMERCIO u OFICINA, creamos los espacios
-        necesarios para que sigas teniendo la intimidad de tu hogar y potenciar tu negocio a la vez.
-        Diseñamos tu fachada para darle “IDENTIDAD COMERCIAL” y a través de nuestro PACK
-        “VISUAL 3D ESPACIAL” podes ver antes de empezar la obra, cómo va a quedar terminado; y
+        description: `Querés convertir tu casa en comercio? Vas a necesitar el servicio de “TRANSFORMACIONES ESPACIALES”. 
+        Te contamos cómo puede ser una realidad.
+        Estudiamos de forma personalizada cada inmueble para proveer la mejor solución en casos como estos. Esta obra pasó de ser una casa en ruinas a un local comercial de lubricentro. Se adaptaron los ingresos y las áreas para el uso que demandaba. Se demolió y construyó a nuevo lo obsoleto.
+        Si en tu caso debe seguir conviniendo CASA+COMERCIO u OFICINA, creamos los espacios necesarios para que sigas teniendo la intimidad de tu hogar y potenciar tu negocio a la vez.
+        Diseñamos tu fachada para darle “IDENTIDAD COMERCIAL” y a través de nuestro PACK “VISUAL 3D ESPACIAL” podes ver antes de empezar la obra, cómo va a quedar terminado; y
         elegir colores, materialidad y combinaciones posibles.`,
         images: [{
             src: '/components/services/asesoramiento/asesoramiento.webp',
