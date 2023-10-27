@@ -53,6 +53,7 @@ export default function Service({ props }: { props: ServiceType}): any {
                         </a>
                     </div>
                     <h2 className='text-3xl font-bold mt-6'>{ title }</h2>
+                    <div className={s.modal_divider}><span></span></div>
                     <p>{ description }</p>
                 </Modal>
             </div>

@@ -33,7 +33,7 @@ export default function Modal({ children, open, onClose }: Props) {
 
   return (
     <dialog
-      className={ s.modal_container }
+      className={ `${s.modal_container} ${open? 'show': 'hide'}` }
       ref={ref}
       onClick={(e) => {
         const dialogDimensions = e.currentTarget.getBoundingClientRect();

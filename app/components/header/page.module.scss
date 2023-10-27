@@ -1,8 +1,8 @@
 .header_section {
-    background-image:url('../../../public/header-bg-n.webp');
-    background-size:60%;
-    background-repeat:no-repeat;
-    background-position: right center;
+    //background-image:url('../../../public/header-bg-n.webp');
+    //background-size:60%;
+    //background-repeat:no-repeat;
+    //background-position: right center;
     transition: 1s ease all;
     background-blend-mode:multiply;
 
@@ -20,9 +20,23 @@
         font-weight: 400;
         text-transform: uppercase;
     }
+
+    .header_box {
+        //width: clamp(50%, 300px, 350px);
+        width: 50%;
+        position: relative;
+        aspect-ratio: 1 / 1;
+        background-color: #e4e4e4;
+        
+        .image {
+            object-fit: cover;
+            object-position: center;
+        }
+        
+    }
     
 }
-.header_section:hover {
+/*.header_section:hover {
     background-size:63%;
     //background-image:url('../../../public/header-bg.webp');
     .header_title {
@@ -31,4 +45,4 @@
     .header_subtitle {
         font-size: 2.55rem;
     }
-}
+}*/
