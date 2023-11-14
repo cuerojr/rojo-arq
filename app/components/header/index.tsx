@@ -8,46 +8,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function Header() {
   
   const titleRef: any = useRef(null);
-  useLayoutEffect(() => {
-
-    gsap.registerPlugin(ScrollTrigger);
-  }, [])
   
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.to('span', {
-        y: 0,
-        stagger: 0.05,
-        delay: 0,
-        duration: .1,
-      });
-
-    })
-    return () => ctx.revert();
-  }, [])
- 
-
-  /*useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.from(titleRef.children, {
-        y: 0,
-        stagger: 0.05,
-        delay: 0,
-        duration: .1,
-      });
-
-    })
-    return () => ctx.revert();
-  }, []);*/
-
   return (
     <section
-      className={`${s.header_section} flex min-h-screen items-center h-full w-full lg:flex`} data-scroll-section>
+      className={`${s.header_section} flex min-h-screen items-center h-full w-full lg:flex`}>
       <div
         style={{
           width: "50%",
         }}>
-        <h1 ref={ titleRef } data-scroll data-scroll-speed="3" data-scroll-position="top"     
+        <h1 ref={ titleRef }     
           className={`${s.header_title} text-lg`}>
           <span>E</span>
           <span>s</span>
@@ -60,7 +29,7 @@ export default function Header() {
           <span>l</span>
           <span>e</span>
         </h1>
-        <p  className={`${s.header_subtitle}`} data-scroll data-scroll-speed="3" data-scroll-position="top">Estás llegando</p>
+        <p  className={`${s.header_subtitle}`}>Estás llegando</p>
       </div>
       <div className={s.header_box}>
         <Image

@@ -7,7 +7,7 @@ import { Input } from 'postcss';
 export default function Footer() {
     return (
         <section 
-            className={`${ s.footer_container } flex min-h-screen items-end justify-between h-full w-full`}>            
+            className={ s.footer_container } >            
             <div className={s.footer_text}>
                 <h2 style={{
                     fontWeight: '600',

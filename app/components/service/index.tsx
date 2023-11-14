@@ -13,7 +13,7 @@ export default function Service({ props }: { props: ServiceType }) {
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <article className={ s.service_container }>
+        <div className={ s.service_container }>
             <div className={ s.column }>
                 <div className={ s.box }>
                     <Image 
@@ -21,6 +21,7 @@ export default function Service({ props }: { props: ServiceType }) {
                         src={ images[0].src } 
                         alt={ title } 
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         loading='lazy'
                         />
                 </div>
@@ -56,6 +57,6 @@ export default function Service({ props }: { props: ServiceType }) {
                     <p>{ description }</p>
                 </Modal>
             </div>
-        </article>
+        </div>
     )
 }

@@ -96,7 +96,7 @@ export default function ServicesList(): any {
 
     return (
         <section>
-            { services.map(( service: ServiceType ) => <Service key={ service.id } props={ service }/>) }
+            { services.map(( service: ServiceType, index: number ) => <Service key={ index } props={ service }/>) }
         </section>
     )
 }
