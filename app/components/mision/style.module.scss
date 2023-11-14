@@ -29,6 +29,9 @@
             .svg{
                 fill: white;
             }
+            .mision_description {
+                color: white;
+            }
         }
 
         .mision_description {
@@ -40,6 +43,11 @@
 
     .mision_article_container:first-child {
         border-top: 3px solid black;
+        .mision_description {
+            display: block;
+            width: 75vw;
+            margin-left: auto;
+        }
     }
 
 
