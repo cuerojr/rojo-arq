@@ -1,6 +1,11 @@
 .footer_container {
     background-color: #000;
     color: #f1f1f1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+
+    align-items: flex-end;
     /*background-image: url('../../../public/components/footer/footer_text.png');
     background-position: bottom left;
     background-size: contain;
@@ -23,7 +28,7 @@
             } 
             
         }
-        /*
+        
         li a {
             background-image: linear-gradient(
             to right,
@@ -37,7 +42,7 @@
             padding: 5px 0;
             position: relative;
             
-            /*background-clip: text;*//*
+            /*background-clip: text;*/
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: all 0.3s ease-in-out;
@@ -65,7 +70,7 @@
         
         li a:hover::before{
             width: 100%;
-        }*/
+        }
   
     }
     p {
