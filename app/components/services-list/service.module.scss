@@ -1,0 +1,13 @@
+.services_container {
+    width: min(800px, 95vw);
+    margin-inline: auto;
+    display: grid;
+    gap: 1rem;
+
+    .services_area{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+}

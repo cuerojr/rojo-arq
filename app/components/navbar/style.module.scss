@@ -1,0 +1,42 @@
+.navbar_li a {
+    background-image: linear-gradient(
+      to right,
+      var(--hover-button-color-start),
+      var(--hover-button-color-end) 50%,
+      #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: .5rem;
+    position: relative;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+    mix-blend-mode: difference;
+    svg {
+      fill: #fff;
+    }
+  }
+  
+.navbar_li a:before{
+    content: '';
+    background: var(--hover-button-color-end);
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+.navbar_li a:hover {
+   background-position: 0;
+  }
+  
+.navbar_li a:hover::before{
+    width: 100%;
+  }
+  

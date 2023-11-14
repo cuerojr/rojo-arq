@@ -80,11 +80,9 @@ function ParallaxText({ children, baseVelocity = 200 }: ParallaxProps) {
 
 export default function Slogan() {
     return (
-        <section style={{
-                //position: 'relative'
-            }} className="h-full w-full">
-          <ParallaxText baseVelocity={-1}>diseñando arquitectura, construyendo espacios</ParallaxText>
-          <ParallaxText baseVelocity={1}>construyendo espacios diseñando arquitectura,</ParallaxText>
+        <section className={`h-full w-full ${s.slogan_section}`}>
+          <ParallaxText baseVelocity={-1}>construyendo espacios diseñando arquitectura,</ParallaxText>
+          {/**<ParallaxText baseVelocity={1}>diseñando arquitectura, construyendo espacios</ParallaxText> */}
         </section>
       );
 }
