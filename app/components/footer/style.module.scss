@@ -1,5 +1,5 @@
 .footer_container {
-    background-color: #141414;
+    background-color: #000;
     color: #f1f1f1;
     /*background-image: url('../../../public/components/footer/footer_text.png');
     background-position: bottom left;
@@ -7,20 +7,23 @@
     background-repeat: no-repeat;
     background-blend-mode: difference;*/
     .footer_text {
+        width: 50%;
         
         .footer_button {                        
             display: flex;
             justify-content: flex-start;
             align-items: center;
             gap: 1rem;     
+            color: #f1f1f1!important;
             .footer_span {
                 color: #f1f1f1!important;
             }  
             svg {
                 fill: #f1f1f1;
-            }  
+            } 
+            
         }
-        
+        /*
         li a {
             background-image: linear-gradient(
             to right,
@@ -33,10 +36,15 @@
             display: inline-block;
             padding: 5px 0;
             position: relative;
-            /*background-clip: text;*/
+            
+            /*background-clip: text;*//*
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: all 0.3s ease-in-out;
+
+            .footer_span {
+                color: #f1f1f1!important;
+            }  
         }
         
         li a:before{
@@ -57,7 +65,7 @@
         
         li a:hover::before{
             width: 100%;
-        }
+        }*/
   
     }
     p {
