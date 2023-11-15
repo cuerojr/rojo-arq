@@ -1,5 +1,5 @@
 .mision_container {
-    min-height: 100vh;
+    margin: 6rem 0;
 
     .mision_article_container{
         border-bottom: 3px solid black;
@@ -21,13 +21,17 @@
         &:hover {
             background-color: black;
             columns: white;
-
+            transform: translate3d(0px, 0em, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+            transform-style: preserve-3d;
             h2 {
                 color: white;
             }
 
             .svg{
                 fill: white;
+            }
+            .mision_description {
+                color: white;
             }
         }
 
@@ -40,7 +44,11 @@
 
     .mision_article_container:first-child {
         border-top: 3px solid black;
+        .mision_description {
+            display: block;
+            width: 75vw;
+            margin-left: auto;
+        }
     }
-
 
 }

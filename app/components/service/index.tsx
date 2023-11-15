@@ -13,7 +13,7 @@ export default function Service({ props }: { props: ServiceType }) {
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <div className={ s.service_container }>
+        <article className={ s.service_container }>
             <div className={ s.column }>
                 <div className={ s.box }>
                     <Image 
@@ -21,8 +21,6 @@ export default function Service({ props }: { props: ServiceType }) {
                         src={ images[0].src } 
                         alt={ title } 
                         fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        loading='lazy'
                         />
                 </div>
             </div>
@@ -39,7 +37,7 @@ export default function Service({ props }: { props: ServiceType }) {
                         setOpenModal(false);
                     }}
                 >
-                    <div className='flex justify-end'>
+                    <div className={ s.modal_container }>
                         <a onClick={() => setOpenModal(false)}
                             style={{
                                 padding: '.5rem'
@@ -57,6 +55,6 @@ export default function Service({ props }: { props: ServiceType }) {
                     <p>{ description }</p>
                 </Modal>
             </div>
-        </div>
+        </article>
     )
 }

@@ -30,25 +30,25 @@
             margin-top: 1rem;
           }
           
-          a:before{
-            content: '';
-            background: var(--hover-button-color-end);
-            display: block;
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            transition: all 0.3s ease-in-out;
-          }
-          
-          a:hover {
-           background-position: 0;
-          }
-          
-          a:hover::before{
-            width: 100%;
-          }
+        a:before{
+        content: '';
+        background: var(--hover-button-color-end);
+        display: block;
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        transition: all 0.3s ease-in-out;
+        }
+        
+        a:hover {
+        background-position: 0;
+        }
+        
+        a:hover::before{
+        width: 100%;
+        }
         
         .divider {
             width: 100%;
@@ -67,7 +67,14 @@
         .text_description {
             line-height: 1.5;
         }
+
+        .modal_container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
     }
+
     h2 {
         margin-bottom: 1.5rem;
         font-size: calc(30px + 0.390625vw);

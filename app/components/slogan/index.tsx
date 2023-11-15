@@ -1,5 +1,5 @@
-'use client'
-import s from './slogan.module.scss';
+"use client";
+import s from "./slogan.module.scss";
 //import "./styles.css";
 import { useRef } from "react";
 import {
@@ -9,7 +9,7 @@ import {
   useTransform,
   useMotionValue,
   useVelocity,
-  useAnimationFrame
+  useAnimationFrame,
 } from "framer-motion";
 
 import { wrap } from "@motionone/utils";
@@ -25,10 +25,10 @@ function ParallaxText({ children, baseVelocity = 200 }: ParallaxProps) {
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, {
     damping: 50,
-    stiffness: 400
+    stiffness: 400,
   });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
+    clamp: false,
   });
 
   /**
@@ -66,23 +66,26 @@ function ParallaxText({ children, baseVelocity = 200 }: ParallaxProps) {
    */
   return (
     <div className={s.progress}>
-        <div className={s.parallax}>
-            <motion.div className={s.scroller} style={{ x }}>
-                <span>{children}</span>
-                <span>{children}</span>
-                <span>{children}</span>
-                <span>{children}</span>
-            </motion.div>
-        </div>
+      <div className={s.parallax}>
+        <motion.div className={s.scroller} style={{ x }}>
+          <span>{children}</span>
+          <span>{children}</span>
+          <span>{children}</span>
+          <span>{children}</span>
+        </motion.div>
+      </div>
     </div>
   );
 }
 
 export default function Slogan() {
-    return (
-        <section className={`h-full w-full ${s.slogan_section}`}>
-          <ParallaxText baseVelocity={-1}>construyendo espacios diseñando arquitectura,</ParallaxText>
-          {/**<ParallaxText baseVelocity={1}>diseñando arquitectura, construyendo espacios</ParallaxText> */}
-        </section>
-      );
+  return (
+    <section
+      className={`h-full w-full ${s.slogan_section}`}>
+      <ParallaxText baseVelocity={-1}>
+        construyendo espacios diseñando arquitectura,
+      </ParallaxText>
+      {/**<ParallaxText baseVelocity={1}>diseñando arquitectura, construyendo espacios</ParallaxText> */}
+    </section>
+  );
 }

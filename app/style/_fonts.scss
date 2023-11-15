@@ -1,0 +1,72 @@
+// HERE WE DEFINE FONT-FACES, I.E.:
+// @font-face {
+//   font-family: 'Attila Sans Uniform';
+//   src: url('/fonts/Attila/AttilaSansUniform-Black.woff2') format('woff2'),
+//     url('/fonts/Attila/AttilaSansUniform-Black.woff') format('woff');
+//   font-display: swap;
+//   font-weight: 900;
+// }
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-SemiBoldItalic.woff2') format('woff2');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-ThinItalic.woff2') format('woff2');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-BlackItalic.woff2') format('woff2');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-LightItalic.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('/fonts/Neris-BoldItalic.woff2') format('woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+
+
