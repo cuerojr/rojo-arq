@@ -1,3 +1,4 @@
+import ContactForm from '../contact-form'
 import s from './style.module.scss'
 
 export default function Footer() {
@@ -34,29 +35,7 @@ export default function Footer() {
                 </ul>
                 <div className={s.back_text}></div>
             </div>
-            <div className={ s.footer_form }>
-                <form>
-                    <div className={ s.form_group }>
-                        <label>NOMBRE</label>
-                        <input type="text" />
-                    </div>
-                    <div className={ s.form_group }>
-                        <label>EMAIL</label>
-                        <input type="email"/>
-                    </div>
-                    <div className={ s.form_group }>
-                        <label>TELÉFONO</label>
-                        <input type="email"/>
-                    </div>
-                    <div className={ s.form_group }>
-                        <label>CONSULTA</label>
-                        <textarea></textarea>
-                    </div>
-                    <div>
-                        <button type="submit">ENVIAR</button>
-                    </div>
-                </form>
-            </div>
+            <ContactForm />
         </section>
     )
 }

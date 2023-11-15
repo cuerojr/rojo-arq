@@ -88,3 +88,29 @@ h1::selection, h2::selection, p::selection {
   color: white;
   background-color: #141414;
 }
+
+/* Buttons */
+.primary-btn {
+  padding: 1rem 2rem;
+  background-color: black;
+  color: white;
+  border: 0;
+  border-radius: 25px;
+  font-size: x-small;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 10rem;
+}
+
+/* Display */
+.d-flex {
+  display: flex;
+} 
+
+.align-center{
+  align-items: center;
+} 
+
+.justify-center{
+  justify-content: center;
+}
