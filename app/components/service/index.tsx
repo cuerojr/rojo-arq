@@ -21,7 +21,6 @@ export default function Service({ props }: { props: ServiceType }) {
                         src={ images[0].src } 
                         alt={ title } 
                         fill
-                        loading='lazy'
                         />
                 </div>
             </div>
@@ -38,7 +37,7 @@ export default function Service({ props }: { props: ServiceType }) {
                         setOpenModal(false);
                     }}
                 >
-                    <div className='flex justify-end'>
+                    <div className={ s.modal_container }>
                         <a onClick={() => setOpenModal(false)}
                             style={{
                                 padding: '.5rem'

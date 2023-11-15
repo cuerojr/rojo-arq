@@ -1,13 +1,12 @@
-'use client'
+"use client";
 import { useLayoutEffect, useRef } from "react";
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
 import PlusIconComponent from "../plus-icon-component";
 
 export default function MisionComponent(): any {
-
   const misionData: MisionType[] = [
     {
       id: "mision",
@@ -34,16 +33,18 @@ export default function MisionComponent(): any {
   ];
 
   const text = useRef(null);
-  
+
   return (
-    <section className={s.mision_container} data-scroll-section>
+    <section className={s.mision_container}>
       {misionData.map((element, index) => (
         <div key={index} className={s.mision_article_container}>
           <div className={s.mision_title_container}>
             <h2 className={s.mision_title}>{element.title}</h2>
             <PlusIconComponent />
           </div>
-          <p ref={text} className={s.mision_description}>{element.description}</p>
+          <p ref={text} className={s.mision_description}>
+            {element.description}
+          </p>
         </div>
       ))}
     </section>

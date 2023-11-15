@@ -1,16 +1,12 @@
 .footer_container {
-    background-color: #000;
-    color: #f1f1f1;
+    //background-color: #000;
+    //color: #f1f1f1;
     min-height: 100vh;
     display: flex;
     flex-direction: row;
-
     align-items: flex-end;
-    /*background-image: url('../../../public/components/footer/footer_text.png');
-    background-position: bottom left;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-blend-mode: difference;*/
+    padding: 2rem 1rem;
+
     .footer_text {
         width: 50%;
         
@@ -19,42 +15,43 @@
             justify-content: flex-start;
             align-items: center;
             gap: 1rem;     
-            color: #f1f1f1!important;
+
+            //color: #f1f1f1!important;
             .footer_span {
-                color: #f1f1f1!important;
+                //color: #f1f1f1!important;
             }  
             svg {
-                fill: #f1f1f1;
+                //fill: #f1f1f1;
             } 
             
         }
         
         li a {
-            background-image: linear-gradient(
+            /*background-image: linear-gradient(
             to right,
             var(--hover-button-color-start),
             var(--hover-button-color-end) 50%,
             #f1f1f1 50%
-            );
+            );*/
             background-size: 200% 100%;
             background-position: -100%;
             display: inline-block;
             padding: 5px 0;
             position: relative;
             
-            /*background-clip: text;*/
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: all 0.3s ease-in-out;
 
             .footer_span {
-                color: #f1f1f1!important;
+                //color: #f1f1f1!important;
             }  
         }
         
         li a:before{
             content: '';
-            background: #f1f1f1;
+            //background: #f1f1f1;
             display: block;
             position: absolute;
             bottom: -3px;
@@ -72,6 +69,36 @@
             width: 100%;
         }
   
+    }
+
+    .footer_form {
+        width: 50%;
+        .form_group{
+            display: grid;
+            flex-direction: row;
+            margin-bottom: 1rem;
+
+            label {
+                margin-bottom: .5rem;
+            }
+
+            input {
+                width: 100%;
+                border: 0;
+                border-bottom: 3px;
+                border-color: black;
+                border-style: solid;
+                padding: .5rem .75rem;
+            }
+
+            textarea {
+                width: 100%;
+                border: 0;
+                border-bottom: 3px;
+                border-color: black;
+                border-style: solid;
+            }
+        }
     }
     p {
         font-size: 20px;

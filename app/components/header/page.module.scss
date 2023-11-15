@@ -14,7 +14,17 @@
         line-height: 1.2;
         font-weight: 600;
         text-transform: uppercase;
+        display: flex;
+        flex-wrap: wrap;
+
+        p {
+            span {
+            
+            opacity: 0.2;
+            }
+        }
     }
+
     .header_subtitle {
         font-size: 2.5rem;
         line-height: 1;

@@ -1,0 +1,51 @@
+@use 'sass:color';
+
+// Each color filled here will create a css variable exposed globally
+
+$colors: (
+  'white': rgb(255, 255, 255),
+  'black': rgb(0, 0, 0),
+  'red': rgb(255, 0, 0),
+  'onyx': rgb(12, 16, 25),
+);
+
+$clr-primary-100: #02d0d9;
+$clr-primary-400: #9516e1;
+$clr-primary-900: #5B45CC;
+
+$clr-accent-100: #ca0acf;
+$clr-accent-400: #02fba0;
+
+$clr-neutral-100: white;
+$clr-neutral-900: #0c1019;
+
+$gradient-100: linear-gradient(
+  90deg,
+  #02d0d9 -4.05%,
+  #3b75d0 44.6%,
+  #5b45cc 72.7%,
+  #7027b7 104.05%
+);
+$gradient-400: linear-gradient(
+  90deg,
+  #09c6d8 -5%,
+  #0dc0d7 12.98%,
+  #17b0d6 36.64%,
+  #2994d3 63.46%,
+  #416fd0 92.4%,
+  #4b5fce 102.98%
+);
+
+$clr-success: green;
+$clr-warning: #02fba0;
+$clr-danger: red;
+
+.danger {
+  background-color: $clr-danger;
+}
+.warning {
+  background-color: $clr-warning;
+}
+.success {
+  background-color: $clr-success;
+}

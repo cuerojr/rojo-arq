@@ -1,14 +1,10 @@
-'use client'
-import { motion } from 'framer-motion';
-import { socialBtnVariants } from '@/app/utils/bottomOpacityAnimation';
 import s from './style.module.scss'
-import { Input } from 'postcss';
 
 export default function Footer() {
     return (
         <section 
-            className={ s.footer_container } >            
-            <div className={s.footer_text}>
+            className={ s.footer_container }>            
+            <div className={ s.footer_text }>
                 <h2 style={{
                     fontWeight: '600',
                     fontSize: '1.5rem'
@@ -38,21 +34,21 @@ export default function Footer() {
                 </ul>
                 <div className={s.back_text}></div>
             </div>
-            <div>
+            <div className={ s.footer_form }>
                 <form>
-                    <div>
+                    <div className={ s.form_group }>
                         <label>NOMBRE</label>
-                        <input type="text" placeholder="Consulta"/>
+                        <input type="text" />
                     </div>
-                    <div>
+                    <div className={ s.form_group }>
                         <label>EMAIL</label>
                         <input type="email"/>
                     </div>
-                    <div>
+                    <div className={ s.form_group }>
                         <label>TELÉFONO</label>
                         <input type="email"/>
                     </div>
-                    <div>
+                    <div className={ s.form_group }>
                         <label>CONSULTA</label>
                         <textarea></textarea>
                     </div>

@@ -1,0 +1,90 @@
+@import './_reset.scss';
+@import './_fonts.scss';
+@import './_colors.scss';
+@import './_easings.scss';
+@import './_functions.scss';
+@import './_layout.scss';
+@import './_utils.scss';
+@import './_font-style.scss';
+@import './_themes.scss';
+@import './_scroll.scss';
+
+:root {
+  --header-height: #{mobile-vw(58px)};
+
+  @include desktop {
+    --header-height: #{desktop-vw(98px)};
+  }
+}
+
+html {
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+
+
+  &.nav {
+    overflow: hidden;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overscroll-behavior: initial;
+  
+  background: white;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+
+a,
+button,
+label,
+select {
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+svg.icon {
+  path[fill],
+  rect[fill],
+  circle[fill] {
+    fill: currentColor;
+  }
+
+  path[stroke],
+  rect[stroke],
+  circle[stroke] {
+    stroke: currentColor;
+  }
+}
+
+p {
+  /* font-size: 2vw;*/
+  /*font-size: calc(25px + 0.390625vw);*/
+  line-height: 1.2;
+  -webkit-box-orient: vertical;
+  /*-webkit-line-clamp: 5;*/
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+h1::selection, h2::selection, p::selection {
+  color: white;
+  background-color: #141414;
+}
