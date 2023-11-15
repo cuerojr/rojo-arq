@@ -36,7 +36,7 @@ export default function MisionComponent(): any {
 
   return (
     <section className={s.mision_container}>
-      {misionData.map((element, index) => (
+      { misionData.map((element, index) => (
         <div key={index} className={s.mision_article_container}>
           <div className={s.mision_title_container}>
             <h2 className={s.mision_title}>{element.title}</h2>
@@ -46,7 +46,7 @@ export default function MisionComponent(): any {
             {element.description}
           </p>
         </div>
-      ))}
+      )) }
     </section>
   );
 }
