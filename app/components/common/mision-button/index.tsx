@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import s from "./style.module.scss";
 import gsap from "gsap";
-import Magnetic from "../magnetic";
 
 export default function MisionButtonComponent({
   children,
