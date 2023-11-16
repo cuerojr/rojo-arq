@@ -3,7 +3,7 @@ import s from "./style.module.scss";
 import gsap from "gsap";
 import Magnetic from "../magnetic";
 
-export default function ButtonComponent({
+export default function MisionButtonComponent({
   children,
   backgroundColor = "black",
   ...attributes
@@ -17,12 +17,12 @@ export default function ButtonComponent({
     timeline.current
       .to(
         circle.current,
-        { top: "-25%", width: "150%", duration: 0.4, ease: "power3.in" },
+        { top: "-125%", width: "250%", duration: 0.4, ease: "power3.in" },
         "enter"
       )
       .to(
         circle.current,
-        { top: "-150%", width: "125%", duration: 0.25 },
+        { top: "-250%", width: "225%", duration: 0.25 },
         "exit"
       );
   }, []);
@@ -42,7 +42,6 @@ export default function ButtonComponent({
   };
 
   return (
-    <Magnetic>
       <div
         className={s.roundedButton}
         style={{ overflow: "hidden" }}
@@ -61,6 +60,5 @@ export default function ButtonComponent({
           style={{ backgroundColor }}
         ></div>
       </div>
-    </Magnetic>
   );
 }

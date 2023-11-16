@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
 import PlusIconComponent from "../plus-icon-component";
+import MisionButtonComponent from "../common/mision-button";
 
 export default function MisionComponent(): any {
   const misionData: MisionType[] = [
@@ -38,10 +39,12 @@ export default function MisionComponent(): any {
     <section className={s.mision_container}>
       { misionData.map((element, index) => (
         <div key={index} className={s.mision_article_container}>
-          <div className={s.mision_title_container}>
-            <h2 className={s.mision_title}>{element.title}</h2>
-            <PlusIconComponent />
-          </div>
+          <MisionButtonComponent>
+            <div className={s.mision_title_container}>
+              <h2 className={s.mision_title}>{element.title}</h2>
+              <PlusIconComponent />
+            </div>
+          </MisionButtonComponent>
           <p ref={text} className={s.mision_description}>
             {element.description}
           </p>
