@@ -6,20 +6,20 @@ export default function ContactForm() {
   <div className={ s.footer_form }>
     <form>
       <div className={ s.form_group }>
-          <label>NOMBRE</label>
-          <input type="text" />
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id='name'/>
       </div>
       <div className={ s.form_group }>
-          <label>EMAIL</label>
-          <input type="email"/>
+          <label htmlFor='email'>Email</label>
+          <input type="email" id='email'/>
       </div>
       <div className={ s.form_group }>
-          <label>TELÉFONO</label>
-          <input type="email"/>
+          <label htmlFor='telephone'>Teléfono</label>
+          <input type="email" id='telephone'/>
       </div>
       <div className={ s.form_group }>
-          <label>CONSULTA</label>
-          <textarea></textarea>
+          <label htmlFor='message'>Consulta</label>
+          <textarea id='message'></textarea>
       </div>
       <div className='d-flex align-center justify-center'>
           <ButtonComponent>

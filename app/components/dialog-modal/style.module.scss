@@ -1,23 +1,26 @@
 .modal_container {
     min-height: 100vh;
     min-width: 100vw;
-    padding: 0 6rem 2rem 1rem;
-    //transition: all 1s;
+    padding: 0 6vw 2rem 1rem;
     border: 0;
     display: none;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease;
-    .modal_description {        
+
+    .modal_description {  
+
         button {
             margin-left: auto;
         }
+
         h2 {
             width: 40%;
             font-size: calc(30px + 0.390625vw);
             margin-left: auto;
             text-align: left !important;
         }
+
         p {
             display: flex;
             flex-direction: column;

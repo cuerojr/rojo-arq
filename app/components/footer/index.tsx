@@ -6,10 +6,7 @@ export default function Footer() {
         <section 
             className={ s.footer_container }>            
             <div className={ s.footer_text }>
-                <h2 style={{
-                    fontWeight: '600',
-                    fontSize: '1.5rem'
-                }}>Contactate con nosotros para empezar a diseñar tu proyecto!</h2>
+                <h2>Contactate con nosotros para empezar a diseñar tu proyecto!</h2>
                 <ul>
                     <li>                                                      
                         <a target="_blank" 
