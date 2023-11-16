@@ -26,8 +26,8 @@ export default function Home() {
       <Navbar />
       <Header />
       <Slogan />
-      <MisionComponent />
       <ServicesList />
+      <MisionComponent />
       <Footer />
     </main>
   )
