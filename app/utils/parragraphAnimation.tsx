@@ -1,4 +1,4 @@
-import { useRef } from "react";
+/*import { useRef } from "react";
 
 let refs = useRef([]);
 
@@ -28,4 +28,4 @@ export const splitLetters = (word: string) => {
     );
   });
   return letters;
-};
+};*/
