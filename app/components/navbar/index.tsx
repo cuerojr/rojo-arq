@@ -5,17 +5,8 @@ import s from './style.module.scss'
 
 export default function Navbar() {
   return (
-    <nav 
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100vw',
-        position: 'fixed',
-        zIndex: 9999,
-        //backgroundColor: '#ffffff85',
-      }}
-      className="">
+    <nav       
+      className={ s.navbar }>
         <Link href={'/'}
           style={{
             maxWidth: '100px'
@@ -27,7 +18,7 @@ export default function Navbar() {
               alt="rojoarq"/>
         </Link>
         <ul 
-            className="flex justify-end gap-2 p-2">
+            className="d-flex justify-end gap-2 p-2">
             <li 
               className={s.navbar_li}>
                 <Link 

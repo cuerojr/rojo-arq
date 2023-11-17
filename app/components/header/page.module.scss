@@ -8,6 +8,11 @@
     align-items: center;
     transition: 1s ease all;
     background-blend-mode:multiply;
+    width: min(960px, 80vw);
+    margin: auto;
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 
     .header_title {
         font-size: 4rem;

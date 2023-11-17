@@ -6,7 +6,11 @@
     flex-direction: row;
     align-items: flex-end;
     padding: 2rem 1rem;
-
+    margin: auto;
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    width: min(960px, 80vw);
     .footer_text {
         width: 50%;
         

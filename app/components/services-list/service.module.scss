@@ -1,6 +1,9 @@
 .services_container {
-    
-    width: min(800px, 95vw);
+    margin: auto;
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    width: min(960px, 80vw);
     margin-inline: auto;
     display: grid;
     gap: 1rem;
