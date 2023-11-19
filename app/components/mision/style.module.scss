@@ -1,8 +1,12 @@
 .mision_container {
-    margin: 6rem 0;
+    
+    width: min(960px, 80vw);
+    margin: auto;
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
 
     .mision_article_container{
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid lightgray;
     
         .mision_title_container {
             width: 100%;
@@ -13,7 +17,7 @@
             cursor: pointer;       
 
             .mision_title {
-                font-size: 2vw;
+                font-size: 1rem;
                 font-weight: 200;
                 padding: 2rem 0;
             }
@@ -46,7 +50,7 @@
     }
 
     .mision_article_container:first-child {
-        border-top: 1px solid black;
+        border-top: 1px solid lightgray;
         .mision_description {
             //display: block;
             width: 75vw;
