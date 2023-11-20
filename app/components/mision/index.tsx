@@ -72,7 +72,7 @@ export default function MisionComponent(): any {
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
             <div className={s.mision_title_container}>
               <h2 className={s.mision_title}>{element.title} <span style={{
-                fontSize: '1rem',
+                fontSize: '1.25rem',
                 fontWeight: '600',
                 fontStyle:'italic',
                 marginLeft: '2rem'
