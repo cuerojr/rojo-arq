@@ -34,20 +34,19 @@ export default function Header() {
   return (
     <section
       className={ s.header_section }>
-      <div
-        style={{
-          width: "50%",
-        }}>
-        <h1 className={`${ s.header_title } text-lg`}>Es posible</h1>
-        <p className={ s.header_subtitle }>Estás llegando</p>
+      <div className={ s.header_title_container}>
+        <h1 className={`${ s.header_title } text-lg`}>Es posible un hogar para vivir</h1>
+        <p className={ s.header_subtitle }>ROJO Arq es una nueva forma de pensar sobre vivir, comprar y poseer bienes raíces, así como también para fines de alquiler.</p>
       </div>
       <div className={ s.header_box }>
-        <Image
+        {/**
+         * <Image
           className={ s.image }
           src={"/header-bg-n.webp"}
           alt={"ad"}
           fill={true}
         />
+         */}
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ export default function ServicesList() {
   const services: ServiceType[] = [
     {
       id: "servicio-1",
-      title: "ESPACIOS EFICIENTES",
+      title: "Espacios eficientes",
       short: `Nos encargamos del diseño y la CONSTRUCCION, lo que nos permite que tengas más
         OPTIMIZACIÓN DEL USO DEL ESPACIO y AMBIENTES MÁS FUNCIONALES.        
         En OBRA NUEVA o REFORMA realizamos los planos y “visual 3d espacial” para que veas PRE-
@@ -63,7 +63,7 @@ export default function ServicesList() {
     },
     {
       id: "servicio-4",
-      title: "DISEÑO SOSTENIBLE",
+      title: "Diseño sostenible",
       short: `Entendemos que la construcción es un gran esfuerzo para muchas familias e individuos, por eso
         brindamos diseño y construcción inteligentes para que la casa puede adaptarse a las cambiantes
         necesidades en el tiempo.`,
@@ -81,7 +81,7 @@ export default function ServicesList() {
     },
     {
       id: "servicio-5",
-      title: "CALIDAD DE VIDA",
+      title: "Calidad de vida",
       short: `Tomamos el compromiso de que cada espacio que diseñamos y construimos sean ambientes
         saludables, bien iluminados con ventilación adecuada, creamos espacios que promuevan el
         bienestar fisico y mental.`,
