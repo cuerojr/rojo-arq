@@ -12,26 +12,26 @@ export default function MisionComponent(): any {
     {
       id: "mision",
       title: "Misión",
-      subTitle: `creatividad espacial`,
+      subTitle: `Creatividad espacial`,
       description: `Somos un equipo de profesionales creativos en continuo crecimiento, trabajamos con un fuerte énfasis en el diseño y la planificación para construir espacios eficientes, de estética única que estimulen el sentido de pertenencia y confort físico-mental.`,
     },
     {
       id: "vision",
       title: "Visión",
-      subTitle: `arquitectura trascendente`,
+      subTitle: `Arquitectura trascendente`,
       description: `Brindar obras que trasciendan en el tiempo capaces de adaptarse a los cambios y necesidades de la vida; materializar espacios que inspiren y resuelvan los deseos y las necesidades de las personas.
       Trabajamos diariamente para ser una empresa referente de excelencia a nivel local y nos proyectamos a ser pioneros en la aplicación y el desarrollo del uso de la tecnología avanzada en la arquitectura y el espacio.`,
     },
     {
       id: "valores",
       title: "Valores",
-      subTitle: `conexión en diseño`,
+      subTitle: `Conexión en diseño`,
       description: `La comunicación y la transparencia, la responsabilidad y el rigor técnico; la capacidad creativa y resolutiva.`,
     },
     {
       id: "politicas",
       title: "Política",
-      subTitle: `construimos con compromiso`,
+      subTitle: `Construimos con compromiso`,
       description: `
         1. Ética y Conducta Profesional\n        
         Nos comprometemos a mantener los más altos estándares éticos y de conducta profesional en todas sus interacciones. 
