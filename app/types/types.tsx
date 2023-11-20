@@ -15,4 +15,5 @@ export interface MisionType {
     id: string;    
     title: string;
     description: string;
+    subTitle: string;
 }

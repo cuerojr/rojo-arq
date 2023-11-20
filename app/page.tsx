@@ -9,6 +9,7 @@ import ServicesList from "./components/services-list";
 import Slogan from "./components/slogan";
 import MisionComponent from "./components/mision";
 import Navbar from './components/navbar';
+import HeroImage from './components/hero-image';
 
 
 export default function Home() {  
@@ -39,6 +40,7 @@ export default function Home() {
         
           <Navbar />
           <Header />
+          <HeroImage />
           <Slogan />
           <ServicesList />
           <MisionComponent />
