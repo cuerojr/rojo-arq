@@ -3,8 +3,8 @@
     //background-size:60%;
     //background-repeat:no-repeat;
     //background-position: right center;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    flex-direction: column;
     align-items: center;
     transition: 1s ease all;
     background-blend-mode:multiply;
@@ -14,44 +14,51 @@
     border-left: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
 
-    .header_title {
-        font-size: 4rem;
-        line-height: 1.2;
-        font-weight: 600;
-        text-transform: uppercase;
-        display: flex;
-        flex-wrap: wrap;
+    .header_title_container {
 
-        p {
-            span {
-            
-            opacity: 0.2;
+        padding-top: 11em;
+        padding-bottom: 5em;
+        padding-left: 2.5em;
+
+        .header_title {
+            font-size: 3.25rem;
+            line-height: 1.4;
+            font-weight: 500;
+            margin: 0;
+    
+            p {
+                margin: 0;
+                span {
+                
+                opacity: 0.2;
+                }
             }
         }
-    }
-
-    .header_subtitle {
-        font-size: 2.5rem;
-        line-height: 1;
-        transition: .7s ease all;
-        font-weight: 400;
-        text-transform: uppercase;
-    }
-
-    .header_box {
-        //width: clamp(50%, 300px, 350px);
-        width: 50%;
-        position: relative;
-        aspect-ratio: 1 / 1;
-        background-color: #e4e4e4;
-        height: 100vh;
-        .image {
-            object-fit: cover;
-            object-position: center;
+    
+        .header_subtitle {
+            font-size: 12px;
+            transition: .7s ease all;
+            font-weight: 400;
+            margin: 0;
+            max-width: 33vw;
+            margin-left: .5rem;
+            line-height: 1.4;
+        }
+    
+        .header_box {
+            //width: clamp(50%, 300px, 350px);+
+            
+            position: relative;
+            aspect-ratio: 16/9;
+            background-color: #e4e4e4;
+            .image {
+                object-fit: cover;
+                object-position: center;
+            }
+            
         }
         
     }
-    
 }
 /*.header_section:hover {
     background-size:63%;
