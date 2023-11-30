@@ -1,17 +1,31 @@
 .services_container {
-    margin: auto;
-    border-right: 1px solid lightgray;
-    border-left: 1px solid lightgray;
+    
     border-bottom: 1px solid lightgray;
-    width: min(960px, 80vw);
+    border-top: 1px solid lightgray;
+    
     margin-inline: auto;
-    display: grid;
-    gap: 1rem;
-
-    .services_area{
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+    
+    .swiper_container {
+        width: min(960px, 80vw);
+        margin: auto;
+        .section_title_container {
+            padding-top: 2rem;
+            padding-left: 1rem;
+    
+            .section_title {
+                margin: 0;
+                font-size: 2.25rem;
+                font-weight: 500;
+                line-height: 1;
+            }
+        }
+    
+        .services_area{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
     }
+
     
 }

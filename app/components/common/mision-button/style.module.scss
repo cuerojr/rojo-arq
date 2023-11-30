@@ -1,12 +1,11 @@
 .roundedButton {
-    //border-radius: 3rem;
-    //border: 1px solid rgb(136, 136, 136);
+    
+    border-top: 1px solid lightgray;
     cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    //padding: 15px 60px 15px 60px;
 
     h2 {
         position: relative;
@@ -34,9 +33,10 @@
 }
 
 .circle {
-    width: 200%;
-    height: 250%;
+    width: 2rem;
+    height: 2rem;
     position: absolute;
     border-radius: 50%;
-    top: 100%;
+    top: -2rem;
+    right: -2rem;
 }

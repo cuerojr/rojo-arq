@@ -1,0 +1,89 @@
+@media screen and (max-width: 991px) {
+    .home_quote_section {
+        padding-top: 10em;
+        padding-bottom: 10em;
+    }
+    .s2 {
+        font-size: 10px;
+    }
+}
+
+.home_quote_section {
+    width: min(960px, 80vw);
+    margin: auto;
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+
+    z-index: 91;
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home_quote_layout {
+    width: 85%;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    position: relative;
+}
+
+.quote_author_box {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.quote_author {
+    width: 3.25em;
+    height: 3.25em;
+}
+
+.author_box_text {
+    width: 53%;
+    margin-left: 0.75em;
+    
+    .text_size_h5 {
+        font-size: 1.5em;
+        font-weight: 500;
+        line-height: 1;
+        margin: 0;
+        width: 10rem;
+    }
+}
+
+.s2 {
+    color: #5b5b58;
+    letter-spacing: .1875em;
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.margin_bottom_1em {
+    margin-bottom: 1rem;
+}
+
+.margin_bottom_3em {
+    margin-bottom: 3rem;
+}
+
+.text_centered {
+    text-align: center;
+}
+
+.body_large {
+    color: #000;
+    font-size: 2em;
+    font-weight: 300;
+    line-height: 1.2;
+}

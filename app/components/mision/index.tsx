@@ -66,6 +66,17 @@ export default function MisionComponent(): any {
 
   return (
     <section className={s.mision_container}>
+      <div className="margin-bottom _5-5em" style={{
+        marginBottom: '3.5rem',
+        paddingTop: '3.5rem',
+      }}>
+        <div className="text-centered" style={{
+          textAlign: 'center',
+        }}>
+          <div className={ s.s2 }>Technology &amp; Partners</div>
+          <h2 className={s.text_size_h2}>Top quality solutions</h2>
+        </div>
+      </div>
       { misionData.map((element) => (
 
         <div key={element.id} className={s.mision_article_container}>

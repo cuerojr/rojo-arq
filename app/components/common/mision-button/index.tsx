@@ -16,12 +16,23 @@ export default function MisionButtonComponent({
     timeline.current
       .to(
         circle.current,
-        { top: "-125%", width: "250%", duration: 0.4, ease: "power3.in" },
+        { 
+          top: "-100rem",
+          right: "-100rem",
+          width: "400rem", 
+          height: "400rem",
+          duration: 0.7, 
+          ease: "power3.in" },
         "enter"
       )
       .to(
         circle.current,
-        { top: "-250%", width: "225%", duration: 0.25 },
+        { 
+          top: "-2rem",
+          right: "-2rem",
+          height: "2rem",
+          width: "2rem", 
+          duration: 0.25 },
         "exit"
       );
   }, []);
