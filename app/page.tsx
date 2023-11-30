@@ -10,19 +10,14 @@ import Slogan from "./components/slogan";
 import MisionComponent from "./components/mision";
 import Navbar from './components/navbar';
 import HeroImage from './components/hero-image';
+import Quote from './components/home-quote';
 
 
 export default function Home() {  
   const lenisRef: any = useRef();
 
-  useEffect(() => {
-    /*(async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const locomotiveScroll = new LocomotiveScroll({
-        el: document.querySelector('[data-scroll-container]') as HTMLElement,
-        smooth: true
-    });
-    })();*/
+  /*useEffect(() => {
+    
     function update(time: any) {
       lenisRef.current?.raf(time * 1000)
     }
@@ -33,19 +28,17 @@ export default function Home() {
       gsap.ticker.remove(update)
     }
 
-  }, []);
+  }, []);*/
   
   return (
-    <main>
-        
-          <Navbar />
-          <Header />
-          <HeroImage />
-          <Slogan />
-          <ServicesList />
-          <MisionComponent />
-          <Footer />
-      
-      </main>
+    <main>        
+      <Navbar />
+      <Header />
+      <HeroImage />
+      <Quote />
+      <ServicesList />
+      <MisionComponent />
+      <Footer />      
+    </main>
   )
 }

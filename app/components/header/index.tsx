@@ -35,8 +35,8 @@ export default function Header() {
     <section
       className={ s.header_section }>
       <div className={ s.header_title_container}>
-        <h1 className={`${ s.header_title } text-lg`}>Es posible un hogar para vivir</h1>
-        <p className={ s.header_subtitle }>ROJO Arq es una nueva forma de pensar sobre vivir, comprar y poseer bienes raíces, así como también para fines de alquiler.</p>
+        <h1 className={`${ s.header_title } text-lg`}>Es posible habitar</h1>
+        <p className={ s.header_subtitle }>ROJO arq es una nueva forma de proyectar y construir: casas, negocios y equipamientos para vivir, alquilar o invertir.</p>
       </div>      
     </section>
   );

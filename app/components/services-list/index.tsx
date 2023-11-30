@@ -1,5 +1,11 @@
 import { ServiceType } from "@/app/types/types";
 import Service from "@/app/components/service/index";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
 import s from "./service.module.scss";
 
 export default function ServicesList() {
@@ -107,9 +113,25 @@ export default function ServicesList() {
 
   return (
     <section className={s.services_container}>
-      {services.map((service: ServiceType) => (
-        <Service key={service.id} props={service} />
-      ))}
+      <div className={ s.swiper_container }>
+        <div className={s.section_title_container}>
+          <h2 className={s.section_title}>Nuestros servicios</h2>
+        </div>
+        <Swiper      
+          spaceBetween={50}
+          slidesPerView={1}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >      
+          
+          {services.map((service: ServiceType) => (
+            <SwiperSlide key={service.id} >
+              <Service props={service} />
+            </SwiperSlide>        
+          ))}
+
+        </Swiper>
+      </div>
     </section>
   );
 }

@@ -6,7 +6,7 @@
     border-left: 1px solid lightgray;
 
     .mision_article_container{
-        border-bottom: 1px solid lightgray;
+        //border-bottom: 1px solid lightgray;
 
         .mision_title_container {
             width: 100%;
@@ -53,8 +53,23 @@
         
     }
 
-    .mision_article_container:first-child {
-        border-top: 1px solid lightgray;
+    .mision_article_container:last-child {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .s2 {
+        color: #5b5b58;
+        letter-spacing: .1875em;
+        text-transform: uppercase;
+        font-size: 10px;
+        line-height: 1.2;
+    }
+
+    .text_size_h2 {
+        color: #1e1e1c;
+        font-size: 2em;
+        font-weight: 500;
+        line-height: 1;
     }
 
 }
