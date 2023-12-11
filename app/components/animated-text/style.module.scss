@@ -1,0 +1,32 @@
+.inner_headings span {
+    position: relative;
+    animation: animation 15s ease infinite;
+}
+
+@keyframes animation {
+    0%,
+    100% {
+      top: 0;
+    }
+    20% {
+      top: 0;
+    }
+    25% {
+      top: -72px;
+    }
+    45% {
+      top: -72px;
+    }
+    50% {
+      top: -145px;
+    }
+    70% {
+      top: -145px;
+    }
+    75% {
+      top: -218px;
+    }
+    95% {
+      top: -218px;
+    }
+  }

@@ -16,7 +16,7 @@
 
     z-index: 91;
     padding-top: 9rem;
-    padding-bottom: 9rem;
+    padding-bottom: 2rem;
     position: relative;
 }
 
@@ -41,11 +41,14 @@
     justify-content: center;
     align-items: center;
     display: flex;
+    aspect-ratio: 1/1;
 }
 
 .quote_author {
-    width: 3.25em;
-    height: 3.25em;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: contain;
+    width: 3rem;
 }
 
 .author_box_text {

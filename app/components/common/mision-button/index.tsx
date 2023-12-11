@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef } from "react";
 import s from "./style.module.scss";
 import gsap from "gsap";
@@ -10,6 +11,7 @@ export default function MisionButtonComponent({
   const circle: any = useRef(null);
   const timeline: any = useRef(null);
   let timeoutId: any = null;
+  let exitTime = 0;
 
   useEffect(() => {
     timeline.current = gsap.timeline({ paused: true });
@@ -25,7 +27,9 @@ export default function MisionButtonComponent({
           ease: "power3.in" },
         "enter"
       )
-      .to(
+      .addPause()
+      exitTime = timeline.current.duration()
+      timeline.current.to(
         circle.current,
         { 
           top: "-2rem",
@@ -40,15 +44,13 @@ export default function MisionButtonComponent({
   const manageMouseEnter = (e: any) => {
     if (timeoutId) {
       clearInterval(timeoutId);
-      timeoutId = null;
     }
-    timeline.current.tweenFromTo("enter", "exit");
+    
+    timeline.current.play();
   };
 
   const manageMouseLeave = (e: any) => {
-    timeoutId = setTimeout(() => {
-      timeline.current.play();
-    }, 300);
+    timeline.current.reverse();
   };
 
   return (
