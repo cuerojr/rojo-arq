@@ -32,7 +32,7 @@ export default function Quote() {
             </div>
             <div className={s.quote_author_box}>
               <img
-                src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edfeb402f94ac66447c60f_witbor_pho.png"
+                src="/juli.jpg"
                 loading="lazy"
                 alt=" - Chief Technology officer, founder of LVNG"
                 className={s.quote_author}
@@ -66,7 +66,7 @@ export default function Quote() {
             </div>
             <div className="quote-author_box">
               <img
-                src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63fdb9a3a5e3b79aaa88f3f7_Sebastian-Jakubiak.png"
+                src="/juli.jpg"
                 loading="lazy"
                 alt="Sebastian Jakubiak - Cheif Executive Officer, Founder of LVNG"
                 className="quote_author"
@@ -93,10 +93,7 @@ export default function Quote() {
                 fill="none"
                 viewBox="0 0 48 48"
               >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="2"
+                <path                  
                   d="M20 24c0 5-2 8-8 11m28-11c0 5-2 8-8 11M20 24H10a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9Zm20 0H30a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9Z"
                 ></path>
               </svg>
@@ -155,9 +152,6 @@ export default function Quote() {
                 viewBox="0 0 48 48"
               >
                 <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="2"
                   d="M20 24c0 5-2 8-8 11m28-11c0 5-2 8-8 11M20 24H10a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9Zm20 0H30a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9Z"
                 ></path>
               </svg>

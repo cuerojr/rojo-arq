@@ -15,17 +15,26 @@
     border-bottom: 1px solid lightgray;
 
     .header_title_container {
-
+        display: grid;
         padding-top: 11em;
         padding-bottom: 5em;
         padding-left: 2.5em;
 
         .header_title {
+            display: flex;
+            gap: 12px;
             font-size: 3.25rem;
             line-height: 1.4;
             font-weight: 500;
             margin: 0;
-    
+            height: 5rem;
+            overflow-y: hidden;
+
+            /*.inner_headings span {
+                position: relative;
+                animation: animation 15s ease infinite;
+            }*/
+
             p {
                 margin: 0;
                 span {
@@ -35,6 +44,7 @@
             }
         }
     
+
         .header_subtitle {
             font-size: 12px;
             transition: .7s ease all;
@@ -60,13 +70,31 @@
         
     }
 }
-/*.header_section:hover {
-    background-size:63%;
-    //background-image:url('../../../public/header-bg.webp');
-    .header_title {
-        font-size: 4.1rem;
+  /*
+  @keyframes animation {
+    0%,
+    100% {
+      top: 0;
     }
-    .header_subtitle {
-        font-size: 2.55rem;
+    20% {
+      top: 0;
     }
-}*/
+    25% {
+      top: -72px;
+    }
+    45% {
+      top: -72px;
+    }
+    50% {
+      top: -144px;
+    }
+    70% {
+      top: -144px;
+    }
+    75% {
+      top: -218px;
+    }
+    95% {
+      top: -218px;
+    }
+  }*/
