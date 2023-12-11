@@ -5,6 +5,8 @@ import {ReactLenis, useLenis } from '@studio-freight/react-lenis';
 export default function SmoothScroll({children}: any) {
 
   return (
-    <ReactLenis root>{ children }</ReactLenis>
+    <ReactLenis root options={{
+        smoothWheel: true
+    }}>{ children }</ReactLenis>
   )
 }
