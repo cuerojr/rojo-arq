@@ -69,8 +69,18 @@
 }
 
 @media (max-width: 940px){
-  .header_title {
-    display: grid !important ;
-    gap: 0 !important ;
+  .header_title_container { 
+    text-align: center !important;
+    padding-left: 0 !important;
+
+    .header_title {
+      display: grid !important ;
+      gap: 0 !important ;
+      
+    }
+    .header_subtitle {
+      margin: 1rem auto !important;
+      text-align: center !important; 
+    }
   }
 }
