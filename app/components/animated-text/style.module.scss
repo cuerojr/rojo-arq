@@ -1,6 +1,12 @@
-.inner_headings span {
-    position: relative;
-    animation: animation 15s ease infinite;
+.inner_headings {
+  height: 5rem !important;
+  overflow: hidden !important;
+  
+  span {
+      position: relative;
+      animation: animation 15s ease infinite;
+      
+  }
 }
 
 @keyframes animation {
@@ -12,21 +18,21 @@
       top: 0;
     }
     25% {
-      top: -72px;
+      top: -94px;
     }
     45% {
-      top: -72px;
+      top: -94px;
     }
     50% {
-      top: -145px;
+      top: -189px;
     }
     70% {
-      top: -145px;
+      top: -189px;
     }
     75% {
-      top: -218px;
+      top: -284px;
     }
     95% {
-      top: -218px;
+      top: -284px;
     }
   }
