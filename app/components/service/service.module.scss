@@ -64,7 +64,8 @@
         }
 
         .text_description {
-            line-height: 1.5;
+            line-height: 1.2;
+            font-size: 12px;
         }
 
         .modal_container {
@@ -74,9 +75,23 @@
         }
     }
 
+    .column:nth-child(1) {
+        width: 80%;
+    }
+
+    .column:nth-child(2) {
+        width: 36%;
+        position: absolute;
+        bottom: 3rem;
+        right: 2px;
+        background-color: white;
+        padding: 1rem;
+        border: 1px solid lightgray;
+    }
+
     h2 {
         margin-bottom: 1.5rem;
-        font-size: calc(30px + 0.390625vw);
+        font-size: calc(18px + 0.390625vw);
         line-height: 1;
     }
     .modal_divider {
@@ -96,7 +111,7 @@
     .box {
         //width: clamp(50%, 300px, 350px);
         position: relative;
-        aspect-ratio: 1 / 1;
+        aspect-ratio: 16/9;
         background-color: #e4e4e4;
         
         .image {
