@@ -1,6 +1,6 @@
 import React from "react";
 import s from './style.module.scss'
-import { Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
 export default function Quote() {
@@ -12,12 +12,11 @@ export default function Quote() {
             <div className={s.s2}>cumplí tus sueños</div>
           </div>
           <Swiper 
-            modules={[EffectCoverflow, Pagination, Navigation]}
+            modules={[Pagination, Autoplay]}
             loop={true}
-            navigation={{
-              nextEl: '.next-btn',
-              prevEl: '.prev-btn',
-              //clickable: true 
+            autoplay={{
+              delay: 10000,
+              pauseOnMouseEnter: true
             }}> 
             <SwiperSlide>
                 <div className={s.text_centered}>
@@ -27,7 +26,7 @@ export default function Quote() {
                       loading="lazy"
                       alt=""
                       className={s.first_quote}/>
-                    <div className={s.body_large}>ROJO arq es la respuesta a las necesidades de las personas. La necesidad de uno mismo, un hogar seguro. Y la necesidad de la casa propia.</div>
+                    <div className={s.body_large}>ROJO arq diseña espacios modernos, económicos y confortables que se pueden construir en 12 meses</div>
                     <img
                       src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edff8f3465de643bc21997_quote_img.svg"
                       loading="lazy"
@@ -61,7 +60,7 @@ export default function Quote() {
                       loading="lazy"
                       alt=""
                       className={s.first_quote}/>
-                    <div className={s.body_large}>ROJO arq es la respuesta a las necesidades de las personas. La necesidad de uno mismo, un hogar seguro. Y la necesidad de la casa propia.</div>
+                    <div className={s.body_large}>ROJO arq construye espacios con arquitectura moderna que permite vivir en el entorno de tus sueños. La experiencia de sus diseñadores y profesionales crean un concepto sostenible en el habitat.</div>
                     <img
                       src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edff8f3465de643bc21997_quote_img.svg"
                       loading="lazy"

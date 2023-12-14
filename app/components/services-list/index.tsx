@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ServiceType } from "@/app/types/types";
 import Service from "@/app/components/service/index";
-import { Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
 // Import Swiper styles
@@ -124,12 +124,16 @@ export default function ServicesList() {
           <h2 className={s.section_title}>Nuestros servicios</h2>
         </div>
         <Swiper 
-          modules={[EffectCoverflow, Pagination, Navigation]}
+          modules={[EffectCoverflow, Navigation, Autoplay]}
           loop={true}
           navigation={{
             nextEl: '.next-btn',
             prevEl: '.prev-btn',
             //clickable: true 
+          }}
+          autoplay={{
+            delay: 10000,
+            pauseOnMouseEnter: true
           }}>     
           
           {services.map((service: ServiceType) => (

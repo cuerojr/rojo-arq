@@ -42,7 +42,7 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    padding-top: 3rem;
+    padding-top: 1rem;
     //aspect-ratio: 1/1;
 }
 
@@ -85,14 +85,14 @@
 
 .text_centered {
     text-align: center;
-
+    min-height: 6rem;
     .text_container{
         display: flex;
 
 
         .body_large {
             color: #000;
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: 300;
             line-height: 1.2;
         }

@@ -11,6 +11,7 @@
     border-left: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     width: min(960px, 80vw);
+    position: relative;
 
     .contact_title_container {
 
@@ -46,10 +47,11 @@
             } 
             
         }
-        &:nth-child(1) {
-            border-right: 1px solid lightgray;
-        }
 
+        .card_wrapper_second_child {
+            border-right: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+        }
     }
     
 
@@ -143,18 +145,23 @@
     transition: 0.7s ease all;
     font-weight: 400;
     margin: 1rem 0;
-    
-    margin-left: 0.5rem;
-    line-height: 1.4;
+    line-height: 1.2;
 }
 
 .footer_info {
     display: flex;
-    flex-direction: column;
+    padding: 3rem 0;
+    min-height: 75vh;
 
     .footer_info_wrapper {
         max-width: 50%;
-        padding: 0 1rem;
+        padding: 1rem;
+        align-self: end;
     }
 
+    .footer_form {
+        width: 50%;
+        padding: 0 2rem;
+        align-self: end;
+    }
 }

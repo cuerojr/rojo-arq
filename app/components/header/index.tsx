@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedText from "../animated-text";
+import StripesContainer from "../common/stripes";
 
 export default function Header() {
   
@@ -35,6 +36,7 @@ export default function Header() {
   return (
     <section
       className={ s.header_section }>
+      <StripesContainer></StripesContainer>
       <div className={ s.header_title_container }>
         <h1 className={`${ s.header_title } text-lg`}>Es posible <AnimatedText /></h1>                
         <p className={ s.header_subtitle }>ROJO arq es una nueva forma de proyectar y construir: casas, negocios y equipamientos para vivir, alquilar o invertir.</p>
