@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     display: flex;
+    z-index: -1;
 
     .stripes {
         width: 33vw;
