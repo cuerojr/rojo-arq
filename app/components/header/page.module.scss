@@ -14,11 +14,12 @@
     border-right: 1px solid lightgray;
     border-left: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+    position: relative;
 
     .header_title_container {
         display: grid;
-        padding-top: 11em;
-        padding-bottom: 5em;
+        //padding-top: 11em;
+        //padding-bottom: 5em;
         padding-left: 2.5em;
 
         .header_title {
