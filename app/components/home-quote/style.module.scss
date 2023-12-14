@@ -15,8 +15,8 @@
     border-left: 1px solid lightgray;
 
     z-index: 91;
-    padding-top: 9rem;
-    padding-bottom: 2rem;
+    padding-top: 3.5rem;
+    padding-bottom: 5rem;
     position: relative;
 }
 
@@ -28,20 +28,22 @@
 }
 
 .home_quote_layout {
-    width: 85%;
-    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+   /* flex-direction: column;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    position: relative;
+    position: relative;*/
 }
 
 .quote_author_box {
     justify-content: center;
     align-items: center;
     display: flex;
-    aspect-ratio: 1/1;
+    padding-top: 3rem;
+    //aspect-ratio: 1/1;
 }
 
 .quote_author {
@@ -49,10 +51,10 @@
     overflow: hidden;
     object-fit: contain;
     width: 3rem;
+    text-align: center;
 }
 
 .author_box_text {
-    width: 53%;
     margin-left: 0.75em;
     
     .text_size_h5 {
@@ -74,6 +76,7 @@
 
 .margin_bottom_1em {
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .margin_bottom_3em {
@@ -82,11 +85,25 @@
 
 .text_centered {
     text-align: center;
-}
 
-.body_large {
-    color: #000;
-    font-size: 2em;
-    font-weight: 300;
-    line-height: 1.2;
+    .text_container{
+        display: flex;
+
+
+        .body_large {
+            color: #000;
+            font-size: 1.5em;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .first_quote{
+            align-self: flex-start;
+            transform: rotate(180deg);
+        }
+        .second_quote{
+            align-self: end;
+        }
+    }
+    
 }
