@@ -1,8 +1,4 @@
 .header_section {
-    //background-image:url('../../../public/header-bg-n.webp');
-    //background-size:60%;
-    //background-repeat:no-repeat;
-    //background-position: right center;
     height: 100vh;
     display: grid;
     flex-direction: column;
@@ -18,8 +14,6 @@
 
     .header_title_container {
         display: grid;
-        //padding-top: 11em;
-        //padding-bottom: 5em;
         padding-left: 2.5em;
 
         .header_title {
@@ -29,11 +23,6 @@
             line-height: 1.4;
             font-weight: 500;
             margin: 0;
-
-            /*.inner_headings span {
-                position: relative;
-                animation: animation 15s ease infinite;
-            }*/
 
             p {
                 margin: 0;
@@ -54,15 +43,15 @@
             line-height: 1.4;
         }
     
-        .header_box {
-            //width: clamp(50%, 300px, 350px);+
-            
+        .header_box {            
             position: relative;
             aspect-ratio: 16/9;
             background-color: #e4e4e4;
+
             .image {
                 object-fit: cover;
                 object-position: center;
+                
             }
             
         }

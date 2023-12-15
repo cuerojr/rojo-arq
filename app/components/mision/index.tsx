@@ -73,15 +73,15 @@ export default function MisionComponent(): any {
       
       { misionData.map((element) => (
 
-        <div key={element.id} className={s.mision_article_container}>
+        <div key={ element.id } className={ s.mision_article_container }>
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
             <div className={s.mision_title_container}>
-              <h2 className={s.mision_title}>{element.title} <span style={{
+              <h2 className={s.mision_title}>{ element.title } <span style={{
                 fontSize: '1.25rem',
                 fontWeight: '600',
                 fontStyle:'italic',
                 marginLeft: '2rem'
-              }}>{element.subTitle}</span></h2>              
+              }}>{ element.subTitle }</span></h2>              
               { selectedMision === element.id ? (
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -90,7 +90,7 @@ export default function MisionComponent(): any {
                   viewBox="0 0 448 512">
                   <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/>
                 </svg>
-              ): (
+              ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
@@ -101,14 +101,14 @@ export default function MisionComponent(): any {
             </div>
           </MisionButtonComponent>
 
-          { selectedMision === element.id && (
-            <p className={s.mision_description}>
-              { element.description }
-            </p>
-          )}
-
+          { 
+            selectedMision === element.id && (
+              <p className={s.mision_description}>
+                { element.description }
+              </p>
+            )
+          }
         </div>
-
       )) }
     </section>
   );
