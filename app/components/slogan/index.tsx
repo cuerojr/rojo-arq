@@ -1,6 +1,6 @@
-"use client";
+'use client';
+
 import s from "./slogan.module.scss";
-//import "./styles.css";
 import { useRef } from "react";
 import {
   motion,
@@ -13,11 +13,7 @@ import {
 } from "framer-motion";
 
 import { wrap } from "@motionone/utils";
-
-interface ParallaxProps {
-  children: string;
-  baseVelocity: number;
-}
+import { ParallaxProps } from '@/app/types/types'
 
 function ParallaxText({ children, baseVelocity = 200 }: ParallaxProps) {
   const baseX = useMotionValue(0);

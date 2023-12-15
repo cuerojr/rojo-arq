@@ -3,7 +3,7 @@ import s from './style.module.scss'
 
 export default function AnimatedText() {
   return (
-    <div className={ s.inner_headings}>
+    <div className={ s.inner_headings }>
       <span>
         construir <br />
         invertir <br />

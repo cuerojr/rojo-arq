@@ -1,10 +1,9 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+
+import { useState } from 'react'
 import Image from 'next/image'
-import { ServiceType} from '@/app/types/types'
+import { ServiceType } from '@/app/types/types'
 import s from './service.module.scss'
-import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Modal from '../dialog-modal'
 import PlusIconComponent from '../plus-icon-component'
 

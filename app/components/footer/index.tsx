@@ -4,21 +4,23 @@ import Image from 'next/image';
 import s from './style.module.scss'
 import MisionButtonComponent from '../common/mision-button';
 import SectionTitle from '../section-title';
+import { Title } from '@/app/types/types';
 import StripesContainer from '../common/stripes';
 
 export default function Footer() {
-    
+    const titleData: Title = {
+        preTitle: `Contacto`,
+        title: `Nuestras redes`,
+        backgroundImage : '/juli.jpg',
+        titleColor: ''
+    };
+
     return (
         <section 
             className={ s.footer_container }>   
-                    
+            <StripesContainer></StripesContainer>      
             <SectionTitle 
-                props={{
-                    preTitle: `Contacto`,
-                    title: `Nuestras redes`,
-                    backgroundImage : '/juli.jpg',
-                    titleColor: ''
-                }}></SectionTitle>
+                props={ titleData }></SectionTitle>
             <div className={ s.stripe_container }>
                 <MisionButtonComponent>
                     <a href="https://wa.me/549341153830273" 
@@ -66,6 +68,7 @@ export default function Footer() {
             </div>
 
             <div className={ s.footer_info }>
+                
                 <div className={ s.footer_info_wrapper }>                                
                     <div className="footer_logo w-embed">
                         <Image
@@ -77,20 +80,14 @@ export default function Footer() {
                     <div className="margin-bottom _2em">
                         <div className={ s.body_small }>ROJO arq es una nueva forma de proyectar y construir: casas, negocios y equipamientos para vivir, alquilar o invertir.</div>
                     </div>
-                    <div className="margin-bottom _3em">
-                        <div className="footer_mail-wrapper">
-                            <div className="margin-right _1em">
-                                <div className="body-small">Escribinos</div>
-                            </div>
-                            <div className="footer_mail-container">
-                                <a href="mailto:rojoarqdiseno@gmail.com" 
-                                    className="home-link w-inline-block">
-                                    <div>rojoarqdiseno@gmail.com</div>
-                                </a>
-                            </div>
-                        </div>
+                    <div className={ s.footer_socials }>
+                        <div className="body-small">Escribinos</div>
+                        <a href="mailto:rojoarqdiseno@gmail.com" 
+                            className="home-link w-inline-block">
+                            rojoarqdiseno@gmail.com
+                        </a>
                     </div>                        
-                    <div className="footer_socials">
+                    <div className={ s.footer_socials }>
                         <Link 
                             href="https://www.linkedin.com/in/julietarojoarq/" 
                             target="_blank">

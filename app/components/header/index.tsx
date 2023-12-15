@@ -1,9 +1,7 @@
-"use client";
-import Image from "next/image";
+'use client';
+
 import s from "./page.module.scss";
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import AnimatedText from "../animated-text";
 import StripesContainer from "../common/stripes";
 
@@ -30,8 +28,6 @@ export default function Header() {
       stagger: 0.1,
     });
   };*/
-
-
 
   return (
     <section

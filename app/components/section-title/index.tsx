@@ -1,13 +1,6 @@
 import React from 'react'
 import s from './style.module.scss'
-import Image from 'next/image'
-
-interface Title {
-    preTitle: string
-    title: string
-    backgroundImage?: string
-    titleColor?: string
-}
+import { Title } from '@/app/types/types'
 
 export default function SectionTitle({ props }: { props: Title }) {
     const { title, preTitle, titleColor = '#1e1e1c' } = props; 

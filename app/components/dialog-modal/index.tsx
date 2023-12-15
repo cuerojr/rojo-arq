@@ -1,11 +1,6 @@
 import { ReactNode, useLayoutEffect, useRef } from 'react';
 import s from './style.module.scss'
-
-interface Props {
-  children: ReactNode;
-  open: boolean;
-  onClose: () => void;
-}
+import { Props } from '@/app/types/types';
 
 export default function Modal({ children, open, onClose }: Props) {
   const ref = useRef<HTMLDialogElement>(null);

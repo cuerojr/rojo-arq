@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import s from "./service.module.scss";
 
-
 export default function ServicesList() {
   const services: ServiceType[] = [
     {

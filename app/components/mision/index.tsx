@@ -1,13 +1,10 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
+import { useState } from "react";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
-import PlusIconComponent from "../plus-icon-component";
 import MisionButtonComponent from "../common/mision-button";
 import SectionTitle from "../section-title";
-import { title } from "process";
+import { Title } from '@/app/types/types';
 
 export default function MisionComponent(): any {
   const misionData: MisionType[] = [
@@ -60,18 +57,19 @@ export default function MisionComponent(): any {
         Estas políticas son fundamentales para nuestra empresa y guían nuestras acciones y decisiones. Todos los empleados son responsables de conocer y cumplir con estas políticas en todo momento`,
     }
   ];
-
   const [selectedMision, setSelectedMision] = useState(null);
   const toggleDescription = (id: any) => {
     setSelectedMision((prevSelected) => (prevSelected === id ? null : id));
   };
 
+  const titleData: Title = {
+    preTitle: `Principios & Fundamentos`,
+    title: `Soluciones de alta calidad`
+  }
+
   return (
     <section className={s.mision_container}>      
-      <SectionTitle props={{
-        preTitle: `Principios & Fundamentos`,
-        title: `Soluciones de alta calidad`
-      }}></SectionTitle>
+      <SectionTitle props={ titleData }></SectionTitle>
       
       { misionData.map((element) => (
 
