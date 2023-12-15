@@ -2,12 +2,13 @@
 import React, { useEffect, useRef } from "react";
 import s from "./style.module.scss";
 import gsap from "gsap";
+import { Props } from "@/app/types/types";
 
 export default function MisionButtonComponent({
   children,
   backgroundColor = "black",
   ...attributes
-}: any) {
+}: Props) {
   const circle: any = useRef(null);
   const timeline: any = useRef(null);
   let timeoutId: any = null;

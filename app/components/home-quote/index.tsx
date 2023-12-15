@@ -1,11 +1,12 @@
 import React from "react";
 import s from './style.module.scss'
-import { Autoplay, Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function Quote() {
   return (
     <section id="quote" className={ s.home_quote_section }>
+      
       <div className={ s.container }>            
         <div id="content1" className={s.home_quote_layout}>
           <div className={s.margin_bottom_1em}>

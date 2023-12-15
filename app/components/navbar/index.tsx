@@ -46,19 +46,7 @@ export default function Navbar() {
                 </li>
             </ul>
           </div>
-      </nav>
-      
-      <div className={ s.stripes }>
-        <div className={s.stripes_wrapper}>
-          <div className={s.stripe_container}>
-            <div id="w-node-_7ee2322c-333b-0214-5dbb-a142688a222e-4c451fe0" className={s.stripe}></div>
-            <div id="w-node-_9546edc1-c069-caee-74dd-479059466453-4c451fe0" className={s.stripe}></div>
-            <div id="w-node-_93cb9ad3-ad3e-0eba-18c1-4988c39f1562-4c451fe0" className={s.two_stripes}>
-              <div className="stripe mob-r"></div><div className="stripe right"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </nav>      
     </>
   )
 }

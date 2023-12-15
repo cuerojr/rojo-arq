@@ -1,8 +1,10 @@
 'use client'
+
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap';
+import { Props } from '@/app/types/types';
 
-export default function Index({children}: any) {
+export default function Index({ children }: Props | any) {
     const magnetic: any = useRef(null);
 
     useEffect( () => {
@@ -24,6 +26,6 @@ export default function Index({children}: any) {
     }, [])
 
     return (
-        React.cloneElement(children, {ref:magnetic})
+        React.cloneElement(children, { ref: magnetic })
     )
 }
