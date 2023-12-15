@@ -20,33 +20,34 @@
             display: inline-block;
             padding: .5rem;
             position: relative;
-            /*background-clip: text;*/
             cursor: pointer;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             transition: all 0.3s ease-in-out;
             margin-top: 1rem;
+
           }
           
         a:before{
-        content: '';
-        background: var(--hover-button-color-end);
-        display: block;
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 3px;
-        transition: all 0.3s ease-in-out;
+            content: '';
+            background: var(--hover-button-color-end);
+            display: block;
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            transition: all 0.3s ease-in-out;
+
         }
         
         a:hover {
-        background-position: 0;
+            background-position: 0;
         }
         
         a:hover::before{
-        width: 100%;
+            width: 100%;
         }
         
         .divider {
@@ -55,28 +56,33 @@
             align-items: center;
             margin-bottom: 1rem;
             padding: 0;
+            
             span {
                 display: flex;
                 background-color: #141414;
                 width: 2rem;
                 height: 3px;
+
             }
         }
 
         .text_description {
             line-height: 1.2;
             font-size: 12px;
+
         }
 
         .modal_container {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
         }
     }
 
     .column:nth-child(1) {
         width: 80%;
+
     }
 
     .column:nth-child(2) {
@@ -87,12 +93,14 @@
         background-color: white;
         padding: 1rem;
         border: 1px solid lightgray;
+
     }
 
     h2 {
         margin-bottom: 1.5rem;
         font-size: calc(18px + 0.390625vw);
         line-height: 1;
+
     }
     .modal_divider {
         width: 40%;
@@ -109,7 +117,6 @@
         }
     }
     .box {
-        //width: clamp(50%, 300px, 350px);
         position: relative;
         aspect-ratio: 16/9;
         background-color: #e4e4e4;

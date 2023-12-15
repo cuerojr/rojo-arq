@@ -1,11 +1,4 @@
 .footer_container {
-    //background-color: #000;
-    //color: #f1f1f1;
-    //min-height: 100vh;
-    display: grid;
-    flex-direction: column;
-    align-items: end;
-    //padding: 2rem 0;
     margin: auto;
     border-right: 1px solid lightgray;
     border-left: 1px solid lightgray;
@@ -14,7 +7,6 @@
     position: relative;
 
     .contact_title_container {
-
         display: grid;
         flex-direction: column;
         justify-content: center;
@@ -33,7 +25,7 @@
             width: 100%;
 
             .card_wrapper {
-                padding: 1.5rem 0;
+                padding: 1rem 0;
                 display: flex;
                 justify-content: center;
                 gap: 15px;                                
@@ -48,36 +40,17 @@
             
         }
 
-        /*.card_wrapper_second_child {
-            border-right: 1px solid lightgray;
-            border-left: 1px solid lightgray;
-        }*/
     }
     
 
     .footer_text {
         width: 50%;
         
-        /*h2 {
-            
-            //font-weight: '600';
-            //font-size: '1.5rem';
-            
-        }*/
-
         .footer_button {                        
             display: flex;
             justify-content: flex-start;
             align-items: center;
             gap: 1rem;     
-
-            //color: #f1f1f1!important;
-            /*.footer_span {
-                //color: #f1f1f1!important;
-            }  */
-            /*svg {
-                //fill: #f1f1f1;
-            } */
             
         }
 
@@ -87,35 +60,16 @@
             flex-direction: row;
             align-items: center;
             gap: 1rem;
+
         }
         
         li a {
             position: relative;
-            /*background-image: linear-gradient(
-            to right,
-            var(--hover-button-color-start),
-            var(--hover-button-color-end) 50%,
-            #f1f1f1 50%
-            );*/
-            /*background-size: 200% 100%;
-            background-position: -100%;
-            display: inline-block;
-            padding: 5px 0;
-            
-            
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.3s ease-in-out;*/
 
-            /*.footer_span {
-                //color: #f1f1f1!important;
-            }  */
         }
         
         li a:before{
             content: '';
-            //background: #f1f1f1;
             display: block;
             position: absolute;
             bottom: -3px;
@@ -173,4 +127,14 @@
         padding: 0 1rem;
         align-self: end;
     }
+}
+
+@media (max-width: 500px){
+    .stripe_container {
+        display: grid !important;
+        border-bottom: 1px solid lightgray;
+        grid-template-columns: 1fr !important;
+        background-color: white;
+    }
+
 }

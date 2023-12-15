@@ -9,26 +9,6 @@ export default function Header() {
   
   const container = useRef(null);
 
-  /*useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    createAnimation();
-  }, []);
-
-  const createAnimation = () => {
-    gsap.to(refs.current, {
-      scrollTrigger: {
-        trigger: container.current,
-        scrub: true,
-        start: `top`,
-        end: `+=200px`,
-        markers: true,
-      },
-      opacity: 1,
-      ease: "none",
-      stagger: 0.1,
-    });
-  };*/
-
   return (
     <section
       className={ s.header_section }>

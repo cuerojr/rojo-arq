@@ -21,21 +21,22 @@ export default function Footer() {
             <StripesContainer></StripesContainer>      
             <SectionTitle 
                 props={ titleData }></SectionTitle>
+
             <div className={ s.stripe_container }>
                 <MisionButtonComponent>
                     <a href="https://wa.me/549341153830273" 
                         target="_blank" 
                         className="regulations_card w-inline-block">
-                            <div className={ s.card_wrapper }>
-                                <h2 className="button-main_text">WHATSAPP</h2>
-                                <svg xmlns="http://www.w3.org/2000/svg" 
-                                    width="9" 
-                                    height="8" 
-                                    fill="currentColor" viewBox="0 0 9 8">
-                                        <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
-                                </svg>
-                            </div>
-                            <div className="background-circle legal" ></div>
+                        <div className={ s.card_wrapper }>
+                            <h2 className="button-main_text">WHATSAPP</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                width="9" 
+                                height="8" 
+                                fill="currentColor" viewBox="0 0 9 8">
+                                    <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
+                            </svg>
+                        </div>
+                        <div className="background-circle legal" ></div>
                     </a>
                 </MisionButtonComponent>
                 <MisionButtonComponent>
@@ -43,13 +44,13 @@ export default function Footer() {
                         href="https://www.linkedin.com/in/julietarojoarq/" 
                         target="_blank" 
                         className={ s.card_wrapper_second_child }>
-                            <div className={ s.card_wrapper }>
-                                <h2 className="button-main_text">INSTAGRAM</h2>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="8" fill="currentColor" viewBox="0 0 9 8">
-                                    <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
-                                </svg>                                
-                            </div>
-                            <div className="background-circle legal" ></div>
+                        <div className={ s.card_wrapper }>
+                            <h2 className="button-main_text">INSTAGRAM</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="8" fill="currentColor" viewBox="0 0 9 8">
+                                <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
+                            </svg>                                
+                        </div>
+                        <div className="background-circle legal" ></div>
                     </a>
                 </MisionButtonComponent>
                 <MisionButtonComponent >
@@ -67,8 +68,7 @@ export default function Footer() {
                 </MisionButtonComponent>                
             </div>
 
-            <div className={ s.footer_info }>
-                
+            <div className={ s.footer_info }>                
                 <div className={ s.footer_info_wrapper }>                                
                     <div className="footer_logo w-embed">
                         <Image
