@@ -20,7 +20,7 @@ export default function ContactForm() {
       </div>
       <div className='d-flex align-center justify-center'>
           <MisionButtonComponent>
-            <span>Enviar</span>
+            <button type='submit'>Enviar</button>
           </MisionButtonComponent>
       </div>
     </form>

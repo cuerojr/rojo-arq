@@ -27,7 +27,7 @@ export default function ServicesList() {
         CONSTRUCTIVO.`,
       images: [
         {
-          src: "/components/services/construccion/construccion.jpeg",
+          src: "/components/services/construccion/servicio-cocina.webp",
           alt: "Mano de obra",
         },
       ],
@@ -45,7 +45,7 @@ export default function ServicesList() {
         ÚNICA y hermosa que te INSPIRE.`,
       images: [
         {
-          src: "/components/services/asesoramiento/asesoramiento.webp",
+          src: "/components/services/asesoramiento/servicio-bano.webp",
           alt: "Acesoramiento personalizado",
         },
       ],
@@ -65,7 +65,7 @@ export default function ServicesList() {
         variedad de colores y texturas; y mano de obra especializada.`,
       images: [
         {
-          src: "/components/services/diseño/diseno.jpeg",
+          src: "/components/services/diseño/servicio-estar.webp",
           alt: "Diseños exclusivos",
         },
       ],
