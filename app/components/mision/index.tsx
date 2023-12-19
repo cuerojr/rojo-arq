@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
