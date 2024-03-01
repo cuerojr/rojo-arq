@@ -5,6 +5,8 @@ import { Montserrat } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
+import { LenisScroller } from "./components/lenis-scroller";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["900", "800", "700", "600", "500", "400", "200"],
@@ -27,6 +29,7 @@ export default function RootLayout({
         <SpeedInsights />
         <Analytics/>
       </body>
+      <LenisScroller />
     </html>
   );
 }
