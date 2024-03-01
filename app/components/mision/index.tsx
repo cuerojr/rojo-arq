@@ -55,7 +55,7 @@ export default function MisionComponent(): any {
         7.Comunicación y Colaboración\n
         Fomentamos una comunicación efectiva y la colaboración entre nuestros empleados y con nuestros clientes. Creemos que un flujo de trabajo colaborativo y una comunicación clara son esenciales para el éxito de nuestros proyectos.\n
         Estas políticas son fundamentales para nuestra empresa y guían nuestras acciones y decisiones. Todos los empleados son responsables de conocer y cumplir con estas políticas en todo momento`,
-    }
+    },
   ];
   const [selectedMision, setSelectedMision] = useState(null);
   const toggleDescription = (id: any) => {
@@ -63,51 +63,57 @@ export default function MisionComponent(): any {
   };
 
   return (
-    <section className={s.mision_container}>      
-      <SectionTitle props={{
-        preTitle: `Principios & Fundamentos`,
-        title: `Soluciones de alta calidad`
-      }}></SectionTitle>
-      
-      { misionData.map((element) => (
+    <section className={s.mision_container}>
+      <SectionTitle
+        props={{
+          preTitle: `Principios & Fundamentos`,
+          title: `Soluciones de alta calidad`,
+        }}
+      ></SectionTitle>
 
+      {misionData.map((element) => (
         <div key={element.id} className={s.mision_article_container}>
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
             <div className={s.mision_title_container}>
-              <h2 className={s.mision_title}>{element.title} <span style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                fontStyle:'italic',
-                marginLeft: '2rem'
-              }}>{element.subTitle}</span></h2>              
-              { selectedMision === element.id ? (
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  height="16" 
-                  width="14" 
-                  viewBox="0 0 448 512">
-                  <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/>
+              <h2 className={s.mision_title}>
+                {element.title}{" "}
+                <span
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: "600",
+                    fontStyle: "italic",
+                    marginLeft: "2rem",
+                  }}
+                >
+                  {element.subTitle}
+                </span>
+              </h2>
+              {selectedMision === element.id ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="16"
+                  width="14"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z" />
                 </svg>
-              ): (
+              ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
-                  viewBox="0 0 448 512">
+                  viewBox="0 0 448 512"
+                >
                   <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                </svg>                
+                </svg>
               )}
             </div>
           </MisionButtonComponent>
 
-          { selectedMision === element.id && (
-            <p className={s.mision_description}>
-              { element.description }
-            </p>
+          {selectedMision === element.id && (
+            <p className={s.mision_description}>{element.description}</p>
           )}
-
         </div>
-
-      )) }
+      ))}
     </section>
   );
 }

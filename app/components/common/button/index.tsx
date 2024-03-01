@@ -43,25 +43,19 @@ export default function ButtonComponent({
   };
 
   return (
-    <Magnetic>
-      <div
-        className={s.roundedButton}
-        style={{ overflow: "hidden" }}
-        {...attributes}
-        onMouseEnter={(e) => {
-          manageMouseEnter(e);
-        }}
-        onMouseLeave={(e) => {
-          manageMouseLeave(e);
-        }}
-      >
-        { children }
-        <div
-          ref={circle}
-          className={s.circle}
-          style={{ backgroundColor }}
-        ></div>
-      </div>
-    </Magnetic>
+    <div
+      className={s.roundedButton}
+      style={{ overflow: "hidden" }}
+      {...attributes}
+      onMouseEnter={(e) => {
+        manageMouseEnter(e);
+      }}
+      onMouseLeave={(e) => {
+        manageMouseLeave(e);
+      }}
+    >
+      {children}
+      <div ref={circle} className={s.circle} style={{ backgroundColor }}></div>
+    </div>
   );
 }
