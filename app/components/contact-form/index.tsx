@@ -16,7 +16,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   nombre: z.string().min(5, {
-    message: "El titulo debe tener al menos 5 caracteres.",
+    message: "El nombre debe tener al menos 5 caracteres.",
   }),
   description: z.string().max(200, { message: "Debe contener menos de 200 caracteres" }),
   email: z.string().email({ message: "Debe ser un email válido" }),
@@ -94,7 +94,7 @@ export default function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="3415123456" {...field} />
+                <Input placeholder="Teléfono" {...field} />
               </FormControl>
 
               <FormMessage />
