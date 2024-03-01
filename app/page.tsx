@@ -11,6 +11,7 @@ import MisionComponent from "./components/mision";
 import Navbar from './components/navbar';
 import HeroImage from './components/hero-image';
 import Quote from './components/home-quote';
+import { Toaster } from '@/components/ui/toaster';
 
 
 export default function Home() {  
@@ -38,7 +39,8 @@ export default function Home() {
       <Quote />
       <ServicesList />
       <MisionComponent />
-      <Footer />      
+      <Footer />  
+      <Toaster />    
     </main>
   )
 }

@@ -3,25 +3,28 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: NextRequest) {
   try {
-    const { subject, message } = await request.json();
-
+    const emailInfo = await request.json();
+    
+    const { email, nombre, description, telefono} = emailInfo;
+    
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "cannibal5033@gmail.com",
-        pass: "aoga ywvd lwxq gnlv",
+        user: process.env.NODEMAILER_EMAIL,
+        pass: process.env.NODEMAILER_PW,
       },
     });
 
     const mailOptions = {
-      from: "cannibal5033@gmail.com",
-      to: "rojonicolasdev@gmail.com",
-      subject: "Entradas de la ticketera",
+      from: nombre,
+      to: process.env.NODEMAILER_EMAIL,
+      subject: "Recibiste un mensaje en la web",
       template: "email",
       html: `
-        <h3>Titulo hardcodeado en el html</h3>
-        <p>${subject}</p>
-        <p>${message}</p>
+        <h3>Mensaje de ${nombre}</h3>
+        <p>Teléfono: ${telefono}</p>
+        <p>Email: ${email}</p>
+        <p>Mensaje: ${description}</p>
     `,
     };
 

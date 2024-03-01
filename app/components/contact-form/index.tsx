@@ -2,8 +2,6 @@ import ButtonComponent from "../common/button";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import MisionButtonComponent from "../common/mision-button";
-import s from "./style.module.scss";
 import {
   Form,
   FormControl,
@@ -12,10 +10,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   nombre: z.string().min(5, {
@@ -27,7 +24,7 @@ const formSchema = z.object({
 });
 
 export default function ContactForm() {
-  //const { toast } = useToast();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,8 +36,25 @@ export default function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("🚀 ~ onSubmit ~ data:", values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    
+    const response = await fetch('/api/send-mail', {
+      method: "POST",
+      body: JSON.stringify(values)
+    });
+
+    if(response.ok) {
+      console.log('asdasd')
+      toast({
+        title: "Email enviado"
+      });
+      return;
+    }
+
+    toast({
+      variant: "destructive",
+      title: "Error enviando email.",
+    });
   }
 
   return (
@@ -100,7 +114,11 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Guardar evento</Button>
+        <ButtonComponent>
+          <button type="submit">
+            <span>Enviar</span>
+          </button>
+        </ButtonComponent>
       </form>
     </Form>
   );

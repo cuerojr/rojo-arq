@@ -1,5 +1,5 @@
 import "./style/globals.scss";
-import '@radix-ui/themes/styles.css';
+import "./global.scss";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
