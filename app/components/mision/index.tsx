@@ -9,10 +9,17 @@ import SectionTitle from "../section-title";
 export default function MisionComponent(): any {
   const misionData: MisionType[] = [
     {
+      id: "somos",
+      title: "Somos",
+      subTitle: `Historia`,
+      description: `ROJO arq es una empresa familiar que tuvo sus inicios en el año 2003. En ese entonces se desarrollaba particularmente realizando instalaciones de telecomunicaciones,eléctricas y protección contra incendios en industrias, comercios y viviendas.\n
+      Nuestra pasión por la técnica y el crecimiento continúo nos abrió camino para brindar soluciones de arquitectura abarcando obras completas, desde el diseño y la planificación hasta la gestión y construcción. Actualmente formamos un equipo de profesionales creativos en continuo crecimiento.`,
+    },
+    {
       id: "mision",
       title: "Misión",
       subTitle: `Creatividad espacial`,
-      description: `Somos un equipo de profesionales creativos en continuo crecimiento, trabajamos con un fuerte énfasis en el diseño y la planificación para construir espacios eficientes, de estética única que estimulen el sentido de pertenencia y confort físico-mental.`,
+      description: `Trabajamos con un fuerte énfasis en el diseño y la planificación para construir espacios eficientes, de estética única que estimulen el sentido de pertenencia y confort físicomental.`,
     },
     {
       id: "vision",
