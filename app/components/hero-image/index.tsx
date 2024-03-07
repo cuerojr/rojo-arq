@@ -8,7 +8,7 @@ export default function HeroImage() {
         <Image
           className={ s.image }
           src={"/header-bg-n.webp"}
-          alt={"ad"}
+          alt={"Rojoarq contrucciones, planeamiento y desarrollo de obras"}
           fill={true}
         />
     </div>

@@ -75,7 +75,7 @@ export default function Quote() {
             <img
               src="/juli.jpg"
               loading="lazy"
-              alt=" - Chief Technology officer, founder of LVNG"
+              alt="Julieta Rojo - Arquitecta - Diseñadora. Jefa de desarrollo, planeamiento y dirección de obra."
               className={s.quote_author}
             />
             <div className={s.author_box_text}>
