@@ -10,15 +10,10 @@ export default function HeroImage() {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.set(imageRef.current, {
-        y: 20
-      });
-
       const titleAnimation = gsap
         .timeline({ paused: false })
         .to(imageRef.current, {
           opacity: 1,
-          y: 0
         });
 
       // scroll trigger titulo imagen pineada
