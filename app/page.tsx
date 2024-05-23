@@ -1,6 +1,5 @@
 'use client'
-import s from './style.module.scss';
-import { useEffect, useRef } from 'react';
+
 import Footer from "./components/footer";
 import Header from "./components/header";
 import ServicesList from "./components/services-list";
