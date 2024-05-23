@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { primaryFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import Cursor from "./components/custom-cursor/custom-cursor";
 
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en" className={cn(primaryFont.variable)}>
       <body>
         <Client />
+        <Cursor />
         {children}
         <SpeedInsights />
         <Analytics/>
