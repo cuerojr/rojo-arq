@@ -21,7 +21,7 @@ export default function ServicesList() {
   const services: ServiceType[] = [
     {
       id: "servicio-1",
-      title: "Espacios eficientes",
+      title: "Eficiente",
       short: `Nos encargamos del diseño y la CONSTRUCCION, lo que nos permite que tengas más
         OPTIMIZACIÓN DEL USO DEL ESPACIO y AMBIENTES MÁS FUNCIONALES.        
         En OBRA NUEVA o REFORMA realizamos los planos y “visual 3d espacial” para que veas PRE-
@@ -40,8 +40,8 @@ export default function ServicesList() {
     },
     {
       id: "servicio-2",
-      title: "Asesoramiento personalizado",
-      short: `Querés convertir tu casa en comercio? En tonces Necesitas una TRANSFORMACIÓN ESPACIAL.
+      title: "Personalizado",
+      short: `Querés convertir tu casa en comercio?. Necesitas una TRANSFORMACIÓN ESPACIAL.
         Estudiamos de forma personalizada cada inmueble para proveer la mejor solución. Nuestros diseños
         son FLEXIBLES y ADAPTABLES, porque entendemos que los usos y necesidades cambian a lo
         largo del tiempo.`,
@@ -58,7 +58,7 @@ export default function ServicesList() {
     },
     {
       id: "servicio-3",
-      title: "Diseños exclusivos",
+      title: "Exclusivo",
       short: `Te damos CREATIVIDAD en la FORMA y los DETALLES arquitectónicos para dar lugar a
         espacios que te ENRIQUEZCAN la VIDA. Hay lugares que necesitan una atención especial para
         aprovechar al máximo su uso.`,
@@ -78,7 +78,7 @@ export default function ServicesList() {
     },
     {
       id: "servicio-4",
-      title: "Diseño sostenible",
+      title: "Sostenible",
       short: `Entendemos que la construcción es un gran esfuerzo para muchas familias e individuos, por eso
         brindamos diseño y construcción inteligentes para que la casa puede adaptarse a las cambiantes
         necesidades en el tiempo.`,
@@ -96,7 +96,7 @@ export default function ServicesList() {
     },
     {
       id: "servicio-5",
-      title: "Calidad de vida",
+      title: "Calidad",
       short: `Tomamos el compromiso de que cada espacio que diseñamos y construimos sean ambientes
         saludables, bien iluminados con ventilación adecuada, creamos espacios que promuevan el
         bienestar fisico y mental.`,
@@ -154,7 +154,7 @@ export default function ServicesList() {
     <section ref={sectionContainer} className={s.services_container}>
       <div ref={title} className={`${s.swiper_container} opacity-0`}>
         <div className={s.section_title_container}>
-          <h2 className={`${s.section_title}`}>
+          <h2 className={`text-4xl font-semibold`}>
             Nuestros servicios
           </h2>
         </div>
@@ -166,23 +166,17 @@ export default function ServicesList() {
             prevEl: ".prev-btn",
             //clickable: true
           }}
-          autoplay={{
-            delay: 10000,
-            pauseOnMouseEnter: true,
-          }}
+          // autoplay={{
+          //   delay: 10000,
+          //   pauseOnMouseEnter: true,
+          // }}
         >
           {services.map((service: ServiceType) => (
             <SwiperSlide key={service.id}>
               <Service props={service} />
             </SwiperSlide>
           ))}
-          <div
-            style={{
-              display: "flex",
-              gap: "10px",
-              marginLeft: "1rem",
-            }}
-          >
+          <div className="flex gap-10 ml-4">
             <button
               className={`${s.swiper_button} prev-btn`}
               aria-label="Previous slide"

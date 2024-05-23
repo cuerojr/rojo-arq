@@ -64,12 +64,35 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
- 
-@layer base {
+
+  html {
+    /* cursor: none; */
+    font-size: 16px;
+    @apply antialiased;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: clamp(16px, calc(16px + (2 * ((100vw - 1024px) / 656))), 18px);
+    }
+  }
+
+  @media (min-width: 1680px) {
+    html {
+      font-size: clamp(18px, calc(18px + (6 * ((100vw - 1680px) / 880))), 24px);
+    }
+  }
+
+  @media (min-width: 2560px) {
+    html {
+      font-size: calc(1.5rem + 0.5vw);
+    }
+  }
+  
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -10,11 +10,6 @@ import Navbar from './components/navbar';
 import HeroImage from './components/hero-image';
 import Quote from './components/home-quote';
 import { Toaster } from '@/components/ui/toaster';
-import TextAnimation from './components/text-animation/text-animation';
-
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
 
 export default function Home() {  
   
