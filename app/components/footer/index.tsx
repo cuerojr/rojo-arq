@@ -4,8 +4,6 @@ import Image from "next/image";
 import s from "./style.module.scss";
 import MisionButtonComponent from "../common/mision-button";
 import SectionTitle from "../section-title";
-import { Title } from "@/app/types/types";
-import StripesContainer from "../common/stripes";
 
 export default function Footer() {
   return (
