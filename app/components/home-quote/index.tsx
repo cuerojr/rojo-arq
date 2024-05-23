@@ -55,10 +55,10 @@ export default function Quote() {
     <section
       ref={sectionContainer}
       id="quote"
-      className={`${s.home_quote_section} h-screen flex items-center`}
+      className={`${s.home_quote_section} md:h-screen md:flex md:items-center`}
     >
       <StripesContainer />
-      <div className={s.container}>
+      <div className={`${s.container} py-20 md:p-0`}>
         <div
           ref={slidesRef}
           id="content1"
@@ -86,7 +86,7 @@ export default function Quote() {
                         alt="Quote"
                         className={s.first_quote}
                       />
-                      <div className={`text-3xl font-light leading-10`}>{slide.text}</div>
+                      <div className={`text-sm md:text-3xl font-light md:leading-10`}>{slide.text}</div>
                       <img
                         src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edff8f3465de643bc21997_quote_img.svg"
                         loading="lazy"
