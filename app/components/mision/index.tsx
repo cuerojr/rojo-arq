@@ -83,7 +83,7 @@ export default function MisionComponent(): any {
       const showImages = gsap.timeline({ paused: true }).to(".gsap-title", {
         opacity: 1,
         scale: 1,
-        duration: 0.5,
+        duration: 0.7,
         ease: "sine.inOut",
         stagger: 0.05,
       });
@@ -98,9 +98,7 @@ export default function MisionComponent(): any {
       });
     });
 
-    return () => {
-      ctx.kill();
-    };
+    return () => ctx.kill();
   }, []);
 
   return (
@@ -115,13 +113,13 @@ export default function MisionComponent(): any {
       {misionData.map((element) => (
         <div
           key={element.id}
-          className={`${s.mision_article_container} bg-white z-10 relative`}
+          className={`${s.mision_article_container} bg-white z-10 relative gsap-title`}
         >
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
-            <div className={`${s.mision_title_container} gsap-title`}>
-              <h2 className={s.mision_title}>
+            <div className={`${s.mision_title_container}  `}>
+              <h2 className={`${s.mision_title} `}>
                 {element.title}{" "}
-                <span
+                <span className=""
                   style={{
                     fontSize: "1.25rem",
                     fontWeight: "600",
