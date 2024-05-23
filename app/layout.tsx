@@ -1,11 +1,12 @@
 import "./style/globals.scss";
 import "./global.scss";
 import type { Metadata } from "next";
+import { LenisScroller } from "./components/lenis-scroller";
+import { Client } from "./components/client";
 import { Montserrat } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
-import { LenisScroller } from "./components/lenis-scroller";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,11 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
+        <Client />
         {children}
         <SpeedInsights />
         <Analytics/>
       </body>
-      <LenisScroller />
+      {/* <LenisScroller /> */}
     </html>
   );
 }

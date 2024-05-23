@@ -1,8 +1,6 @@
 'use client'
 import s from './style.module.scss';
 import { useEffect, useRef } from 'react';
-import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
-import gsap from 'gsap'
 import Footer from "./components/footer";
 import Header from "./components/header";
 import ServicesList from "./components/services-list";
@@ -12,24 +10,13 @@ import Navbar from './components/navbar';
 import HeroImage from './components/hero-image';
 import Quote from './components/home-quote';
 import { Toaster } from '@/components/ui/toaster';
+import TextAnimation from './components/text-animation/text-animation';
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 
 export default function Home() {  
-  const lenisRef: any = useRef();
-
-  /*useEffect(() => {
-    
-    function update(time: any) {
-      lenisRef.current?.raf(time * 1000)
-    }
-  
-    gsap.ticker.add(update)
-  
-    return () => {
-      gsap.ticker.remove(update)
-    }
-
-  }, []);*/
   
   return (
     <main>        
