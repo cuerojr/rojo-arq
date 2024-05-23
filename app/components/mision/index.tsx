@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
-import MisionButtonComponent from "../common/mision-button";
-import SectionTitle from "../section-title";
+import MisionButtonComponent from "@/app/components/common/mision-button";
+import SectionTitle from "@/app/components/section-title";
+import StripesContainer from "@/app/components/common/stripes";
+
 
 export default function MisionComponent(): any {
   const misionData: MisionType[] = [
@@ -68,18 +70,25 @@ export default function MisionComponent(): any {
   const toggleDescription = (id: any) => {
     setSelectedMision((prevSelected) => (prevSelected === id ? null : id));
   };
+  
+
+  
 
   return (
     <section className={s.mision_container}>
+      <StripesContainer />
       <SectionTitle
         props={{
           preTitle: `Principios & Fundamentos`,
           title: `Soluciones de alta calidad`,
         }}
-      ></SectionTitle>
+      />
 
       {misionData.map((element) => (
-        <div key={element.id} className={s.mision_article_container}>
+        <div
+          key={element.id}
+          className={`${s.mision_article_container} bg-white z-10 relative`}
+        >
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
             <div className={s.mision_title_container}>
               <h2 className={s.mision_title}>

@@ -1,14 +1,20 @@
-'use client'
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import { ServiceType } from "@/app/types/types";
 import Service from "@/app/components/service/index";
-import { Autoplay, Controller, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import {
+  Autoplay,
+  EffectCoverflow,
+  Navigation,
+} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import s from "./service.module.scss";
 
 export default function ServicesList() {
@@ -115,50 +121,94 @@ export default function ServicesList() {
   ];
 
   const [swiper, setSwiper] = useState<any | null>(null);
+  const sectionContainer = useRef<HTMLDivElement>(null);
+  const title = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.set(title.current, {
+        y: 20,
+      });
+
+      const titleAnimation = gsap
+        .timeline({ paused: false })
+        .to(title.current, {
+          opacity: 1,
+          y: 0,
+        });
+
+      // scroll trigger titulo imagen pineada
+      ScrollTrigger.create({
+        trigger: sectionContainer.current,
+        start: "top +=300px",
+        end: `bottom bottom`,
+        animation: titleAnimation,
+        markers: false,
+        scrub: false,
+      });
+    });
+    return () => ctx.revert();
+  }, []);
   
   return (
-    <section className={s.services_container}>
-      <div className={ s.swiper_container }>
+    <section ref={sectionContainer} className={s.services_container}>
+      <div className={s.swiper_container}>
         <div className={s.section_title_container}>
-          <h2 className={s.section_title}>Nuestros servicios</h2>
+          <h2 ref={title} className={`${s.section_title} opacity-0`}>
+            Nuestros servicios
+          </h2>
         </div>
-        <Swiper 
+        <Swiper
           modules={[EffectCoverflow, Navigation, Autoplay]}
           loop={true}
           navigation={{
-            nextEl: '.next-btn',
-            prevEl: '.prev-btn',
-            //clickable: true 
+            nextEl: ".next-btn",
+            prevEl: ".prev-btn",
+            //clickable: true
           }}
           autoplay={{
             delay: 10000,
-            pauseOnMouseEnter: true
-          }}>     
-          
+            pauseOnMouseEnter: true,
+          }}
+        >
           {services.map((service: ServiceType) => (
-            <SwiperSlide key={service.id} >
+            <SwiperSlide key={service.id}>
               <Service props={service} />
-            </SwiperSlide>        
+            </SwiperSlide>
           ))}
-          <div 
+          <div
             style={{
-              display: 'flex',
-              gap: '10px',
-              marginLeft: '1rem'
-            }}>
-            <button 
-              className={ `${s.swiper_button} prev-btn` }      
-              aria-label="Previous slide">
-              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+              display: "flex",
+              gap: "10px",
+              marginLeft: "1rem",
+            }}
+          >
+            <button
+              className={`${s.swiper_button} prev-btn`}
+              aria-label="Previous slide"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="16"
+                width="14"
+                viewBox="0 0 448 512"
+              >
+                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
               </svg>
               Anterior
             </button>
-            <button 
-              className={ `${s.swiper_button} next-btn` }
-              aria-label="Next slide">Siguiente
-              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+            <button
+              className={`${s.swiper_button} next-btn`}
+              aria-label="Next slide"
+            >
+              Siguiente
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="16"
+                width="14"
+                viewBox="0 0 448 512"
+              >
+                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
               </svg>
             </button>
           </div>
