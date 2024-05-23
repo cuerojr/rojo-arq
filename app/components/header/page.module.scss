@@ -23,7 +23,7 @@
             line-height: 1.4;
             font-weight: 500;
             margin: 0;
-
+            z-index: 1;
             p {
                 margin: 0;
                 span {
@@ -41,6 +41,7 @@
             max-width: 33vw;
             margin-left: .5rem;
             line-height: 1.4;
+            z-index: 1;
         }
     
         .header_box {            
@@ -67,11 +68,12 @@
     .header_title {
       display: grid !important ;
       gap: 0 !important ;
-      
+      z-index: 1;
     }
     .header_subtitle {
       margin: 1rem auto !important;
       text-align: center !important; 
+      z-index: 1;
     }
   }
 }

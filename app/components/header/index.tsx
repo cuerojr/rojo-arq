@@ -2,8 +2,8 @@
 
 import s from "./page.module.scss";
 import { useRef } from "react";
-import AnimatedText from "../animated-text";
-import StripesContainer from "../common/stripes";
+import AnimatedText from "@/app/components/animated-text";
+import StripesContainer from "@/app/components/common/stripes";
 
 export default function Header() {
   

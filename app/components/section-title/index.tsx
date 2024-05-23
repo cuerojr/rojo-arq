@@ -8,12 +8,13 @@ export default function SectionTitle({ props }: { props: Title }) {
     return (
         <div className={ s.title_container } >            
             <div className="text-centered" style={{
-                textAlign: 'center',
+                textAlign: 'center'
                 }}>
                 <div className={ s.s2 }>{ preTitle }</div>
                 <h2 className={ s.text_size_h2 }
                     style={{
-                        color: titleColor
+                        color: titleColor,
+                        zIndex: 1
                     }}>{ title }</h2>
             </div>
         </div>
