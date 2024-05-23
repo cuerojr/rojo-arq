@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MisionType } from "@/app/types/types";
 import s from "./style.module.scss";
 import MisionButtonComponent from "@/app/components/common/mision-button";
 import SectionTitle from "@/app/components/section-title";
-import StripesContainer from "@/app/components/common/stripes";
-
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function MisionComponent(): any {
   const misionData: MisionType[] = [
@@ -70,12 +70,41 @@ export default function MisionComponent(): any {
   const toggleDescription = (id: any) => {
     setSelectedMision((prevSelected) => (prevSelected === id ? null : id));
   };
-  
 
-  
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(".gsap-title", {
+        opacity: 0,
+        scale: 0,
+      });
+
+      const showImages = gsap.timeline({ paused: true }).to(".gsap-title", {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: "sine.inOut",
+        stagger: 0.05,
+      });
+
+      ScrollTrigger.create({
+        animation: showImages,
+        trigger: sectionRef.current,
+        start: "top center",
+        end: "bottom bottom",
+        markers: false,
+        scrub: false,
+      });
+    });
+
+    return () => {
+      ctx.kill();
+    };
+  }, []);
 
   return (
-    <section className={s.mision_container}>
+    <section ref={sectionRef} className={s.mision_container}>
       <SectionTitle
         props={{
           preTitle: `Principios & Fundamentos`,
@@ -89,7 +118,7 @@ export default function MisionComponent(): any {
           className={`${s.mision_article_container} bg-white z-10 relative`}
         >
           <MisionButtonComponent onClick={() => toggleDescription(element.id)}>
-            <div className={s.mision_title_container}>
+            <div className={`${s.mision_title_container} gsap-title`}>
               <h2 className={s.mision_title}>
                 {element.title}{" "}
                 <span
