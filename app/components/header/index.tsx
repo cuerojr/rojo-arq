@@ -11,9 +11,7 @@ export default function Header() {
   const sectionContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-
     let ctx = gsap.context(() => {
-
       gsap.set(".text-reveal", {
         y: 20,
       });

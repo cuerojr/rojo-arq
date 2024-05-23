@@ -152,9 +152,9 @@ export default function ServicesList() {
   
   return (
     <section ref={sectionContainer} className={s.services_container}>
-      <div className={s.swiper_container}>
+      <div ref={title} className={`${s.swiper_container} opacity-0`}>
         <div className={s.section_title_container}>
-          <h2 ref={title} className={`${s.section_title} opacity-0`}>
+          <h2 className={`${s.section_title}`}>
             Nuestros servicios
           </h2>
         </div>
