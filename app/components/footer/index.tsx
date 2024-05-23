@@ -8,18 +8,14 @@ import { Title } from "@/app/types/types";
 import StripesContainer from "../common/stripes";
 
 export default function Footer() {
-  const titleData: Title = {
-    preTitle: `Contacto`,
-    title: `Nuestras redes`,
-    backgroundImage: "/juli.jpg",
-    titleColor: "",
-  };
-
   return (
     <section className={s.footer_container}>
-      <StripesContainer />
-      <SectionTitle props={titleData}></SectionTitle>
-
+      <SectionTitle
+        props={{
+          preTitle: `Contacto`,
+          title: `Nuestras redes`,
+        }}
+       />
       <div className={s.stripe_container}>
         <MisionButtonComponent>
           <a
@@ -86,7 +82,6 @@ export default function Footer() {
           </a>
         </MisionButtonComponent>
       </div>
-
       <div className={s.footer_info}>
         <div className={s.footer_info_wrapper}>
           <div className="footer_logo w-embed">

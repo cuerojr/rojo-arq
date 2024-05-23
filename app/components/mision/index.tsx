@@ -76,7 +76,6 @@ export default function MisionComponent(): any {
 
   return (
     <section className={s.mision_container}>
-      <StripesContainer />
       <SectionTitle
         props={{
           preTitle: `Principios & Fundamentos`,

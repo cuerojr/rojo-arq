@@ -4,6 +4,7 @@ import s from "./style.module.scss";
 import { Title } from "@/app/types/types";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import StripesContainer from "../common/stripes";
 
 export default function SectionTitle({ props }: { props: Title }) {
   const { title, preTitle, titleColor = "#1e1e1c" } = props;
@@ -37,18 +38,21 @@ export default function SectionTitle({ props }: { props: Title }) {
     return () => ctx.revert();
   }, []);
   return (
-    <div ref={sectionContainer} className={`${s.title_container} `}>
-      <div className="text-center ">
-        <div ref={preTitleRef} className={`${s.s2} opacity-0`}>
-          {preTitle}
+    <>
+      <StripesContainer />
+      <div ref={sectionContainer} className={`${s.title_container} bg-white`}>
+        <div className="text-center ">
+          <div ref={preTitleRef} className={`${s.s2} opacity-0`}>
+            {preTitle}
+          </div>
+          <h2
+            ref={titleRef}
+            className={`${s.text_size_h2} relative z-10 text-[${titleColor}] opacity-0`}
+          >
+            {title}
+          </h2>
         </div>
-        <h2
-          ref={titleRef}
-          className={`${s.text_size_h2} relative z-10 text-[${titleColor}] opacity-0`}
-        >
-          {title}
-        </h2>
       </div>
-    </div>
+    </>
   );
 }
