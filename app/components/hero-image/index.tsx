@@ -3,6 +3,7 @@ import Image from 'next/image'
 import s from './style.module.scss'
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import StripesContainer from '../common/stripes';
 
 export default function HeroImage() {
   const sectionContainer = useRef<HTMLDivElement>(null);

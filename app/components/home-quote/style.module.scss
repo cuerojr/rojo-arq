@@ -1,12 +1,3 @@
-@media screen and (max-width: 991px) {
-    .home_quote_section {
-        padding-top: 10em;
-        padding-bottom: 10em;
-    }
-    .s2 {
-        font-size: 10px;
-    }
-}
 
 .home_quote_section {
     width: min(960px, 80vw);
@@ -15,8 +6,6 @@
     border-left: 1px solid lightgray;
 
     z-index: 91;
-    padding-top: 3.5rem;
-    padding-bottom: 5rem;
     position: relative;
 }
 
@@ -48,7 +37,7 @@
 }
 
 .author_box_text {
-    margin-left: 0.75em;
+    
     
     .text_size_h5 {
         font-size: 1em;
@@ -83,12 +72,7 @@
         display: flex;
 
 
-        .body_large {
-            color: #000;
-            font-size: 1.2em;
-            font-weight: 500;
-            line-height: 1.5;
-        }
+        
 
         .first_quote{
             align-self: flex-start;
