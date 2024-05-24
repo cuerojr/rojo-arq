@@ -5,11 +5,11 @@ import { gsap } from "gsap";
 export default function Cursor() {
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const cursor = document.querySelector("#custom-cursor");
-      const cursorText: any = document.querySelector(".cursor-text");
-      const links = document.querySelectorAll("a");
-      const buttons = document.querySelectorAll("button");
-      const mission: any = document.querySelectorAll(".gsap-title");
+      const cursor = document.querySelector<HTMLDivElement>("#custom-cursor");
+      const cursorText = document.querySelector<HTMLDivElement>(".cursor-text")!;
+      const links = document.querySelectorAll<HTMLAnchorElement>("a");
+      const buttons = document.querySelectorAll<HTMLButtonElement>("button");
+      const mission = document.querySelectorAll<HTMLDivElement>(".gsap-title");
 
       const onMouseMove = (event: MouseEvent) => {
         const { clientX, clientY } = event;
