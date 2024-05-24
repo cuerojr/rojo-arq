@@ -20,6 +20,7 @@ export default function Service({ props }: { props: ServiceType }) {
                         src={ images[0].src } 
                         alt={ title } 
                         fill
+                        loading='eager'
                         />
                 </div>
             </div>
