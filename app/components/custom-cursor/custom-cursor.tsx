@@ -1,39 +1,51 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 
 export default function Cursor() {
   useEffect(() => {
     const ctx = gsap.context(() => {
-    const cursor = document.querySelector("#custom-cursor");
-    const cursorText: any = document.querySelector(".cursor-text");
-    const links = document.querySelectorAll("a");
-    
-    const onMouseMove = (event: MouseEvent) => {
+      const cursor = document.querySelector("#custom-cursor");
+      const cursorText: any = document.querySelector(".cursor-text");
+      const links = document.querySelectorAll("a");
+      const buttons = document.querySelectorAll("button");
+      const mission: any = document.querySelectorAll(".gsap-title");
+
+      const onMouseMove = (event: MouseEvent) => {
         const { clientX, clientY } = event;
         gsap.to(cursor, { x: clientX, y: clientY });
-    }
+      };
 
-    const onMouseEnterLink = (event: any) => { 
+      const onMouseEnterLink = (event: any) => {
         const link = event.target;
-        if(link?.classList.contains("view")) {
-            gsap.to(cursor, { scale: 4}); 
-            cursorText.style.display = "block";
+        if (link?.classList.contains("gsap-title")) {
+          gsap.to(cursor, { scale: 4 });
+          cursorText.style.display = "block";
         } else {
-            gsap.to(cursor, { scale: 4});
+          gsap.to(cursor, { scale: 4 });
         }
-    }
+      };
 
-    const onMouseLeaveLink = (event: any) => { 
-        gsap.to(cursor, {scale: 1})
+      const onMouseLeaveLink = (event: any) => {
+        gsap.to(cursor, { scale: 1 });
         cursorText.style.display = "none";
-    }
+      };
 
-    document.addEventListener("mousemove", onMouseMove);
-    links.forEach((link:any) => {
+      document.addEventListener("mousemove", onMouseMove);
+      links.forEach((link: HTMLAnchorElement) => {
         link.addEventListener("mouseenter", onMouseEnterLink);
         link.addEventListener("mouseleave", onMouseLeaveLink);
-    })
+      });
+
+      buttons.forEach((button: HTMLButtonElement) => {
+        button.addEventListener("mouseenter", onMouseEnterLink);
+        button.addEventListener("mouseleave", onMouseLeaveLink);
+      });
+
+      mission.forEach((mission: HTMLDivElement) => {
+        mission.addEventListener("mouseenter", onMouseEnterLink);
+        mission.addEventListener("mouseleave", onMouseLeaveLink);
+      });
     });
 
     return () => ctx.kill();
