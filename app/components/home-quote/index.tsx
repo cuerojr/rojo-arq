@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import s from "./style.module.scss";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -80,18 +81,26 @@ export default function Quote() {
                 <SwiperSlide key={slide.id}>
                   <div className={s.text_centered}>
                     <div className={`${s.text_container}`}>
-                      <img
-                        src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edff8f3465de643bc21997_quote_img.svg"
-                        loading="lazy"
+                      <Image
+                        src="/quote_img.svg"
                         alt="Quote"
+                        loading="eager"
                         className={s.first_quote}
+                        width={52}
+                        height={52}
                       />
-                      <div className={`text-sm md:text-3xl font-light md:leading-10`}>{slide.text}</div>
-                      <img
-                        src="https://assets-global.website-files.com/63edd6d4291b030b472abf35/63edff8f3465de643bc21997_quote_img.svg"
-                        loading="lazy"
+                      <div
+                        className={`text-sm md:text-3xl font-light md:leading-10`}
+                      >
+                        {slide.text}
+                      </div>
+                      <Image
+                        src="/quote_img.svg"
                         alt="Quote"
+                        loading="eager"
                         className={s.second_quote}
+                        width={52}
+                        height={52}
                       />
                     </div>
                   </div>
@@ -101,11 +110,13 @@ export default function Quote() {
           <div
             className={`${s.quote_author_box} gap-5 flex items-center mt-10`}
           >
-            <img
+            <Image
               src="/juli.jpg"
               loading="lazy"
               alt="Julieta Rojo - Arquitecta - Diseñadora. Jefa de desarrollo, planeamiento y dirección de obra."
               className={s.quote_author}
+              width={52}
+              height={52}
             />
             <div className={s.author_box_text}>
               <h5 className={``}>Julieta Rojo</h5>

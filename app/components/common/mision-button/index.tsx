@@ -12,7 +12,7 @@ export default function MisionButtonComponent({
   const circle: any = useRef(null);
   const timeline: any = useRef(null);
   let timeoutId: any = null;
-  let exitTime = 0;
+  let exitTime = useRef(0);
 
   useEffect(() => {
     timeline.current = gsap.timeline({ paused: true });
