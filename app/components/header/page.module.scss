@@ -1,11 +1,11 @@
 .header_section {
-    height: 100vh;
+    height: 75vh;
     display: grid;
     flex-direction: column;
     align-items: center;
     transition: 1s ease all;
     background-blend-mode:multiply;
-    width: min(960px, 80vw);
+    width: min(1140px, 90vw);
     margin: auto;
     border-right: 1px solid lightgray;
     border-left: 1px solid lightgray;
