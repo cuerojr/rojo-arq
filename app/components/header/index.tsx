@@ -43,7 +43,7 @@ export default function Header() {
         <h1 className={`${s.header_title} text-lg opacity-0 text-reveal`}>
           Es posible <AnimatedText />
         </h1>
-        <p className={`${s.header_subtitle} opacity-0 text-reveal`}>
+        <p className={`${s.header_subtitle} opacity-0 text-reveal text-balance text-xs`}>
           ROJO arq es una nueva forma de proyectar y construir: casas, negocios
           y equipamientos para vivir, alquilar o invertir.
         </p>

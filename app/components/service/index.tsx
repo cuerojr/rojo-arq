@@ -24,9 +24,9 @@ export default function Service({ props }: { props: ServiceType }) {
                 </div>
             </div>
             <div className={ `${s.column } p-8 min-h-[80%]`}>
-                <h3 className='text-xl font-semibold mb-4'>{ title }</h3>
+                <h3 className='text-xl font-base mb-4'>{ title }</h3>
                 <div className={s.divider}><span className='bg-gray-300'></span></div>
-                <p className={`text-sm font-base text-balance`}>{ short }</p>
+                <p className={`text-xs font-base text-balance`}>{ short }</p>
                 {/* <a onClick={() => setOpenModal(true)}>
                     <PlusIconComponent />
                 </a> */}
