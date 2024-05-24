@@ -35,7 +35,11 @@ export default function HeroImage() {
           className={`${s.image }`}
           src={"/header-bg-n.webp"}
           alt={"Rojoarq contrucciones, planeamiento y desarrollo de obras"}
-          fill={true}
+          //fill={true}
+          width={1920}
+          height={1080}
+          sizes='(max-width: 1200px) 100vw'
+          loading='eager'
         />
       </div>
     </div>
