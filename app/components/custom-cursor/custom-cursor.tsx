@@ -52,7 +52,7 @@ export default function Cursor() {
   }, []);
 
   return (
-    <div id="custom-cursor" className="custom-cursor">
+    <div id="custom-cursor" className="hidden sm:flex custom-cursor">
       <span className="cursor-text">Ver</span>
     </div>
   );

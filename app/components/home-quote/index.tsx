@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import s from "./style.module.scss";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -69,11 +69,14 @@ export default function Quote() {
             <div className={s.s2}>cumplí tus sueños</div>
           </div>
           <Swiper
-            modules={[Pagination, Autoplay]}
+            modules={[EffectFade, Pagination, Autoplay]}
+            effect={'fade'}
+            fadeEffect={{
+              crossFade: true
+            }}
             loop={true}
             autoplay={{
               delay: 10000,
-              pauseOnMouseEnter: true,
             }}
           >
             {sliderData &&

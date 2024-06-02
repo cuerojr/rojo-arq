@@ -163,6 +163,9 @@ export default function ServicesList() {
           modules={[EffectFade, Navigation, Autoplay]}
           loop={true}
           effect={'fade'}
+          fadeEffect={{
+            crossFade: true
+          }}
           navigation={{
             nextEl: ".next-btn",
             prevEl: ".prev-btn",
