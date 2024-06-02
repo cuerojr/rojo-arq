@@ -4,7 +4,7 @@ import { ServiceType } from "@/app/types/types";
 import Service from "@/app/components/service/index";
 import {
   Autoplay,
-  EffectCoverflow,
+  EffectFade,
   Navigation,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,6 +15,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import 'swiper/css/effect-fade';
 import s from "./service.module.scss";
 
 const services: ServiceType[] = [
@@ -159,8 +160,9 @@ export default function ServicesList() {
           </h2>
         </div>
         <Swiper
-          modules={[EffectCoverflow, Navigation, Autoplay]}
+          modules={[EffectFade, Navigation, Autoplay]}
           loop={true}
+          effect={'fade'}
           navigation={{
             nextEl: ".next-btn",
             prevEl: ".prev-btn",
