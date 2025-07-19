@@ -13,7 +13,7 @@ export default function Auto() {
             fontSize: "10px",
           }}
         >
-          © 2024 rojoarq / Rojo Nicolás
+          © {new Date().getFullYear()} rojoarq / Rojo Nicolás
         </p>
       </div>
     </section>
