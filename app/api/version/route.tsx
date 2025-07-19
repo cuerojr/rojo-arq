@@ -1,6 +1,5 @@
-// pages/api/version.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
 
-export default function POST(_req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({ node: process.version });
+export async function POST(_req: NextRequest) {
+  return NextResponse.json({ node: process.version });
 }
