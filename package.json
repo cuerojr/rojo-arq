@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/themes": "^2.0.3",
     "@studio-freight/lenis": "^1.0.42",
@@ -23,10 +24,10 @@
     "dotenv": "^16.3.1",
     "gsap": "^3.12.2",
     "lucide-react": "^0.343.0",
-    "next": "^14.2.3",
+    "next": "15.5.2",
     "nodemailer": "^6.9.11",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sass": "^1.69.3",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.2.1",
@@ -40,13 +41,13 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.19.9",
     "@types/nodemailer": "^6.4.14",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "@types/swiper": "^6.0.0",
     "autoprefixer": "^10.4.17",
     "babel-jest": "^29.7.0",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4",
+    "eslint-config-next": "15.5.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.35",
@@ -55,5 +56,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "overrides": {
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9"
   }
 }
