@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
@@ -25,6 +26,7 @@
     "gsap": "^3.12.2",
     "lucide-react": "^0.343.0",
     "next": "15.5.2",
+    "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

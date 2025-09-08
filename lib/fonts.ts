@@ -1,34 +1,6 @@
 import localFont from "next/font/local";
 
 const primaryFont = localFont({
-  variable: "--font-primary",
-  preload: true,
-  display: "swap",
-  src: [
-    {
-      path: "../assets/fonts/HelveticaLTStd-Light.woff2",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/HelveticaLTStd-Roman.woff2",
-      weight: "normal",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/HelveticaLTStd-Bold.woff2",
-      weight: "bold",
-      style: "normal",
-    },
-    {
-      path: "../assets/fonts/HelveticaLTStd-Blk.woff2",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-});
-
-const secondaryFont = localFont({
   variable: "--font-secondary",
   preload: true,
   display: "swap",
@@ -56,4 +28,4 @@ const secondaryFont = localFont({
   ],
 });
 
-export { primaryFont, secondaryFont };
+export { primaryFont };

@@ -11,6 +11,9 @@ import { primaryFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Cursor from "./components/custom-cursor/custom-cursor";
 
+const montserrat = Montserrat({
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: "ROJO ARQ",
@@ -23,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(primaryFont.variable)}>
+    <html lang="en" className={cn(montserrat.className)}>
       <body>
         <Client />
         <Cursor />

@@ -2,8 +2,7 @@
     z-index: 999;
     position: fixed;
     width: 100vw;
-    margin-top: 1.25rem;
-    padding: 0 4.25vw;
+    padding: 0;
     
   .navbar {
     display: flex;
@@ -12,7 +11,7 @@
     align-items: center;
     background-color: #fff;
     border: 1px solid lightgray;
-    padding: 0 1rem;
+    padding: 1rem 1rem 0 1rem;
     .dropdown_menu{
       margin: 0;
   
@@ -36,6 +35,12 @@
         
         svg {
           fill: #fff;
+        }
+
+        span {
+          color: #000;
+          font-weight: 500;
+          font-size: 1rem;
         }
       }
       
