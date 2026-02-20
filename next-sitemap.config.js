@@ -11,6 +11,6 @@ module.exports = {
   siteUrl: `${SITE_URL}`, // reemplaza por tu dominio
   generateRobotsTxt: true, // genera automáticamente robots.txt
   sitemapSize: 5000, // opcional, si tenés muchas páginas
-  changefreq: 'daily',
+  changefreq: 'weekly',
   priority: 0.7,
 };

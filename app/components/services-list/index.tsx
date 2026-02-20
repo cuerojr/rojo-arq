@@ -2,11 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ServiceType } from "@/app/types/types";
 import Service from "@/app/components/service/index";
-import {
-  Autoplay,
-  EffectFade,
-  Navigation,
-} from "swiper/modules";
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -15,13 +11,15 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import 'swiper/css/effect-fade';
+import "swiper/css/effect-fade";
 import s from "./service.module.scss";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const services: ServiceType[] = [
+const servicesConstruccion: ServiceType[] = [
   {
     id: "servicio-1",
-    title: "Eficiente",
+    title: "Ampliación de vivienda",
     short: `Nos encargamos del diseño y la CONSTRUCCION, lo que nos permite que tengas más
       OPTIMIZACIÓN DEL USO DEL ESPACIO y AMBIENTES MÁS FUNCIONALES.        
       En OBRA NUEVA o REFORMA realizamos los planos y “visual 3d espacial” para que veas PRE-
@@ -40,7 +38,7 @@ const services: ServiceType[] = [
   },
   {
     id: "servicio-2",
-    title: "Personalizado",
+    title: "Remodelación de cocina/baño",
     short: `Querés convertir tu casa en comercio?. Necesitas una TRANSFORMACIÓN ESPACIAL.
       Estudiamos de forma personalizada cada inmueble para proveer la mejor solución. Nuestros diseños
       son FLEXIBLES y ADAPTABLES, porque entendemos que los usos y necesidades cambian a lo
@@ -58,7 +56,7 @@ const services: ServiceType[] = [
   },
   {
     id: "servicio-3",
-    title: "Exclusivo",
+    title: "Permisos de obra",
     short: `Te damos CREATIVIDAD en la FORMA y los DETALLES arquitectónicos para dar lugar a
       espacios que te ENRIQUEZCAN la VIDA. Hay lugares que necesitan una atención especial para
       aprovechar al máximo su uso.`,
@@ -78,7 +76,7 @@ const services: ServiceType[] = [
   },
   {
     id: "servicio-4",
-    title: "Sostenible",
+    title: "Diseño de interiores",
     short: `Entendemos que la construcción es un gran esfuerzo para muchas familias e individuos, por eso
       brindamos diseño y construcción inteligentes para que la casa puede adaptarse a las cambiantes
       necesidades en el tiempo.`,
@@ -96,7 +94,7 @@ const services: ServiceType[] = [
   },
   {
     id: "servicio-5",
-    title: "Calidad",
+    title: "Empresas de construcción",
     short: `Tomamos el compromiso de que cada espacio que diseñamos y construimos sean ambientes
       saludables, bien iluminados con ventilación adecuada, creamos espacios que promuevan el
       bienestar fisico y mental.`,
@@ -118,12 +116,89 @@ const services: ServiceType[] = [
       },
     ],
   },
+  {
+    id: "servicio-6",
+    title: "Reforma de casa/departamento",
+    short: `Ofrecemos un servicio integral de arquitectura y construcción, abarcando todas las etapas del
+      proceso, desde el diseño inicial hasta la finalización de la obra.`,
+    description: `Nos encargamos de cada detalle, asegurando una experiencia fluida y sin complicaciones para
+      nuestros clientes. Coordinamos todos los aspectos del proyecto, incluyendo la gestión de permisos,
+      la selección de materiales y la supervisión de la construcción.`,
+    images: [
+      {
+        src: "/components/services/comercial/garita.webp",
+        alt: "Arquitectura comercial",
+      },
+    ],
+  },
+];
+
+const servicesMobiliario: ServiceType[] = [
+  {
+    id: "servicio-1",
+    title: "Diseño de mobiliario",
+    short: `Nos encargamos del diseño y la CONSTRUCCION, lo que nos permite que tengas más
+      OPTIMIZACIÓN DEL USO DEL ESPACIO y AMBIENTES MÁS FUNCIONALES.        
+      En OBRA NUEVA o REFORMA realizamos los planos y “visual 3d espacial” para que veas PRE-
+      OBRA como va a quedar terminado tu proyecto.`,
+    description: `Nuestro servicio de construcción incluye la dirección de obra y planificación para gestionar mejor
+      los recursos y el tiempo. Entregamos “INFORMES SEMANALES” en etapa de arquitectura y de
+      obra para que sepas el estado de AVANCE de tu OBRA.
+      Podes contratar la mano de obra y materiales por tu cuenta o acceder a nuestro SISTEMA
+      CONSTRUCTIVO.`,
+    images: [
+      {
+        src: "/components/services/construccion/servicio-cocina.webp",
+        alt: "Mano de obra",
+      },
+    ],
+  },
+  {
+    id: "servicio-2",
+    title: "Muebles de cocina",
+    short: `Querés convertir tu casa en comercio?. Necesitas una TRANSFORMACIÓN ESPACIAL.
+      Estudiamos de forma personalizada cada inmueble para proveer la mejor solución. Nuestros diseños
+      son FLEXIBLES y ADAPTABLES, porque entendemos que los usos y necesidades cambian a lo
+      largo del tiempo.`,
+    description: `Si en tu caso debe seguir conviniendo CASA+COMERCIO u OFICINA, creamos los espacios
+      necesarios para que sigas teniendo la intimidad de tu hogar y potenciar tu negocio a la vez.
+      Diseñamos tu fachada para darle IDENTIDAD COMERCIAL y que tengas una arquitectura
+      ÚNICA y hermosa que te INSPIRE.`,
+    images: [
+      {
+        src: "/components/services/asesoramiento/servicio-bano.webp",
+        alt: "Acesoramiento personalizado",
+      },
+    ],
+  },
+  {
+    id: "servicio-3",
+    title: "Muebles a medida",
+    short: `Te damos CREATIVIDAD en la FORMA y los DETALLES arquitectónicos para dar lugar a
+      espacios que te ENRIQUEZCAN la VIDA. Hay lugares que necesitan una atención especial para
+      aprovechar al máximo su uso.`,
+    description: `A través de nuestra línea pensada especialmente para cocinas, INNEN ®, proveemos
+      amoblamientos de cocina y muebles diseñados a medida. Proyectamos con vos al detalle cada parte
+      de la cocina y su funcionamiento; con nuestra “visual 3d espacial” podes ir viendo como queda
+      terminada. Con nosotros tenes la posibilidad de contratar el proyecto solo o contratar el MUEBLE
+      TERMINADO que incluye diseño y colocación.
+      Trabajamos con materia prima de primera calidad en melamina mdf de 18 mm marca Faplac con
+      variedad de colores y texturas; y mano de obra especializada.`,
+    images: [
+      {
+        src: "/components/services/diseño/servicio-estar.webp",
+        alt: "Diseños exclusivos",
+      },
+    ],
+  },
 ];
 
 export default function ServicesList() {
   const [swiper, setSwiper] = useState<any | null>(null);
   const sectionContainer = useRef<HTMLDivElement>(null);
   const title = useRef<HTMLDivElement>(null);
+
+  const [isServicesConstruccion, setIsServicesConstruccion] = useState(true);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -150,68 +225,47 @@ export default function ServicesList() {
     });
     return () => ctx.revert();
   }, []);
-  
+
   return (
-    <section ref={sectionContainer} className={s.services_container}>
-      <div ref={title} className={`${s.swiper_container} opacity-0`}>
-        <div className={s.section_title_container}>
-          <h2 className={`text-4xl font-semibold`}>
-            Nuestros servicios
-          </h2>
-        </div>
-        <Swiper
-          modules={[EffectFade, Navigation, Autoplay]}
-          loop={true}
-          effect={'fade'}
-          fadeEffect={{
-            crossFade: true
-          }}
-          navigation={{
-            nextEl: ".next-btn",
-            prevEl: ".prev-btn",
-            //clickable: true
-          }}
-          // autoplay={{
-          //   delay: 10000,
-          //   pauseOnMouseEnter: true,
-          // }}
+    <section ref={sectionContainer} className={cn("py-[30vh]")}>
+      <div>
+        <Button
+          variant="link"
+          disabled={isServicesConstruccion}
+          onClick={() => setIsServicesConstruccion(true)}
         >
-          {services.map((service: ServiceType) => (
-            <SwiperSlide key={service.id}>
-              <Service props={service} />
-            </SwiperSlide>
-          ))}
-          <div className="flex justify-between ml-4">
-            <button
-              className={`${s.swiper_button} prev-btn`}
-              aria-label="Previous slide"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="16"
-                width="14"
-                viewBox="0 0 448 512"
-              >
-                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-              </svg>
-              Anterior
-            </button>
-            <button
-              className={`${s.swiper_button} next-btn`}
-              aria-label="Next slide"
-            >
-              Siguiente
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="16"
-                width="14"
-                viewBox="0 0 448 512"
-              >
-                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-              </svg>
-            </button>
-          </div>
-        </Swiper>
+          <span className="text-2xl font-semibold">Construcciones</span>
+        </Button>
+        <Button
+          variant="link"
+          disabled={!isServicesConstruccion}
+          onClick={() => setIsServicesConstruccion(false)}
+        >
+          <span className="text-2xl font-semibold">Mobiliario</span>
+        </Button>
+      </div>
+      <div ref={title} className="mx-[2.5vw]">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {isServicesConstruccion
+            ? servicesConstruccion?.map(
+                (service: ServiceType, index: number) => (
+                  <li key={service.id} className="w-full col-span-1">
+                    <span className="font-semibold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <Service props={service} />
+                  </li>
+                )
+              )
+            : servicesMobiliario?.map((service: ServiceType, index: number) => (
+                <li key={service.id} className="w-full col-span-1">
+                  <span className="font-semibold">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <Service props={service} />
+                </li>
+              ))}
+        </ul>
       </div>
     </section>
   );

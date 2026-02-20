@@ -1,0 +1,38 @@
+{
+  "type": "SharedSlice",
+  "id": "logo_list",
+  "name": "LogoList",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Displays a simple title and a repeating group of images in a row or grid.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Title"
+          }
+        },
+        "logos": {
+          "type": "Group",
+          "config": {
+            "label": "Logos",
+            "fields": {
+              "logo_image": {
+                "type": "Image",
+                "config": {
+                  "label": "Logo Image"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

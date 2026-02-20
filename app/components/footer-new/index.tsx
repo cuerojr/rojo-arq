@@ -4,25 +4,19 @@ import ContactForm from "../contact-form";
 import Image from "next/image";
 import s from "./style.module.scss";
 import MisionButtonComponent from "../common/mision-button";
-import SectionTitle from "../section-title";
+import SectionTitle from "../section-title-new";
 
 export default function Footer() {
   return (
-    <section className={s.footer_container}>
-      <SectionTitle
-        props={{
-          preTitle: `Contacto`,
-          title: `Nuestras redes`,
-        }}
-       />
-      <div className={s.stripe_container}>
+    <section className="container min-h-[400px] my-10">
+      <div className="flex gap-4 mb-10 flex-wrap justify-between">
         <MisionButtonComponent>
           <a
             href="https://wa.me/549341153830273"
             target="_blank"
-            className="regulations_card w-inline-block"
+            className="regulations_card w-inline-block "
           >
-            <div className={s.card_wrapper}>
+            <div className="flex items-center justify-center gap-2">
               <h2 className="button-main_text">WHATSAPP</h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +38,7 @@ export default function Footer() {
             target="_blank"
             className={s.card_wrapper_second_child}
           >
-            <div className={s.card_wrapper}>
+            <div className="flex items-center justify-center gap-2">
               <h2 className="button-main_text">INSTAGRAM</h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +59,7 @@ export default function Footer() {
             target="_blank"
             className="regulations_card w-inline-block"
           >
-            <div className={s.card_wrapper}>
+            <div className="flex items-center justify-center gap-2">
               <h2 className="button-main_text">LinkedIn</h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

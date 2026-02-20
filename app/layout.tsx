@@ -3,15 +3,17 @@ import "./global.scss";
 import type { Metadata } from "next";
 import { LenisScroller } from "./components/lenis-scroller";
 import { Client } from "./components/client";
-import { Montserrat, Radio_Canada } from "next/font/google";
+import { Montserrat, Funnel_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { primaryFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Cursor from "./components/custom-cursor/custom-cursor";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer-new";
 
-const montserrat = Montserrat({
+const funnel = Funnel_Display({
   subsets: ['latin'],
 })
 
@@ -26,11 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(montserrat.className)}>
+    <html lang="en" className={cn(funnel.className)}>
       <body>
         <Client />
         <Cursor />
+        <Navbar />
         {children}
+        <Footer />
         <SpeedInsights />
         <Analytics/>
       </body>
