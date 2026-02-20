@@ -2,15 +2,12 @@
 import Link from "next/link";
 import ContactForm from "../contact-form";
 import Image from "next/image";
-import s from "./style.module.scss";
-import MisionButtonComponent from "../common/mision-button";
-import SectionTitle from "../section-title-new";
 
 export default function Footer() {
   return (
     <section className="container min-h-[400px] my-10">
       <div className="flex gap-4 mb-10 flex-wrap justify-between">
-        <MisionButtonComponent>
+        
           <a
             href="https://wa.me/549341153830273"
             target="_blank"
@@ -30,13 +27,12 @@ export default function Footer() {
             </div>
             <div className="background-circle legal"></div>
           </a>
-        </MisionButtonComponent>
-        <MisionButtonComponent>
+          
           <a
             data-w-id="4c6cc4d4-5adf-56d9-ccc1-7a7e3dd901a3"
             href="https://www.linkedin.com/in/julietarojoarq/"
             target="_blank"
-            className={s.card_wrapper_second_child}
+            className="card_wrapper_second_child"
           >
             <div className="flex items-center justify-center gap-2">
               <h2 className="button-main_text">INSTAGRAM</h2>
@@ -52,8 +48,7 @@ export default function Footer() {
             </div>
             <div className="background-circle legal"></div>
           </a>
-        </MisionButtonComponent>
-        <MisionButtonComponent>
+          
           <a
             href="https://www.linkedin.com/in/julietarojoarq/"
             target="_blank"
@@ -73,20 +68,20 @@ export default function Footer() {
             </div>
             <div className="background-circle legal"></div>
           </a>
-        </MisionButtonComponent>
+          
       </div>
-      <div className={s.footer_info}>
-        <div className={s.footer_info_wrapper}>
+      <div className="footer_info">
+        <div className="footer_info_wrapper">
           <div className="footer_logo w-embed">
             <Image src={"/logo.png"} width={100} height={50} alt="rojoarq" />
           </div>
           <div className="margin-bottom _2em">
-            <div className={s.body_small}>
+            <div className="body_small">
               ROJO arq es una nueva forma de proyectar y construir: casas,
               negocios y equipamientos para vivir, alquilar o invertir.
             </div>
           </div>
-          <div className={s.footer_socials}>
+          <div className="footer_socials">
             <div className="body-small">Escribinos</div>
             <a
               href="mailto:rojoarqdiseno@gmail.com"
@@ -95,7 +90,7 @@ export default function Footer() {
               rojoarqdiseno@gmail.com
             </a>
           </div>
-          <div className={s.footer_socials}>
+          <div className="footer_socials">
             <Link
               href="https://www.linkedin.com/in/julietarojoarq/"
               target="_blank"
@@ -122,7 +117,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className={s.footer_form}>
+        <div className="footer_form">
           <ContactForm />
         </div>
       </div>

@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import s from "./style.module.scss";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   return (
-    <nav className={s.navbar_container}>
-      <div className={s.navbar}>
+    <nav className="navbar_container">
+      <div className="navbar">
         <Link
           href={"/"}
           style={{
@@ -16,7 +15,7 @@ export default function Navbar() {
         >
           <Image src={"/logo.png"} width={200} height={200} alt="rojoarq" />
         </Link>
-        <ul className={`${s.dropdown_menu} d-flex justify-end gap-2`}>
+        <ul className={` d-flex justify-end gap-2`}>
           <li>
             <Link
               href="https://www.linkedin.com/in/julietarojoarq/"

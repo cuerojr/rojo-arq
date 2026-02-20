@@ -1,5 +1,5 @@
-import "./style/globals.scss";
-import "./global.scss";
+
+import "./global.css";
 import type { Metadata } from "next";
 import { LenisScroller } from "./components/lenis-scroller";
 import { Client } from "./components/client";
@@ -28,10 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(funnel.className)}>
+    <html lang="es" className={cn(funnel.className, "bg-white text-black")}>
       <body>
         <Client />
-        <Cursor />
+        {/*<Cursor />*/}
         <Navbar />
         {children}
         <Footer />
