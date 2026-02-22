@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <section className="container min-h-[400px] my-10">
+    <footer className="max-w-[1440px] mx-auto min-h-[400px] py-10 px-10 bg-black text-white">
       <div className="flex gap-4 mb-10 flex-wrap justify-between">
         
           <a
@@ -118,9 +118,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer_form">
-          <ContactForm />
+          {/*<ContactForm />*/}
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

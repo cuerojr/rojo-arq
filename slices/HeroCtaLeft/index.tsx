@@ -15,11 +15,11 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="h-screen bg-black flex items-center"
+      className="min-h-screen bg-black flex items-end py-16 px-10"
     >
-      <div className="container flex items-center">
-        <div className="w-full lg:w-1/2">
-          <div className="text-4xl font-bold text-gray-300">
+      <div className="max-w-[1440px] mx-auto flex items-center">
+        <div className="w-full lg:w-2/3">
+          <div className="text-6xl text-pretty font-bold text-gray-300">
             <PrismicRichText field={slice.primary.title} />
           </div>
           <div className="mt-4 text-lg text-gray-300">
@@ -29,7 +29,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
             <PrismicRichText field={slice.primary.description} />
           </div>
         </div>
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/3">
           {/* Aquí podrías agregar una imagen o cualquier otro contenido que quieras mostrar a la derecha */}
         </div>
       </div>

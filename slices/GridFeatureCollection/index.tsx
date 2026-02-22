@@ -17,9 +17,9 @@ const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="h-screen border"
+      className="py-16 px-10 bg-white"
     >
-      <div className="container">
+      <div className="max-w-[1440px] mx-auto">
         <div className="text-4xl font-bold">
           <PrismicRichText field={slice.primary.title} />
         </div>

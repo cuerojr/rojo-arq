@@ -1,9 +1,8 @@
 
 import "./global.css";
-import type { Metadata } from "next";
-import { LenisScroller } from "./components/lenis-scroller";
+
 import { Client } from "./components/client";
-import { Montserrat, Funnel_Display } from "next/font/google";
+import { Funnel_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -15,12 +14,7 @@ import Footer from "./components/footer-new";
 
 const funnel = Funnel_Display({
   subsets: ['latin'],
-})
-
-export const metadata: Metadata = {
-  title: "ROJO ARQ",
-  description: "Arquitectura, diseño y construcción.",
-};
+});
 
 export default function RootLayout({
   children,
@@ -28,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={cn(funnel.className, "bg-white text-black")}>
+    <html lang="es" className={cn(funnel.className)}>
       <body>
         <Client />
         {/*<Cursor />*/}

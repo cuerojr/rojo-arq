@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   return (
-    <nav className="navbar_container">
-      <div className="navbar">
+    <nav className="fixed inset-x-0 top-0 z-50 bg-white backdrop-blur-sm shadow">
+      <div className="flex items-center justify-between max-w-[1440px] mx-auto py-2 px-6">
         <Link
           href={"/"}
           style={{
@@ -15,7 +15,7 @@ export default function Navbar() {
         >
           <Image src={"/logo.png"} width={200} height={200} alt="rojoarq" />
         </Link>
-        <ul className={` d-flex justify-end gap-2`}>
+        <ul className="flex gap-4">
           <li>
             <Link
               href="https://www.linkedin.com/in/julietarojoarq/"
