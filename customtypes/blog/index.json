@@ -1,14 +1,27 @@
 {
   "format": "page",
   "id": "blog",
+  "label": "Blog",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
-      "slices": {
+      "uid": {
+        "type": "UID",
         "config": {
-          "choices": {}
-        },
+          "label": "UID"
+        }
+      },
+      "slices": {
+        "type": "Slices",
         "fieldset": "Slice Zone",
-        "type": "Slices"
+        "config": {
+          "choices": {
+            "blog_content": {
+              "type": "SharedSlice"
+            }
+          }
+        }
       }
     },
     "SEO & Metadata": {
@@ -38,8 +51,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "Blog",
-  "repeatable": false,
-  "status": true
+  }
 }

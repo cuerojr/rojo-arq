@@ -18,14 +18,14 @@ const SideTitleContent: FC<SideTitleContentProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="py-16 px-10 flex items-center"
     >
-      <div className="max-w-[1440px] mx-auto flex items-center">
-        <div className="w-full lg:w-3/3">
-          <div className="text-4xl font-bold text-gray-300">            
+      <div className="max-w-[1440px] mx-auto flex flex-col items-center">
+        <div className="w-full lg:w-3/3 mb-10">
+          <div className="text-4xl font-bold text-black">            
             <PrismicRichText field={slice.primary.section_title} />
           </div>
         </div>
-        <div className="w-full lg:w-1/2">
-          <div className="text-lg text-gray-300">
+        <div className="w-full lg:w-2/3">
+          <div className="text-lg text-black">
             <PrismicRichText field={slice.primary.main_content} />
           </div>
         </div>

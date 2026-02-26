@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type BlogDocumentDataSlicesSlice = never;
+type BlogDocumentDataSlicesSlice = BlogContentSlice;
 
 /**
  * Content for Blog documents
@@ -122,13 +122,13 @@ interface BlogDocumentData {
  * Blog document from Prismic
  *
  * - **API ID**: `blog`
- * - **Repeatable**: `false`
+ * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/content-modeling
  *
  * @typeParam Lang - Language API ID of the document.
  */
 export type BlogDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<Simplify<BlogDocumentData>, "blog", Lang>;
+  prismic.PrismicDocumentWithUID<Simplify<BlogDocumentData>, "blog", Lang>;
 
 type HomeDocumentDataSlicesSlice =
   | LogoListSlice
@@ -198,6 +198,108 @@ export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
 export type AllDocumentTypes = BlogDocument | HomeDocument;
+
+/**
+ * Item in *BlogContent → Default → Primary → Otros blogs*
+ */
+export interface BlogContentSliceDefaultPrimaryOtrosBlogsItem {
+  /**
+   * blog field in *BlogContent → Default → Primary → Otros blogs*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.otros_blogs[].blog
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  blog: prismic.ContentRelationshipField<"blog">;
+}
+
+/**
+ * Primary content in *BlogContent → Default → Primary*
+ */
+export interface BlogContentSliceDefaultPrimary {
+  /**
+   * Portada field in *BlogContent → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.portada
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  portada: prismic.ImageField<never>;
+
+  /**
+   * Titulo field in *BlogContent → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.titulo
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  titulo: prismic.RichTextField;
+
+  /**
+   * Bajada field in *BlogContent → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.bajada
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  bajada: prismic.RichTextField;
+
+  /**
+   * Cuerpo de la noticia field in *BlogContent → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.cuerpo_de_la_noticia
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  cuerpo_de_la_noticia: prismic.RichTextField;
+
+  /**
+   * Otros blogs field in *BlogContent → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_content.default.primary.otros_blogs[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  otros_blogs: prismic.GroupField<
+    Simplify<BlogContentSliceDefaultPrimaryOtrosBlogsItem>
+  >;
+}
+
+/**
+ * Default variation for BlogContent Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BlogContentSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BlogContentSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BlogContent*
+ */
+type BlogContentSliceVariation = BlogContentSliceDefault;
+
+/**
+ * BlogContent Shared Slice
+ *
+ * - **API ID**: `blog_content`
+ * - **Description**: BlogContent
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BlogContentSlice = prismic.SharedSlice<
+  "blog_content",
+  BlogContentSliceVariation
+>;
 
 /**
  * Item in *CardCarousel → Default → Primary → Cards*
@@ -722,6 +824,11 @@ declare module "@prismicio/client" {
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
       AllDocumentTypes,
+      BlogContentSlice,
+      BlogContentSliceDefaultPrimaryOtrosBlogsItem,
+      BlogContentSliceDefaultPrimary,
+      BlogContentSliceVariation,
+      BlogContentSliceDefault,
       CardCarouselSlice,
       CardCarouselSliceDefaultPrimaryCardsItem,
       CardCarouselSliceDefaultPrimary,
