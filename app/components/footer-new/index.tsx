@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto min-h-[400px] py-10 px-10 bg-black text-white">
-      <div className="flex gap-4 mb-10 flex-wrap justify-between">
+    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between py-10 px-10 bg-rojoarq-white text-rojoarq-white border-t border-rojoarq-stone">
+      <div className="hidden flex gap-4 mb-10 flex-wrap justify-between">
         
           <a
             href="https://wa.me/549341153830273"
@@ -70,7 +70,10 @@ export default function Footer() {
           </a>
           
       </div>
-      <div className="footer_info">
+      <div className="text-center">
+        <h2 className="text-lg uppercase font-bold underline underline-offset-8 decoration-1">Contacto</h2>
+      </div>
+      <div className="footer_info text-rojoarq-black">
         <div className="footer_info_wrapper">
           <div className="footer_logo w-embed">
             <Image src={"/logo.png"} width={100} height={50} alt="rojoarq" />

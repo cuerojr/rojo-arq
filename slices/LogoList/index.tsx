@@ -16,10 +16,10 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 px-10 bg-gray-50"
+      className="py-16 px-10"
     >
       <div className="max-w-[1440px] mx-auto">
-        <div className="text-4xl font-bold">
+        <div className="text-lg py-10 underline underline-offset-8 decoration-1">
           <PrismicRichText field={slice.primary.title} />
         </div>
         <div className="flex gap-4">

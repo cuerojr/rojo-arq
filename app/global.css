@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+:root {
+  --rojoarq-arena: #E5E1D0;
+  --rojoarq-stone: #8F8D7F;
+  --rojoarq-blue: #3063AD;
+  --rojoarq-black: #2F2E2C;
+  --rojoarq-pink: #CDB9DB;
+  --rojoarq-white: #EAEAEA;
+  
+}
+
+@theme {
+  --font-grotesk: var(--font-space-grotesk);
+  --font-mono: var(--font-geist-mono);
+
+  --color-rojoarq-stone: var(--rojoarq-stone);
+  --color-rojoarq-arena: var(--rojoarq-arena);
+  --color-rojoarq-blue: var(--rojoarq-blue);
+  --color-rojoarq-black: var(--rojoarq-black);
+  --color-rojoarq-pink: var(--rojoarq-pink);
+  --color-rojoarq-white: var(--rojoarq-white);
+
+
+  
+}
+
 html.lenis {
   height: auto;
 }

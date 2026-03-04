@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 bg-white backdrop-blur-sm shadow">
+    <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-xs shadow">
       <div className="flex items-center justify-between max-w-[1440px] mx-auto py-2 px-6">
         <Link
           href={"/"}
@@ -20,7 +20,7 @@ export default function Navbar() {
             <Link
               href="https://www.linkedin.com/in/julietarojoarq/"
               target="_blank"
-              className={cn("text-black text-xs")}
+              className={cn("text-xs")}
             >
               {/*<svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -36,9 +36,9 @@ export default function Navbar() {
             <Link
               href="https://www.instagram.com/rojoarqdiseno/"
               target="_blank"
-              className={cn("text-black text-xs")}
+              className={cn("text-xs")}
             >
-              <span className={cn("text-black")}>Instagram</span>
+              <span>Instagram</span>
               {/*
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
