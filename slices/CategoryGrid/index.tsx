@@ -15,8 +15,8 @@ export type CategoryGridProps = SliceComponentProps<Content.CategoryGridSlice>;
 const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
   const dinamicStyle = {
     textCont: [
-      "order-1 border-rojoarq-stone border-r pr-4",
-      "order-3 border-rojoarq-stone border-l pl-6",
+      "order-1 border-r border-rojoarq-stone pr-4",
+      "order-3 border-l border-rojoarq-stone pl-6",
     ],
     picCont: ["order-2", "order-2"],
     thumbnailsCont: ["order-3", "order-1"],

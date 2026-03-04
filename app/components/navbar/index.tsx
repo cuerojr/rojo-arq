@@ -2,10 +2,40 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
+  const [visible, setVisible] = useState(true);
+  const [whiteColor, setWhiteColor] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      console.log("🚀 ~ handleScroll ~ currentScrollY:", currentScrollY)
+
+      if (currentScrollY < 10) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-xs shadow">
+    <nav
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 backdrop-blur-xs shadow transition-transform duration-300 ease-in-out",
+        visible ? "translate-y-0" : "-translate-y-full",
+      )}
+    >
       <div className="flex items-center justify-between max-w-[1440px] mx-auto py-2 px-6">
         <Link
           href={"/"}
@@ -15,7 +45,7 @@ export default function Navbar() {
         >
           <Image src={"/logo.png"} width={200} height={200} alt="rojoarq" />
         </Link>
-        <ul className="flex gap-4">
+        <ul className={cn("flex gap-4", whiteColor ? "text-rojoarq-white": "text-rojoarq-black")}>
           <li>
             <Link
               href="https://www.linkedin.com/in/julietarojoarq/"

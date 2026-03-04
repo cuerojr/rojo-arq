@@ -73,11 +73,9 @@ export default function Footer() {
       <div className="text-center">
         <h2 className="text-lg uppercase font-bold underline underline-offset-8 decoration-1">Contacto</h2>
       </div>
-      <div className="footer_info text-rojoarq-black">
+      <div className="footer_info text-rojoarq-black text-right">
         <div className="footer_info_wrapper">
-          <div className="footer_logo w-embed">
-            <Image src={"/logo.png"} width={100} height={50} alt="rojoarq" />
-          </div>
+          
           <div className="margin-bottom _2em">
             <div className="body_small">
               ROJO arq es una nueva forma de proyectar y construir: casas,
@@ -122,6 +120,9 @@ export default function Footer() {
         </div>
         <div className="footer_form">
           {/*<ContactForm />*/}
+          <div className="footer_logo w-embed">
+            <Image src={"/logo.png"} width={200} height={100} alt="rojoarq" />
+          </div>
         </div>
       </div>
     </footer>

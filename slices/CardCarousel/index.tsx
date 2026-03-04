@@ -42,13 +42,13 @@ const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
             className=""
           >
             {slice.primary.cards.map((item, index) => (
-              <SwiperSlide key={index} className="bg-rojoarq-white border border-rojoarq-stone">
-                <div className="text-2xl p-10 selectable-none cursor-pointer text-rojoarq-black text-pretty">
+              <SwiperSlide key={index} className="cursor-pointer bg-rojoarq-white border border-rojoarq-stone">
+                <div className="indent-5 text-2xl p-10 selectable-none cursor-pointer text-rojoarq-black text-balance">
                   <PrismicRichText field={item.content} />
                 </div>
                 <div className="p-7">
                   <h3>Nombre</h3>
-                  <p className="text-rojoarq-gray">Quien es en verdad</p>
+                  <p className="text-rojoarq-stone">Quien es en verdad</p>
                 </div>
               </SwiperSlide>
             ))}
