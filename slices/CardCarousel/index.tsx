@@ -39,16 +39,25 @@ const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
             slidesPerView={2.1}
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
-            className=""
+            className="w-full"
           >
             {slice.primary.cards.map((item, index) => (
-              <SwiperSlide key={index} className="cursor-pointer bg-rojoarq-white border border-rojoarq-stone">
-                <div className="indent-5 text-2xl p-10 selectable-none cursor-pointer text-rojoarq-black text-balance">
-                  <PrismicRichText field={item.content} />
-                </div>
-                <div className="p-7">
-                  <h3>Nombre</h3>
-                  <p className="text-rojoarq-stone">Quien es en verdad</p>
+              <SwiperSlide
+                key={index}
+                className="min-h-[330px] cursor-pointer bg-rojoarq-white border border-rojoarq-stone "
+              >
+                <div className="flex flex-col justify-end h-auto">
+                  <div className=" text-2xl p-10 selectable-none cursor-pointer text-rojoarq-black text-pretty">
+                    <PrismicRichText field={item.content} />
+                  </div>
+                  <div className="p-7">
+                    <div className="">
+                      <PrismicRichText field={item.reviewer} />
+                    </div>
+                    <div className="text-rojoarq-stone">
+                      <PrismicRichText field={item.profesion} />
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

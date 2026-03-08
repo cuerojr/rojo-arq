@@ -43,6 +43,38 @@
                   "multi": "paragraph,strong,em",
                   "label": "Description"
                 }
+              },
+              "thumbnail1": {
+                "type": "Image",
+                "config": {
+                  "label": "thumbnail1",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "thumbnail2": {
+                "type": "Image",
+                "config": {
+                  "label": "thumbnail2",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "thumbnail3": {
+                "type": "Image",
+                "config": {
+                  "label": "thumbnail3",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "thumbnail4": {
+                "type": "Image",
+                "config": {
+                  "label": "thumbnail4",
+                  "constraint": {},
+                  "thumbnails": []
+                }
               }
             }
           }

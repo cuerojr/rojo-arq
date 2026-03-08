@@ -13,9 +13,11 @@ export type CategoryGridProps = SliceComponentProps<Content.CategoryGridSlice>;
  * Component for "CategoryGrid" Slices.
  */
 const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
+
+  console.log(slice.primary.items)
   const dinamicStyle = {
     textCont: [
-      "order-1 border-r border-rojoarq-stone pr-4",
+      "order-1 border-r border-rojoarq-stone pr-6",
       "order-3 border-l border-rojoarq-stone pl-6",
     ],
     picCont: ["order-2", "order-2"],
@@ -43,13 +45,13 @@ const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
               <div
                 className={cn(
                   dinamicStyle.textCont[index % 2],
-                  "col-span-3 md:col-span-1 space-y-5 flex flex-col justify-end  pb-4",
+                  "col-span-3 md:col-span-1 space-y-5 flex flex-col justify-end pb-4",
                 )}
               >
-                <h2 className="text-2xl md:text-3xl leading-[1] text-balance">
+                <h2 className="indent-5 text-2xl md:text-3xl leading-[1] text-justify">
                   {item.title}
                 </h2>
-                <div className="indent-5 text-sm md:text-lg leading-6 text-pretty flex flex-col gap-4">
+                <div className="text-sm md:text-lg leading-6 text-pretty flex flex-col gap-4">
                   <PrismicRichText field={item.description} />
                 </div>
               </div>
@@ -74,33 +76,33 @@ const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
               >
                 <div className="col-span-1 row-span-1 aspect-square overflow-hidden">
                   <PrismicNextImage
-                    field={item.image}
-                    width={item.image.dimensions.width}
-                    height={item.image.dimensions.height}
+                    field={item.thumbnail1}
+                    width={item.thumbnail1.dimensions?.width}
+                    height={item.thumbnail1.dimensions?.height}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="col-span-1 row-span-1 aspect-square overflow-hidden">
                   <PrismicNextImage
-                    field={item.image}
-                    width={item.image.dimensions.width}
-                    height={item.image.dimensions.height}
+                    field={item.thumbnail2}
+                    width={item.thumbnail2.dimensions?.width}
+                    height={item.thumbnail2.dimensions?.height}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="col-span-1 row-span-1 aspect-square overflow-hidden">
                   <PrismicNextImage
-                    field={item.image}
-                    width={item.image.dimensions.width}
-                    height={item.image.dimensions.height}
+                    field={item.thumbnail3}
+                    width={item.thumbnail3.dimensions?.width}
+                    height={item.thumbnail3.dimensions?.height}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="col-span-1 row-span-1 aspect-square overflow-hidden">
                   <PrismicNextImage
-                    field={item.image}
-                    width={item.image.dimensions.width}
-                    height={item.image.dimensions.height}
+                    field={item.thumbnail4}
+                    width={item.thumbnail4.dimensions?.width}
+                    height={item.thumbnail4.dimensions?.height}
                     className="w-full h-full object-cover"
                   />
                 </div>

@@ -33,6 +33,34 @@
 										}
 									]
 								}
+							],
+							[
+								"reviewer",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Lorem irure ex qui incididunt nostrud nulla in duis exercitation laboris commodo duis qui. Laborum esse tempor veniam mollit cillum quis ex."
+											}
+										}
+									]
+								}
+							],
+							[
+								"profesion",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Lorem cillum fugiat aliqua voluptate est deserunt ullamco. Qui fugiat deserunt qui sunt et."
+											}
+										}
+									]
+								}
 							]
 						]
 					}

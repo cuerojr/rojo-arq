@@ -1,8 +1,19 @@
+"use client"
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 /**
  * Props for `LogoList`.
  */
@@ -22,16 +33,27 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
         <div className="text-lg py-10 underline underline-offset-8 decoration-1">
           <PrismicRichText field={slice.primary.title} />
         </div>
-        <div className="flex gap-4">
-          {slice.primary.logos.map((item, index) => (
-            <div key={index}>
-              <PrismicNextImage 
-                field={item.logo_image}
-                width={item.logo_image.dimensions?.width}
-                height={item.logo_image.dimensions?.height}
-              />
-            </div>
-          ))}
+        <div className="">
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={4.2}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+            className="w-full"
+          >
+            {slice.primary.logos.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div key={index} className="aspect-video">
+                  <PrismicNextImage
+                    field={item.logo_image}
+                    width={item.logo_image.dimensions?.width}
+                    height={item.logo_image.dimensions?.height}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
