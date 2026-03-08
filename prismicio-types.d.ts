@@ -314,6 +314,26 @@ export interface CardCarouselSliceDefaultPrimaryCardsItem {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   content: prismic.RichTextField;
+
+  /**
+   * reviewer field in *CardCarousel → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_carousel.default.primary.cards[].reviewer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  reviewer: prismic.RichTextField;
+
+  /**
+   * profesion field in *CardCarousel → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_carousel.default.primary.cards[].profesion
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  profesion: prismic.RichTextField;
 }
 
 /**
@@ -404,6 +424,46 @@ export interface CategoryGridSliceDefaultPrimaryItemsItem {
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   description: prismic.RichTextField;
+
+  /**
+   * thumbnail1 field in *CategoryGrid → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: category_grid.default.primary.items[].thumbnail1
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail1: prismic.ImageField<never>;
+
+  /**
+   * thumbnail2 field in *CategoryGrid → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: category_grid.default.primary.items[].thumbnail2
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail2: prismic.ImageField<never>;
+
+  /**
+   * thumbnail3 field in *CategoryGrid → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: category_grid.default.primary.items[].thumbnail3
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail3: prismic.ImageField<never>;
+
+  /**
+   * thumbnail4 field in *CategoryGrid → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: category_grid.default.primary.items[].thumbnail4
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumbnail4: prismic.ImageField<never>;
 }
 
 /**

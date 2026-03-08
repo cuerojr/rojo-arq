@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --rojoarq-arena: #E5E1D0;
-  --rojoarq-stone: #8F8D7F;
-  --rojoarq-blue: #3063AD;
-  --rojoarq-black: #2F2E2C;
-  --rojoarq-pink: #CDB9DB;
-  --rojoarq-white: #EAEAEA;
-  
+  --rojoarq-arena: #e5e1d0;
+  --rojoarq-stone: #8f8d7f;
+  --rojoarq-blue: #3063ad;
+  --rojoarq-black: #2f2e2c;
+  --rojoarq-pink: #cdb9db;
+  --rojoarq-white: #eaeaea;
 }
 
 @theme {
@@ -20,9 +19,6 @@
   --color-rojoarq-black: var(--rojoarq-black);
   --color-rojoarq-pink: var(--rojoarq-pink);
   --color-rojoarq-white: var(--rojoarq-white);
-
-
-  
 }
 
 html.lenis {
@@ -44,7 +40,6 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
-
 
 .reveal {
   background: var(--backgroundColor);
@@ -72,4 +67,8 @@ html.lenis {
   .reveal {
     padding-left: 10px;
   }
+}
+
+.swiper-slide {
+  height: auto;
 }
