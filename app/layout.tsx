@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={cn(funnel.className)}>
-      <body className="text-rojoarq-black bg-rojoarq-white">
+      <body className="text-rojoarq-black bg-rojoarq-white selection:text-rojoarq-pink">
         <Client />
         {/*<Cursor />*/}
         <Navbar />

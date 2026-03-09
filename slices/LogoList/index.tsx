@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
@@ -23,37 +23,45 @@ export type LogoListProps = SliceComponentProps<Content.LogoListSlice>;
  * Component for "LogoList" Slices.
  */
 const LogoList: FC<LogoListProps> = ({ slice }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="py-16 px-10"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[1440px] min-h-[300px] mx-auto border-b border-rojoarq-stone pb-10">
         <div className="text-lg py-10 underline underline-offset-8 decoration-1">
           <PrismicRichText field={slice.primary.title} />
         </div>
         <div className="">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={4.2}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-            className="w-full"
-          >
-            {slice.primary.logos.map((item, index) => (
-              <SwiperSlide key={index}>
-                <div key={index} className="aspect-video">
-                  <PrismicNextImage
-                    field={item.logo_image}
-                    width={item.logo_image.dimensions?.width}
-                    height={item.logo_image.dimensions?.height}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {mounted && (
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={4.2}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+              className="w-full"
+            >
+              {slice.primary.logos.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div key={index} className="aspect-video p-4">
+                    <PrismicNextImage
+                      field={item.logo_image}
+                      width={item.logo_image.dimensions?.width}
+                      height={item.logo_image.dimensions?.height}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </div>
     </section>

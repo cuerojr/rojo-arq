@@ -43,7 +43,7 @@ export default function Navbar() {
             maxWidth: "100px",
           }}
         >
-          <Image src={"/logo.png"} width={200} height={200} alt="rojoarq" />
+          <Image src={"/white-logo.png"} width={200} height={200} alt="rojoarq" className="p-4" />
         </Link>
         <ul className={cn("flex gap-4", whiteColor ? "text-rojoarq-white": "text-rojoarq-black")}>
           <li>

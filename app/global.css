@@ -72,3 +72,7 @@ html.lenis {
 .swiper-slide {
   height: auto;
 }
+
+::selection {
+	background: var(--rojoarq-blue);
+}

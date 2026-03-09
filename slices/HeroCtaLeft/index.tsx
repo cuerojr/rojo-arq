@@ -42,14 +42,14 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
       className="relative min-h-screen flex items-end pt-16 pb-8 px-10"
     >
       <div className="max-w-[1440px] h-full mx-auto z-20 border-t border-rojoarq-stone">
-        <div className="h-full">
+        <div className="h-full grid">
           <div className="mt-4 text-lg text-rojoarq-white leading-[1]">
             <PrismicRichText field={slice.primary.subtitle} />
           </div>
-          <div className="mt-4 text-lg text-rojoarq-arena font-light max-w-[33vw] ml-auto py-6 text-justify flex flex-col gap-4 leading-[1.2] indent-10">
+          <div className="order-2 md:order-1 mt-4 text-lg text-rojoarq-white font-light md:max-w-[33vw] ml-auto py-6 text-justify flex flex-col gap-4 leading-[1.2] indent-10">
             <PrismicRichText field={slice.primary.description} />
           </div>
-          <div className="text-[clamp(2rem,8rem,6.5vw)] leading-[1] text-pretty text-rojoarq-arena indent-69 text-justify">
+          <div className="order-1 md:order-2 text-[clamp(3rem,8rem,6.5vw)] leading-[1] text-pretty text-rojoarq-white md:indent-[20vw] md:text-justify">
             <PrismicRichText field={slice.primary.title} />
           </div>
         </div>

@@ -2,126 +2,99 @@
 import Link from "next/link";
 import ContactForm from "../contact-form";
 import Image from "next/image";
+import { Instagram, Linkedin, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+
+
+interface HeroVideoProps {
+  videoSrc: string;
+  title?: string;
+  subtitle?: string;
+}
 
 export default function Footer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+    const data: HeroVideoProps = {
+      videoSrc: "/fondo.mp4",
+      title: "Tu Título Aquí",
+      subtitle: "Una descripción memorable que invite a la acción.",
+    };
+  
+    useEffect(() => {
+      const video = videoRef.current;
+      if (!video) return;
+      video.play().catch(() => {
+        // Autoplay bloqueado por el navegador — silencioso
+      });
+    }, []);
+  
   return (
-    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between py-10 px-10 bg-rojoarq-white text-rojoarq-white border-t border-rojoarq-stone">
-      <div className="hidden flex gap-4 mb-10 flex-wrap justify-between">
-        
-          <a
-            href="https://wa.me/549341153830273"
-            target="_blank"
-            className="regulations_card w-inline-block "
-          >
-            <div className="flex items-center justify-center gap-2">
-              <h2 className="button-main_text">WHATSAPP</h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="8"
-                fill="currentColor"
-                viewBox="0 0 9 8"
-              >
-                <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
-              </svg>
-            </div>
-            <div className="background-circle legal"></div>
-          </a>
-          
-          <a
-            data-w-id="4c6cc4d4-5adf-56d9-ccc1-7a7e3dd901a3"
-            href="https://www.linkedin.com/in/julietarojoarq/"
-            target="_blank"
-            className="card_wrapper_second_child"
-          >
-            <div className="flex items-center justify-center gap-2">
-              <h2 className="button-main_text">INSTAGRAM</h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="8"
-                fill="currentColor"
-                viewBox="0 0 9 8"
-              >
-                <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
-              </svg>
-            </div>
-            <div className="background-circle legal"></div>
-          </a>
-          
-          <a
-            href="https://www.linkedin.com/in/julietarojoarq/"
-            target="_blank"
-            className="regulations_card w-inline-block"
-          >
-            <div className="flex items-center justify-center gap-2">
-              <h2 className="button-main_text">LinkedIn</h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="8"
-                fill="currentColor"
-                viewBox="0 0 9 8"
-              >
-                <path d="M8.055 0H.71v.445h7.036L.5 7.685.815 8 8.055.766v7.018H8.5V0h-.445Z"></path>
-              </svg>
-            </div>
-            <div className="background-circle legal"></div>
-          </a>
-          
+    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between py-10 px-10 bg-rojoarq-black text-rojoarq-white">
+      <div className="">
+        <h2 className="text-lg  underline underline-offset-8 decoration-1">
+          Contacto
+        </h2>
       </div>
-      <div className="text-center">
-        <h2 className="text-lg uppercase font-bold underline underline-offset-8 decoration-1">Contacto</h2>
-      </div>
-      <div className="footer_info text-rojoarq-black text-right">
-        <div className="footer_info_wrapper">
-          
-          <div className="margin-bottom _2em">
-            <div className="body_small">
-              ROJO arq es una nueva forma de proyectar y construir: casas,
-              negocios y equipamientos para vivir, alquilar o invertir.
-            </div>
+      <div className="flex flex-col gap-10">
+        <div className="grid grid-cols-12 gap-13 items-end border-b border-rojoarq-arena pb-10">
+          <div className="relative col-span-5 aspect-video">
+            <div className="absolute inset-0 bg-rojoarq-black opacity-60 z-10"></div>
+            <video
+              ref={videoRef}
+              src={data.videoSrc}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover z-0"
+              aria-hidden="true"
+            />
           </div>
-          <div className="footer_socials">
-            <div className="body-small">Escribinos</div>
-            <a
-              href="mailto:rojoarqdiseno@gmail.com"
-              className="home-link w-inline-block"
-            >
-              rojoarqdiseno@gmail.com
-            </a>
-          </div>
-          <div className="footer_socials">
-            <Link
-              href="https://www.linkedin.com/in/julietarojoarq/"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-              >
-                <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
-              </svg>
-            </Link>
-            <Link
-              href="https://www.instagram.com/rojoarqdiseno/"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-              >
-                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-              </svg>
-            </Link>
+          <div className="col-span-7 flex flex-col gap-0  pb-10">
+            <h2 className=" indent-9 text-5xl leading-[1.24]">
+              Diseño y construcción para cada espacio
+            </h2>
+            <p className="text-lg font-light leading-[1.1] text-justify max-w-[27vw] ml-auto">Reformas de consultorios, oficinas, comercios y casas. Analizamos la factibilidad de tu construcción para que tomes la mejor decisión a la hora de invertir. Agendá una asesoría técnica de cortesía.</p>
           </div>
         </div>
         <div className="footer_form">
           {/*<ContactForm />*/}
-          <div className="footer_logo w-embed">
-            <Image src={"/logo.png"} width={200} height={100} alt="rojoarq" />
+          <div className="flex items-center gap-5 justify-between">
+            <Image
+              src={"/colegio-de-arquitectos.png"}
+              width={150}
+              height={80}
+              alt="Colegio de Arquitectos de la provincia de Santa Fe"
+            />
+            <div className="flex gap-4 ">
+              <Link
+                href="mailto:rojoarqdiseno@gmail.com"
+                target="_blank"
+                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+              >
+                <Mail />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/julietarojoarq/"
+                target="_blank"
+                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+              >
+                <Linkedin />
+              </Link>
+              <Link
+                href="https://www.instagram.com/rojoarqdiseno/"
+                target="_blank"
+                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+              >
+                <Instagram />
+              </Link>
+            </div>
+            <Image
+              src={"/white-logo.png"}
+              width={140}
+              height={60}
+              alt="Estudio de arquitectura de la ciudad de Rosario"
+            />
           </div>
         </div>
       </div>

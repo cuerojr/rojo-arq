@@ -16,7 +16,7 @@ const SideTitleContent: FC<SideTitleContentProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 px-10 flex items-center"
+      className="py-16 px-10 flex items-center md:min-h-screen"
     >
       <div className="max-w-[1440px] mx-auto">
         <div className="w-full">
@@ -25,7 +25,7 @@ const SideTitleContent: FC<SideTitleContentProps> = ({ slice }) => {
           </div>
         </div>
         <div className="w-full ">
-          <div className="indent-56 text-2xl md:text-5xl text-rojoarq-black text-justify leading-[1.1]">
+          <div className="selection:text-rojoarq-pink indent-10 md:indent-[20vw] text-2xl md:text-5xl font-semibold text-rojoarq-black text-justify leading-[1.24]">
             <PrismicRichText field={slice.primary.main_content} />
           </div>
         </div>
