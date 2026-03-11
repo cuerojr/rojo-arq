@@ -30,8 +30,8 @@ export default function Footer() {
 
   return (
     <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between p-4 md:p-10 bg-rojoarq-black text-rojoarq-white">
-      <div className="mb-4">
-        <h2 className="text-lg  underline underline-offset-8 decoration-1">
+      <div className="">
+        <h2 className="text-lg  underline underline-offset-8 decoration-1 mb-4">
           Contacto
         </h2>
       </div>
