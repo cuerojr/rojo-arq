@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --rojoarq-arena: #e5e1d0;
+  --rojoarq-stone: #8f8d7f;
+  --rojoarq-blue: #3063ad;
+  --rojoarq-black: #2f2e2c;
+  --rojoarq-pink: #cdb9db;
+  --rojoarq-white: #eaeaea;
+}
+
+@theme {
+  --font-grotesk: var(--font-space-grotesk);
+  --font-mono: var(--font-geist-mono);
+
+  --color-rojoarq-stone: var(--rojoarq-stone);
+  --color-rojoarq-arena: var(--rojoarq-arena);
+  --color-rojoarq-blue: var(--rojoarq-blue);
+  --color-rojoarq-black: var(--rojoarq-black);
+  --color-rojoarq-pink: var(--rojoarq-pink);
+  --color-rojoarq-white: var(--rojoarq-white);
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.reveal {
+  background: var(--backgroundColor);
+  padding-left: 30%;
+  padding-right: 10%;
+}
+
+.reveal-text {
+  font-weight: 800;
+  font-size: var(--headlineBig);
+  line-height: var(--headlineBig);
+  color: var(--backgroundColor);
+  filter: drop-shadow(0 0 0.06rem rgb(2, 2, 2));
+}
+
+.spacing-small {
+  height: 50vh;
+}
+
+.spacing {
+  height: 100vh;
+}
+
+@media screen and (max-width: 500px) {
+  .reveal {
+    padding-left: 10px;
+  }
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+::selection {
+	background: var(--rojoarq-blue);
+}

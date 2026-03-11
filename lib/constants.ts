@@ -21,3 +21,6 @@ export const ENABLE_PAGE_TRANSITIONS: boolean = true;
 
 export const GOOGLE_ANALYTICS_ID =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || "";
+
+export const EMAIL_ADDRESS_LINK =
+  "https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=rojoarqdiseno@gmail.com";

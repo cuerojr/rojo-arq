@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     };
 
     const data = await transporter.sendMail(mailOptions);
-    console.log(data.response);
+    
     return NextResponse.json(
       {
         message: "Email sent",

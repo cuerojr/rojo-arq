@@ -1,28 +1,25 @@
-'use client'
+import { type Metadata } from "next";
+import { notFound } from "next/navigation";
+import { asImageSrc } from "@prismicio/client";
+import { SliceZone } from "@prismicio/react";
 
-import Footer from "@/app/components/footer";
-import Header from "@/app/components/header";
-import ServicesList from "@/app/components/services-list";
-import MisionComponent from "@/app/components/mision";
-import Navbar from '@/app/components/navbar';
-import HeroImage from '@/app/components/hero-image';
-import Quote from '@/app/components/home-quote';
-import { Toaster } from '@/components/ui/toaster';
-import Autor from "@/app/components/autor/autor";
+import { cms } from "@/prismicio";
+import { components } from "@/slices";
 
-export default function Home() {  
-  
-  return (
-    <main>        
-      <Navbar />
-      <Header />
-      <HeroImage />
-      <Quote />
-      <ServicesList />
-      <MisionComponent />
-      <Footer />
-      <Autor />  
-      <Toaster />    
-    </main>
-  )
+export default async function Page() {
+  const page = await cms.getSingle("home").catch(() => notFound());
+
+  return <SliceZone slices={page.data.slices} components={components} />;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await cms.getSingle("home").catch(() => notFound());
+
+  return {
+    title: page.data.meta_title,
+    description: page.data.meta_description,
+    openGraph: {
+      images: [{ url: asImageSrc(page.data.meta_image) ?? "" }],
+    },
+  };
 }

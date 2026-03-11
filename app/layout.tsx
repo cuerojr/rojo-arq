@@ -1,21 +1,20 @@
-import "./style/globals.scss";
-import "./global.scss";
-import type { Metadata } from "next";
-import { LenisScroller } from "./components/lenis-scroller";
+import "./global.css";
+
 import { Client } from "./components/client";
-import { Montserrat, Radio_Canada } from "next/font/google";
+import { Funnel_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { primaryFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Cursor from "./components/custom-cursor/custom-cursor";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer-new";
 
-
-export const metadata: Metadata = {
-  title: "ROJO ARQ",
-  description: "Arquitectura, diseño y construcción.",
-};
+const funnel = Funnel_Display({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export default function RootLayout({
   children,
@@ -23,13 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(primaryFont.variable)}>
-      <body>
+    <html lang="es" className={cn(funnel.className)}>
+      <body className="text-rojoarq-black bg-rojoarq-white selection:text-rojoarq-pink">
         <Client />
-        <Cursor />
+        {/*<Cursor />*/}
+        <Navbar />
         {children}
+        <Footer />
         <SpeedInsights />
-        <Analytics/>
+        <Analytics />
       </body>
     </html>
   );

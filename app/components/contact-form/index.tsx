@@ -1,4 +1,3 @@
-import ButtonComponent from "../common/button";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,9 +17,13 @@ const formSchema = z.object({
   nombre: z.string().min(5, {
     message: "El nombre debe tener al menos 5 caracteres.",
   }),
-  description: z.string().max(200, { message: "Debe contener menos de 200 caracteres" }),
+  description: z
+    .string()
+    .max(200, { message: "Debe contener menos de 200 caracteres" }),
   email: z.string().email({ message: "Debe ser un email válido" }),
-  telefono: z.string().min(10, { message: "Debe contener al menos 10 números"}),
+  telefono: z
+    .string()
+    .min(10, { message: "Debe contener al menos 10 números" }),
 });
 
 export default function ContactForm() {
@@ -37,16 +40,15 @@ export default function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    
-    const response = await fetch('/api/send-mail', {
+    const response = await fetch("/api/send-mail", {
       method: "POST",
-      body: JSON.stringify(values)
+      body: JSON.stringify(values),
     });
 
-    if(response.ok) {
-      console.log('asdasd')
+    if (response.ok) {
+      //console.log("asdasd");
       toast({
-        title: "Email enviado"
+        title: "Email enviado",
       });
       return;
     }
@@ -114,11 +116,9 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <ButtonComponent>
-          <button type="submit">
-            <span>Enviar</span>
-          </button>
-        </ButtonComponent>
+        <button type="submit">
+          <span>Enviar</span>
+        </button>
       </form>
     </Form>
   );
