@@ -37,8 +37,6 @@ export default function Navbar() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const theme = entry.target.getAttribute("data-navbar-theme");
-            console.log("🚀 ~ Navbar ~ theme:", theme);
-
             setWhiteColor(theme === "light");
           }
         });
