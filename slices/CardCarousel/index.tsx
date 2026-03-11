@@ -53,7 +53,7 @@ const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
               {slice.primary.cards.map((item, index) => (
                 <SwiperSlide
                   key={index}
-                  className="min-h-[330px] aspect-square cursor-pointer bg-rojoarq-white border border-rojoarq-stone"
+                  className="min-h-[330px] md:aspect-square cursor-pointer bg-rojoarq-white border border-rojoarq-stone"
                 >
                   <div className="flex flex-col justify-between h-full">
                     <div className="text-[clamp(1.2rem,1.5rem,3rem)] p-6 md:p-10 selectable-none cursor-pointer text-rojoarq-black text-pretty">                      <PrismicRichText field={item.content} />
