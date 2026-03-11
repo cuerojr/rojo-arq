@@ -35,7 +35,7 @@ export default function Footer() {
         </h2>
       </div>
       <div className="overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-12 md:gap-10 items-end border-b border-rojoarq-arena pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 md:gap-10 items-end border-b border-rojoarq-arena pb-5 md:pb-10">
           <div className="relative col-span-1 md:col-span-5 aspect-video">
             <div className="absolute inset-0 bg-rojoarq-black opacity-60 z-10"></div>
             <video
@@ -49,11 +49,11 @@ export default function Footer() {
               aria-hidden="true"
             />
           </div>
-          <div className="col-span-1 md:col-span-7 flex flex-col gap-0 pb-10">
+          <div className="col-span-1 md:col-span-7 flex flex-col gap-5 md:gap-10 pb-10">
             <h2 className=" md:indent-9 text-[clamp(1.6rem,3.3rem,6.5vw)] leading-[1.24] mb-4">
               Diseño y construcción para cada espacio
             </h2>
-            <p className="text-lg font-light leading-[1.1] text-justify md:max-w-[27vw] md:ml-auto">
+            <p className="text-lg font-light leading-[1.1] text-justify">
               Reformas de consultorios, oficinas, comercios y casas. Analizamos
               la factibilidad de tu construcción para que tomes la mejor
               decisión a la hora de invertir. Agendá una asesoría técnica de
@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="footer_form">
+        <div className="footer_form pt-5 md:pt-10">
           {/*<ContactForm />*/}
           <div className="flex flex-col md:flex-row items-center gap-5 justify-between">
             <Image

@@ -7,6 +7,8 @@ import { PrismicNextImage } from "@prismicio/next";
 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
+import { useMediaQuery } from "@mantine/hooks";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -23,6 +25,7 @@ export type LogoListProps = SliceComponentProps<Content.LogoListSlice>;
  * Component for "LogoList" Slices.
  */
 const LogoList: FC<LogoListProps> = ({ slice }) => {
+  const isSmallSize = useMediaQuery("(max-width: 768px)");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 px-10"
+      className="p-4 md:py-16 md:px-10"
     >
       <div className="max-w-[1440px] min-h-[300px] mx-auto border-b border-rojoarq-stone pb-10">
         <div className="text-lg py-10 underline underline-offset-8 decoration-1">
@@ -43,7 +46,7 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
           {mounted && (
             <Swiper
               spaceBetween={20}
-              slidesPerView={4.2}
+              slidesPerView={isSmallSize ? 1 : 4.2}
               onSlideChange={() => console.log("slide change")}
               onSwiper={(swiper) => console.log(swiper)}
               className="w-full"

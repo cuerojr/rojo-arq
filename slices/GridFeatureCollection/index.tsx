@@ -27,10 +27,10 @@ const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 px-10"
+      className="p-4 md:py-16 md:px-10"
     >
       <div className="max-w-[1440px] mx-auto">
-        <div className="max-w-[66vw] max-h-[90vh] mx-auto  grid grid-cols-6 grid-rows-8 gap-4">
+        <div className="md:max-w-[66vw] max-h-[90vh] mx-auto  grid grid-cols-6 grid-rows-8 gap-2 md:gap-4">
           {slice.primary.items.map((item, index) => (
             <div key={index} className={cn("bg-rojoarq-white", data[index])}>
               <PrismicNextImage

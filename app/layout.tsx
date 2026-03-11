@@ -1,4 +1,3 @@
-
 import "./global.css";
 
 import { Client } from "./components/client";
@@ -13,7 +12,8 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer-new";
 
 const funnel = Funnel_Display({
-  subsets: ['latin'],
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <SpeedInsights />
-        <Analytics/>
+        <Analytics />
       </body>
     </html>
   );
