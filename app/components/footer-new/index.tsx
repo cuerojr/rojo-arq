@@ -50,8 +50,8 @@ export default function Footer() {
               aria-hidden="true"
             />
           </div>
-          <div className="col-span-1 md:col-span-7 flex flex-col gap-5 md:gap-10 pb-10">
-            <h2 className=" md:indent-9 text-[clamp(1.6rem,3.3rem,6.5vw)] leading-[1.24] mb-4">
+          <div className="col-span-1 md:col-span-7 flex flex-col gap-5 py-5">
+            <h2 className=" md:indent-9 text-[clamp(1.5rem,3rem,4vw)] leading-[1.24] mb-4">
               Diseño y construcción para cada espacio
             </h2>
             <p className="text-lg font-light leading-[1.1] text-justify">
