@@ -4,6 +4,7 @@ import ContactForm from "../contact-form";
 import Image from "next/image";
 import { Instagram, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { EMAIL_ADDRESS_LINK } from "@/lib/constants";
 
 interface HeroVideoProps {
   videoSrc: string;
@@ -72,7 +73,7 @@ export default function Footer() {
             />
             <div className="flex gap-4 ">
               <Link
-                href="mailto:rojoarqdiseno@gmail.com"
+                href={EMAIL_ADDRESS_LINK}
                 target="_blank"
                 className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
               >
