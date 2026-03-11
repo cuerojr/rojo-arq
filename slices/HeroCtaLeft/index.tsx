@@ -4,6 +4,8 @@ import { FC, useEffect, useRef } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
+import Image from "next/image";
+
 /**
  * Props for `HeroCtaLeft`.
  */
@@ -42,7 +44,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
       data-navbar-theme="dark"
       className="relative min-h-screen flex items-end p-4 md:pt-16 md:pb-8 md:px-10"
     >
-      <div className="max-w-[1440px] h-full mx-auto z-20 border-t border-rojoarq-stone">
+      <div className="max-w-[1440px] h-full mx-auto z-30 border-t border-rojoarq-stone">
         <div className="h-full grid">
           <div className="mt-4 text-lg text-rojoarq-white leading-[1]">
             <PrismicRichText field={slice.primary.subtitle} />
@@ -55,7 +57,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-rojoarq-black opacity-50 w-full h-full object-cover z-10"></div>
+      <div className="absolute inset-0 bg-rojoarq-black opacity-50 w-full h-full object-cover z-20"></div>
       <video
         ref={videoRef}
         src={data.videoSrc}
@@ -63,8 +65,15 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-10"
         aria-hidden="true"
+      />
+      <Image
+        src="/hero-bg.png"
+        alt="Construcciones y reformas en la ciudad de Rosario"
+        height={1080}
+        width={1920}
+        className="absolute inset-0 w-full h-full object-cover z-0 "
       />
     </section>
   );
