@@ -16,8 +16,6 @@ export type BlogContentProps = SliceComponentProps<Content.BlogContentSlice>;
  * Component for "BlogContent" Slices.
  */
 const BlogContent: FC<BlogContentProps> = ({ slice }) => {
-  console.log("🚀 ~ BlogContent ~ slice:", slice.primary);
-
   return (
     <section
       data-slice-type={slice.slice_type}

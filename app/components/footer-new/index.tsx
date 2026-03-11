@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Instagram, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-
 interface HeroVideoProps {
   videoSrc: string;
   title?: string;
@@ -14,30 +13,30 @@ interface HeroVideoProps {
 
 export default function Footer() {
   const videoRef = useRef<HTMLVideoElement>(null);
-    const data: HeroVideoProps = {
-      videoSrc: "/fondo.mp4",
-      title: "Tu Título Aquí",
-      subtitle: "Una descripción memorable que invite a la acción.",
-    };
-  
-    useEffect(() => {
-      const video = videoRef.current;
-      if (!video) return;
-      video.play().catch(() => {
-        // Autoplay bloqueado por el navegador — silencioso
-      });
-    }, []);
-  
+  const data: HeroVideoProps = {
+    videoSrc: "/fondo.mp4",
+    title: "Tu Título Aquí",
+    subtitle: "Una descripción memorable que invite a la acción.",
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {
+      // Autoplay bloqueado por el navegador — silencioso
+    });
+  }, []);
+
   return (
-    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between py-10 px-10 bg-rojoarq-black text-rojoarq-white">
+    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between p-4 md:p-10 bg-rojoarq-black text-rojoarq-white">
       <div className="">
         <h2 className="text-lg  underline underline-offset-8 decoration-1">
           Contacto
         </h2>
       </div>
-      <div className="flex flex-col gap-10">
-        <div className="grid grid-cols-12 gap-13 items-end border-b border-rojoarq-arena pb-10">
-          <div className="relative col-span-5 aspect-video">
+      <div className="overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-12 md:gap-10 items-end border-b border-rojoarq-arena pb-10">
+          <div className="relative col-span-1 md:col-span-5 aspect-video">
             <div className="absolute inset-0 bg-rojoarq-black opacity-60 z-10"></div>
             <video
               ref={videoRef}
@@ -50,16 +49,21 @@ export default function Footer() {
               aria-hidden="true"
             />
           </div>
-          <div className="col-span-7 flex flex-col gap-0  pb-10">
-            <h2 className=" indent-9 text-5xl leading-[1.24]">
+          <div className="col-span-1 md:col-span-7 flex flex-col gap-0 pb-10">
+            <h2 className=" md:indent-9 text-[clamp(1.6rem,3.3rem,6.5vw)] leading-[1.24] mb-4">
               Diseño y construcción para cada espacio
             </h2>
-            <p className="text-lg font-light leading-[1.1] text-justify max-w-[27vw] ml-auto">Reformas de consultorios, oficinas, comercios y casas. Analizamos la factibilidad de tu construcción para que tomes la mejor decisión a la hora de invertir. Agendá una asesoría técnica de cortesía.</p>
+            <p className="text-lg font-light leading-[1.1] text-justify md:max-w-[27vw] md:ml-auto">
+              Reformas de consultorios, oficinas, comercios y casas. Analizamos
+              la factibilidad de tu construcción para que tomes la mejor
+              decisión a la hora de invertir. Agendá una asesoría técnica de
+              cortesía.
+            </p>
           </div>
         </div>
         <div className="footer_form">
           {/*<ContactForm />*/}
-          <div className="flex items-center gap-5 justify-between">
+          <div className="flex flex-col md:flex-row items-center gap-5 justify-between">
             <Image
               src={"/colegio-de-arquitectos.png"}
               width={150}

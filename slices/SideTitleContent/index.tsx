@@ -16,7 +16,7 @@ const SideTitleContent: FC<SideTitleContentProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 px-10 flex items-center md:min-h-screen"
+      className="p-4 md:py-16 md:px-10 flex items-center md:min-h-screen"
     >
       <div className="max-w-[1440px] mx-auto">
         <div className="w-full">

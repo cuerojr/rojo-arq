@@ -46,7 +46,7 @@ export default function ContactForm() {
     });
 
     if (response.ok) {
-      console.log("asdasd");
+      //console.log("asdasd");
       toast({
         title: "Email enviado",
       });

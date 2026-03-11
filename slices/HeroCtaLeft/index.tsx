@@ -39,7 +39,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative min-h-screen flex items-end pt-16 pb-8 px-10"
+      className="relative min-h-screen flex items-end p-4 md:pt-16 md:pb-8 md:px-10"
     >
       <div className="max-w-[1440px] h-full mx-auto z-20 border-t border-rojoarq-stone">
         <div className="h-full grid">
@@ -49,7 +49,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
           <div className="order-2 md:order-1 mt-4 text-lg text-rojoarq-white font-light md:max-w-[33vw] ml-auto py-6 text-justify flex flex-col gap-4 leading-[1.2] indent-10">
             <PrismicRichText field={slice.primary.description} />
           </div>
-          <div className="order-1 md:order-2 text-[clamp(3rem,8rem,6.5vw)] leading-[1] text-pretty text-rojoarq-white md:indent-[20vw] md:text-justify">
+          <div className="order-1 md:order-2 text-[clamp(2.2rem,8rem,6.5vw)] leading-[1] text-pretty text-rojoarq-white md:indent-[20vw] md:text-justify">
             <PrismicRichText field={slice.primary.title} />
           </div>
         </div>

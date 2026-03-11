@@ -12,7 +12,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      console.log("🚀 ~ handleScroll ~ currentScrollY:", currentScrollY)
 
       if (currentScrollY < 10) {
         setVisible(true);
