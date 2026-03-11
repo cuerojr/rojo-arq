@@ -7,7 +7,7 @@ import { EMAIL_ADDRESS_LINK } from "@/lib/constants";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
-  const [whiteColor, setWhiteColor] = useState(true);
+  const [whiteColor, setWhiteColor] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -29,6 +29,27 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-navbar-theme]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = entry.target.getAttribute("data-navbar-theme");
+            console.log("🚀 ~ Navbar ~ theme:", theme);
+
+            setWhiteColor(theme === "light");
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <nav
       className={cn(
@@ -43,9 +64,20 @@ export default function Navbar() {
             maxWidth: "100px",
           }}
         >
-          <Image src={"/white-logo.png"} width={200} height={200} alt="rojoarq" className="p-4" />
+          <Image
+            src={whiteColor ? "/black-logo.png" : "/white-logo.png"}
+            width={200}
+            height={200}
+            alt="rojoarq"
+            className="p-4"
+          />
         </Link>
-        <ul className={cn("flex gap-4", whiteColor ? "text-rojoarq-white": "text-rojoarq-black")}>
+        <ul
+          className={cn(
+            "flex gap-4 transition-all duration-300 ease-in-out",
+            whiteColor ? "text-rojoarq-black" : "text-rojoarq-white",
+          )}
+        >
           <li>
             <Link
               href={EMAIL_ADDRESS_LINK}

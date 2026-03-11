@@ -39,6 +39,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      data-navbar-theme="dark"
       className="relative min-h-screen flex items-end p-4 md:pt-16 md:pb-8 md:px-10"
     >
       <div className="max-w-[1440px] h-full mx-auto z-20 border-t border-rojoarq-stone">
