@@ -22,7 +22,6 @@ const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
     "row-span-3 col-start-5 row-start-3",
     "row-span-2 col-start-2 row-start-2",
   ];
-  console.log(slice.primary.items)
 
   return (
     <section

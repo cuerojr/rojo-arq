@@ -46,8 +46,8 @@ const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
             <Swiper
               spaceBetween={20}
               slidesPerView={isSmallSize ? 1 :2.7}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
+              //onSlideChange={() => console.log("slide change")}
+              //onSwiper={(swiper) => console.log(swiper)}
               className="w-full"
             >
               {slice.primary.cards.map((item, index) => (
