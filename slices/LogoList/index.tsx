@@ -47,8 +47,8 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
             <Swiper
               spaceBetween={20}
               slidesPerView={isSmallSize ? 1 : 4.2}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
+              //onSlideChange={() => console.log("slide change")}
+              //onSwiper={(swiper) => console.log(swiper)}
               className="w-full"
             >
               {slice.primary.logos.map((item, index) => (
