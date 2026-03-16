@@ -11,8 +11,8 @@ interface Store {
   isMenuOpen: boolean;
   setIsMenuOpen: (v: boolean) => void;
 
-  isIndexOpen: boolean;
-  setIsIndexOpen: (v: boolean) => void;
+  isCotizadorOpen: boolean;
+  setIsCotizadorOpen: (v: boolean) => void;
 }
 
 export const useGlobal = create<Store>((set) => ({
@@ -25,6 +25,6 @@ export const useGlobal = create<Store>((set) => ({
   isMenuOpen: false,
   setIsMenuOpen: (isMenuOpen) => set({ isMenuOpen }),
 
-  isIndexOpen: false,
-  setIsIndexOpen: (isIndexOpen) => set({ isIndexOpen }),
+  isCotizadorOpen: false,
+  setIsCotizadorOpen: (isCotizadorOpen) => set({ isCotizadorOpen }),
 }));
