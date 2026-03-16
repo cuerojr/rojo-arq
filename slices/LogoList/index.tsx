@@ -36,9 +36,9 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-4 md:py-16 md:px-10"
+      className="p-4 md:py-16 md:px-10 bg-rojoarq-black "
     >
-      <div className="max-w-[1440px] min-h-[300px] mx-auto border-b border-rojoarq-stone pb-10">
+      <div className="max-w-[1440px] min-h-[300px] mx-auto text-rojoarq-white pb-10">
         <div className="text-lg py-10 underline underline-offset-8 decoration-1">
           <PrismicRichText field={slice.primary.title} />
         </div>
@@ -53,12 +53,12 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
             >
               {slice.primary.logos.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <div key={index} className="aspect-video p-4">
+                  <div key={index} className="aspect-video p-4 ">
                     <PrismicNextImage
                       field={item.logo_image}
                       width={item.logo_image.dimensions?.width}
                       height={item.logo_image.dimensions?.height}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain brightness-0 invert"
                     />
                   </div>
                 </SwiperSlide>

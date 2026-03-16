@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Instagram, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { EMAIL_ADDRESS_LINK } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 interface HeroVideoProps {
   videoSrc: string;
@@ -28,8 +29,10 @@ export default function Footer() {
     });
   }, []);
 
+  const socialBtnsStyle = "border-rojoarq-black border p-4 hover:bg-rojoarq-black hover:text-rojoarq-white transition-all ease-in-out duration-300";
+  
   return (
-    <footer className="max-w-[1440px] mx-auto min-h-[90vh] flex flex-col justify-between p-4 md:p-10 bg-rojoarq-black text-rojoarq-white">
+    <footer className="max-w-[1440px] mx-auto min-h-screen flex flex-col justify-between p-4 md:p-10 bg-rojoarq-white text-rojoarq-black">
       <div className="">
         <h2 className="text-lg  underline underline-offset-8 decoration-1 mb-4">
           Contacto
@@ -50,11 +53,11 @@ export default function Footer() {
               aria-hidden="true"
             />
           </div>
-          <div className="col-span-1 md:col-span-7 flex flex-col gap-5 py-5">
-            <h2 className=" md:indent-9 text-[clamp(1.5rem,3rem,4vw)] leading-[1.24] mb-4">
+          <div className="col-span-1 md:col-span-7 flex flex-col gap-10 py-10">
+            <h2 className=" md:indent-9 text-[clamp(1.5rem,3rem,4vw)] leading-[1.24] ">
               Diseño y construcción para cada espacio
             </h2>
-            <p className="text-lg font-light leading-[1.1] text-justify">
+            <p className="text-lg font-light leading-[1.1] text-balance pr-2">
               Reformas de consultorios, oficinas, comercios y casas. Analizamos
               la factibilidad de tu construcción para que tomes la mejor
               decisión a la hora de invertir. Agendá una asesoría técnica de
@@ -75,27 +78,27 @@ export default function Footer() {
               <Link
                 href={EMAIL_ADDRESS_LINK}
                 target="_blank"
-                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+                className={cn(socialBtnsStyle)}
               >
                 <Mail />
               </Link>
               <Link
                 href="https://www.linkedin.com/in/julietarojoarq/"
                 target="_blank"
-                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+                className={cn(socialBtnsStyle)}
               >
                 <Linkedin />
               </Link>
               <Link
                 href="https://www.instagram.com/rojoarqdiseno/"
                 target="_blank"
-                className="border-rojoarq-arena border p-4 hover:bg-rojoarq-arena hover:text-rojoarq-black transition-all ease-in-out duration-300"
+                className={cn(socialBtnsStyle)}
               >
                 <Instagram />
               </Link>
             </div>
             <Image
-              src={"/white-logo.png"}
+              src={"/black-logo.png"}
               width={140}
               height={60}
               alt="Estudio de arquitectura de la ciudad de Rosario"
