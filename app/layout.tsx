@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer-new";
-import Cotizador from "./components/cotizador/cotizador";
+import Cotizador from "./components/asesoria/asesoria";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 

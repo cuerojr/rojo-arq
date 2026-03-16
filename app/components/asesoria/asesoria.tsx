@@ -9,15 +9,11 @@ import { Button } from "@/components/ui/button";
 import { useGlobal } from "@/lib/store";
 import { X } from "lucide-react";
 
-function Cotizador() {
+function Asesoria() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const setScroller = useGlobal((s) => s.setScroller);
 
-  const handleModal = () => {
-    //if (isOpen) setScroller();
-    setIsOpen((prev) => !prev);
-    console.log("🚀 ~ handleModal ~ handleModal:", isOpen);
-  };
+  const handleModal = () => setIsOpen((prev) => !prev);
 
   return (
     <>
@@ -73,4 +69,4 @@ function Cotizador() {
   );
 }
 
-export default Cotizador;
+export default Asesoria;
