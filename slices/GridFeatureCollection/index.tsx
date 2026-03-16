@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,23 +22,26 @@ const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
     "row-span-3 col-start-5 row-start-3",
     "row-span-2 col-start-2 row-start-2",
   ];
+  console.log(slice.primary.items)
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-4 md:py-16 md:px-10"
+      className="p-4 md:py-16 md:px-10 asd"
     >
       <div className="max-w-[1440px] mx-auto">
         <div className="md:max-w-[66vw] max-h-[90vh] mx-auto  grid grid-cols-6 grid-rows-8 gap-2 md:gap-4">
           {slice.primary.items.map((item, index) => (
             <div key={index} className={cn("bg-rojoarq-white", data[index])}>
-              <PrismicNextImage
-                field={item.image}
-                width={item.image.dimensions?.width}
-                height={item.image.dimensions?.height}
-                className="w-full h-full object-cover"
-              />
+              <PrismicNextLink field={item.item_link}>
+                <PrismicNextImage
+                  field={item.image}
+                  width={item.image.dimensions?.width}
+                  height={item.image.dimensions?.height}
+                  className="w-full h-full object-cover"
+                />
+              </PrismicNextLink>
             </div>
           ))}
 
