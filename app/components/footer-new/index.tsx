@@ -4,7 +4,7 @@ import ContactForm from "../contact-form";
 import Image from "next/image";
 import { Instagram, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { EMAIL_ADDRESS_LINK } from "@/lib/constants";
+import { EMAIL_ADDRESS_LINK, INSTAGRAM, LINKEDIN } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 interface HeroVideoProps {
@@ -83,14 +83,14 @@ export default function Footer() {
                 <Mail />
               </Link>
               <Link
-                href="https://www.linkedin.com/in/julietarojoarq/"
+                href={LINKEDIN}
                 target="_blank"
                 className={cn(socialBtnsStyle)}
               >
                 <Linkedin />
               </Link>
               <Link
-                href="https://www.instagram.com/rojoarqdiseno/"
+                href={INSTAGRAM}
                 target="_blank"
                 className={cn(socialBtnsStyle)}
               >
