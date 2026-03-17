@@ -3,6 +3,7 @@ import Link from "next/link";
 import ContactForm from "../contact-form";
 import Image from "next/image";
 import SectionTitle from "../section-title";
+import { INSTAGRAM, LINKEDIN } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -99,7 +100,7 @@ export default function Footer() {
           </div>
           <div className="footer_socials">
             <Link
-              href="https://www.linkedin.com/in/julietarojoarq/"
+              href={LINKEDIN}
               target="_blank"
             >
               <svg
@@ -111,7 +112,7 @@ export default function Footer() {
               </svg>
             </Link>
             <Link
-              href="https://www.instagram.com/rojoarqdiseno/"
+              href={INSTAGRAM}
               target="_blank"
             >
               <svg

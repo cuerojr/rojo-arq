@@ -13,6 +13,9 @@ interface Store {
 
   isCotizadorOpen: boolean;
   setIsCotizadorOpen: (v: boolean) => void;
+
+  isLight: boolean;
+  setLight: (value: boolean) => void;
 }
 
 export const useGlobal = create<Store>((set) => ({
@@ -27,4 +30,7 @@ export const useGlobal = create<Store>((set) => ({
 
   isCotizadorOpen: false,
   setIsCotizadorOpen: (isCotizadorOpen) => set({ isCotizadorOpen }),
+
+  isLight: false,
+  setLight: (value) => set({ isLight: value }),
 }));

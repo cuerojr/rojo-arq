@@ -1,6 +1,9 @@
+"use client"
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 /**
  * Props for `SideTitleContent`.
@@ -12,11 +15,13 @@ export type SideTitleContentProps =
  * Component for "SideTitleContent" Slices.
  */
 const SideTitleContent: FC<SideTitleContentProps> = ({ slice }) => {
+  const ref = useNavbarSection("light");
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      data-navbar-theme="light"
+      ref={ref as React.RefObject<HTMLElement>}
       className="p-4 md:py-16 md:px-10 flex items-center md:min-h-screen"
     >
       <div className="max-w-[1440px] mx-auto">

@@ -1,5 +1,5 @@
-export const SITE_NAME = `Paraná Extremo`;
-export const SITE_DESCRPTION = `Next Generation Customer Support Outsourcing Services.`;
+export const SITE_NAME = `Rojo Arq`;
+export const SITE_DESCRPTION = `.`;
 export const SITE_LANG = "es";
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL?.startsWith("https://")
@@ -24,3 +24,6 @@ export const GOOGLE_ANALYTICS_ID =
 
 export const EMAIL_ADDRESS_LINK =
   "https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=rojoarqdiseno@gmail.com";
+
+export const INSTAGRAM = "https://www.instagram.com/rojoarq_";
+export const LINKEDIN = "https://www.linkedin.com/in/julietarojoarq/";

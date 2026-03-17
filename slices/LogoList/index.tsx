@@ -16,6 +16,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 /**
  * Props for `LogoList`.
  */
@@ -25,6 +26,7 @@ export type LogoListProps = SliceComponentProps<Content.LogoListSlice>;
  * Component for "LogoList" Slices.
  */
 const LogoList: FC<LogoListProps> = ({ slice }) => {
+  const ref = useNavbarSection("dark");
   const isSmallSize = useMediaQuery("(max-width: 768px)");
   const [mounted, setMounted] = useState(false);
 
@@ -36,6 +38,7 @@ const LogoList: FC<LogoListProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      ref={ref as React.RefObject<HTMLElement>}
       className="p-4 md:py-16 md:px-10 bg-rojoarq-black "
     >
       <div className="max-w-[1440px] min-h-[300px] mx-auto text-rojoarq-white pb-10">

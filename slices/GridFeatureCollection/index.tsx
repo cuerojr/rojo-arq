@@ -1,8 +1,11 @@
+"use client"
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { cn } from "@/lib/utils";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 /**
  * Props for `GridFeatureCollection`.
@@ -15,6 +18,7 @@ export type GridFeatureCollectionProps =
  */
 
 const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
+  const ref = useNavbarSection("light");
   const data = [
     "col-span-2 row-span-7 col-start-3 row-start-2",
     "col-span-2 row-span-5 col-start-1 row-start-4",
@@ -27,6 +31,7 @@ const GridFeatureCollection: FC<GridFeatureCollectionProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      ref={ref as React.RefObject<HTMLElement>}
       className="p-4 md:py-16 md:px-10 asd"
     >
       <div className="max-w-[1440px] mx-auto">
