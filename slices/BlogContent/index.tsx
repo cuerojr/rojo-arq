@@ -59,7 +59,7 @@ const BlogContent: FC<BlogContentProps> = ({ slice }) => {
           <div className="flex gap-4 items-center border-y">
             {slice.primary.otros_blogs.map((item: any, i: number) => (
               <div key={item.blog.id} className="py-4">
-                <PrismicNextLink href={item.blog.uid}>
+                <PrismicNextLink href={item.blog.uid} className="underline decoration-1 underline-offset-4">
                   {item.blog.uid as string}
                 </PrismicNextLink>
               </div>
