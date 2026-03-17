@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
-import { EMAIL_ADDRESS_LINK } from "@/lib/constants";
+import { EMAIL_ADDRESS_LINK, INSTAGRAM, LINKEDIN } from "@/lib/constants";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
@@ -94,7 +94,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="https://www.linkedin.com/in/julietarojoarq/"
+              href={LINKEDIN}
               target="_blank"
               className={cn("text-xs")}
             >
@@ -110,7 +110,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="https://www.instagram.com/rojoarqdiseno/"
+              href={INSTAGRAM}
               target="_blank"
               className={cn("text-xs")}
             >
