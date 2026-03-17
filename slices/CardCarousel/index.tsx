@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
@@ -25,6 +26,7 @@ export type CardCarouselProps = SliceComponentProps<Content.CardCarouselSlice>;
  * Component for "CardCarousel" Slices.
  */
 const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
+  const ref = useNavbarSection("light");
   const isSmallSize = useMediaQuery("(max-width: 768px)");
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -35,6 +37,7 @@ const CardCarousel: FC<CardCarouselProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      ref={ref as React.RefObject<HTMLElement>}
       className="p-4 md:py-16 md:px-10 "
     >
       <div className="max-w-[1440px] min-h-[450px] mx-auto border-b border-rojoarq-stone pb-10">

@@ -6,6 +6,8 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 
 import Image from "next/image";
 
+import { useNavbarSection } from "@/hooks/use-navbar-section";
+
 /**
  * Props for `HeroCtaLeft`.
  */
@@ -22,6 +24,8 @@ interface HeroVideoProps {
 }
 
 const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
+  const ref = useNavbarSection("dark");
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const data: HeroVideoProps = {
     videoSrc: "/fondo.mp4",
@@ -41,7 +45,7 @@ const HeroCtaLeft: FC<HeroCtaLeftProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      data-navbar-theme="dark"
+      ref={ref as React.RefObject<HTMLElement>}
       className="relative min-h-screen flex items-end p-4 md:pt-16 md:pb-8 md:px-10"
     >
       <div className="max-w-[1440px] h-full mx-auto z-30 border-t border-rojoarq-stone">

@@ -6,6 +6,7 @@ import { Instagram, Linkedin, Mail } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { EMAIL_ADDRESS_LINK, INSTAGRAM, LINKEDIN } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 interface HeroVideoProps {
   videoSrc: string;
@@ -14,6 +15,7 @@ interface HeroVideoProps {
 }
 
 export default function Footer() {
+  const ref = useNavbarSection("light");
   const videoRef = useRef<HTMLVideoElement>(null);
   const data: HeroVideoProps = {
     videoSrc: "/fondo.mp4",
@@ -29,10 +31,14 @@ export default function Footer() {
     });
   }, []);
 
-  const socialBtnsStyle = "border-rojoarq-black border p-4 hover:bg-rojoarq-black hover:text-rojoarq-white transition-all ease-in-out duration-300";
-  
+  const socialBtnsStyle =
+    "border-rojoarq-black border p-4 hover:bg-rojoarq-black hover:text-rojoarq-white transition-all ease-in-out duration-300";
+
   return (
-    <footer className="max-w-[1440px] mx-auto min-h-screen flex flex-col justify-between p-4 md:p-10 bg-rojoarq-white text-rojoarq-black">
+    <footer
+      ref={ref as React.RefObject<HTMLElement>}
+      className="max-w-[1440px] mx-auto min-h-screen flex flex-col justify-between p-4 md:p-10 bg-rojoarq-white text-rojoarq-black"
+    >
       <div className="">
         <h2 className="text-lg  underline underline-offset-8 decoration-1 mb-4">
           Contacto

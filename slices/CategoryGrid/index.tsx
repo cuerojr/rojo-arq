@@ -1,8 +1,11 @@
+"use client"
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { cn } from "@/lib/utils";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 /**
  * Props for `CategoryGrid`.
@@ -13,7 +16,8 @@ export type CategoryGridProps = SliceComponentProps<Content.CategoryGridSlice>;
  * Component for "CategoryGrid" Slices.
  */
 const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
-  
+  const ref = useNavbarSection("light");
+
   const dinamicStyle = {
     textCont: [
       "order-1 ", //0,2,4,6... 2n
@@ -27,6 +31,7 @@ const CategoryGrid: FC<CategoryGridProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      ref={ref as React.RefObject<HTMLElement>}
       className="p-4 md:p-10"
     >
       <div className="max-w-[1440px] mx-auto">

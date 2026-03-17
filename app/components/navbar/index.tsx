@@ -4,24 +4,19 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { EMAIL_ADDRESS_LINK, INSTAGRAM, LINKEDIN } from "@/lib/constants";
+import { useGlobal } from "@/lib/store";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
-  const [whiteColor, setWhiteColor] = useState(false);
+  const whiteColor = useGlobal((s) => s.isLight);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 10) {
-        setVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-
+      if (currentScrollY < 10) setVisible(true);
+      else if (currentScrollY > lastScrollY.current) setVisible(false);
+      else setVisible(true);
       lastScrollY.current = currentScrollY;
     };
 
@@ -29,7 +24,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const sections = document.querySelectorAll("[data-navbar-theme]");
 
     const observer = new IntersectionObserver(
@@ -46,7 +41,7 @@ export default function Navbar() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, []);*/
 
   return (
     <nav
@@ -93,11 +88,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              href={LINKEDIN}
-              target="_blank"
-              className={cn("text-xs")}
-            >
+            <Link href={LINKEDIN} target="_blank" className={cn("text-xs")}>
               {/*<svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
@@ -109,11 +100,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link
-              href={INSTAGRAM}
-              target="_blank"
-              className={cn("text-xs")}
-            >
+            <Link href={INSTAGRAM} target="_blank" className={cn("text-xs")}>
               <span>Instagram</span>
               {/*
                 <svg

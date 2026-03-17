@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { Content } from "@prismicio/client";
 import {
@@ -6,6 +8,7 @@ import {
   SliceComponentProps,
 } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { useNavbarSection } from "@/hooks/use-navbar-section";
 
 /**
  * Props for `BlogContent`.
@@ -16,13 +19,19 @@ export type BlogContentProps = SliceComponentProps<Content.BlogContentSlice>;
  * Component for "BlogContent" Slices.
  */
 const BlogContent: FC<BlogContentProps> = ({ slice }) => {
+  const ref = useNavbarSection("dark");
+  const ref2 = useNavbarSection("light");
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="max-w-[1440px] mx-auto"
     >
-      <div className="relative h-screen overflow-hidden">
+      <div
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className="relative h-screen overflow-hidden"
+      >
         <div className="absolute inset-0 bg-rojoarq-black opacity-50 w-full h-full object-cover z-10" />
         <PrismicNextImage
           field={slice.primary.portada}
@@ -32,7 +41,10 @@ const BlogContent: FC<BlogContentProps> = ({ slice }) => {
         />
       </div>
 
-      <div className="min-h-screen p-10 md:px-44 md:pt-20 flex flex-col gap-10 mb-10">
+      <div
+        ref={ref2 as React.RefObject<HTMLDivElement>}
+        className="min-h-screen p-10 md:px-44 md:pt-20 flex flex-col gap-10 mb-10"
+      >
         <div className="text-5xl font-bold text-black">
           <PrismicRichText field={slice.primary.titulo} />
         </div>
