@@ -1,4 +1,4 @@
-import "./global.css";
+import "./globals.css";
 
 import { Client } from "./components/client";
 import { Funnel_Display, Geist } from "next/font/google";
@@ -6,6 +6,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { cn } from "@/lib/utils";
+
+import { GTMScript, GTMNoScript } from '@/app/components/tag-manager/GoogleTagManager';
 
 import Navbar from "./components/navbar";
 import Footer from "./components/footer-new";
@@ -25,7 +27,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={cn(funnel.className, "font-sans", geist.variable)}>
+      <head>
+        <GTMScript />
+      </head>
       <body className="text-rojoarq-black bg-rojoarq-white selection:text-rojoarq-pink">
+        <GTMNoScript />
         <Client />
         <Cotizador />
         <Navbar />
