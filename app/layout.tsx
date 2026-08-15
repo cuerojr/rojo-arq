@@ -1,3 +1,4 @@
+
 import "./globals.css";
 
 import { Client } from "./components/client";
@@ -12,6 +13,7 @@ import { GTMScript, GTMNoScript } from '@/app/components/tag-manager/GoogleTagMa
 import Navbar from "./components/navbar";
 import Footer from "./components/footer-new";
 import Cotizador from "./components/asesoria/asesoria";
+import { SessionProvider } from "@/components/auth/SessionProvider";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -35,7 +37,9 @@ export default function RootLayout({
         <Client />
         <Cotizador />
         <Navbar />
+        <SessionProvider>
         {children}
+        </SessionProvider>
         <Footer />
         <SpeedInsights />
         <Analytics />
