@@ -1,4 +1,3 @@
-
 import { AppSidebar } from "@/components/panel/main-sidebar";
 import { ReportsList } from "@/components/panel/reports-list";
 import { getReports } from "@/lib/actions/inspection";
@@ -6,7 +5,7 @@ import { Menu } from "lucide-react";
 
 export default async function Page() {
   const reports = await getReports();
-  
+
   return (
     <div className="flex min-h-screen bg-background">
       <AppSidebar open={false} />
@@ -21,7 +20,9 @@ export default async function Page() {
             <Menu className="size-5" />
           </button>
           <div>
-            <h1 className="text-base font-semibold text-foreground sm:text-lg">Informes</h1>
+            <h1 className="text-base font-semibold text-foreground sm:text-lg">
+              Informes
+            </h1>
             <p className="hidden text-xs text-muted-foreground sm:block">
               Consulta, filtra y descarga tus informes
             </p>

@@ -177,6 +177,9 @@ export async function getReports(): Promise<any[]> {
         cliente: true,
         inmueble: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return reportes;
   } catch (err) {
@@ -196,7 +199,11 @@ export async function getInformeDetalle(id: string) {
         inspeccionGeneral: true,
         patologias: true,
         hipotesisPreliminar: true,
-        registroFotografico: true,
+        registroFotografico: {
+          include: {
+            fotos: true,
+          },
+        },
       },
     });
     if (!informe) {
@@ -206,5 +213,37 @@ export async function getInformeDetalle(id: string) {
   } catch (err) {
     console.error("Error obteniendo informe detalle:", err);
     return null;
+  }
+}
+
+export async function createInformeGenerado(resultado: any, id: string) {
+  try {
+    const informeGuardado = await prisma.informeGenerado.upsert({
+      where: {
+        visitaId: id,
+      },
+
+      create: {
+        visitaId: id,
+        version: 1,
+        contenido: resultado.contenido,
+        modelo: resultado.modelo,
+        promptVersion: resultado.promptVersion,
+      },
+
+      update: {
+        version: {
+          increment: 1,
+        },
+
+        contenido: resultado.contenido,
+
+        modelo: resultado.modelo,
+
+        promptVersion: resultado.promptVersion,
+      },
+    });
+  } catch (err) {
+    console.error("Error creando informe generado:", err);
   }
 }
