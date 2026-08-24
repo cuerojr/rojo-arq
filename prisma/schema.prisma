@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -7,8 +6,6 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
-
 
 // ============================================================
 // ENUMS
@@ -152,11 +149,9 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  accounts               Account[]
-  sessions               Session[]
-  
+  accounts Account[]
+  sessions Session[]
 }
-
 
 // ============================================================
 // MODELOS
@@ -170,7 +165,9 @@ model Cliente {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  isSuperAdmin  Boolean   @default(false)
+  isSuperAdmin Boolean @default(false)
+
+  ordenes Orden[]
 
   inmuebles Inmueble[]
   visitas   VisitaTecnica[]
@@ -179,18 +176,20 @@ model Cliente {
 }
 
 model Inmueble {
-  id                String        @id @default(cuid())
-  direccion         String
-  barrioCiudad      String?
-  tipoPropiedad     TipoPropiedad
-  antiguedadAnios   Int?
-  tieneReformas     Boolean       @default(false)
-  detalleReformas   String?       @db.Text
+  id              String        @id @default(cuid())
+  direccion       String
+  barrioCiudad    String?
+  tipoPropiedad   TipoPropiedad
+  antiguedadAnios Int?
+  tieneReformas   Boolean       @default(false)
+  detalleReformas String?       @db.Text
 
   clienteId String
   cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
 
   visitas VisitaTecnica[]
+
+  ordenes Orden[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -199,18 +198,45 @@ model Inmueble {
   @@map("inmuebles")
 }
 
+enum EstadoOrden {
+  PENDIENTE
+  EN_PROCESO
+  COMPLETADA
+  CANCELADA
+}
+
+model Orden {
+  id     String      @id @default(cuid())
+  estado EstadoOrden @default(PENDIENTE)
+
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Restrict)
+
+  inmuebleId String
+  inmueble   Inmueble @relation(fields: [inmuebleId], references: [id], onDelete: Restrict)
+
+  visitaTecnica VisitaTecnica?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clienteId])
+  @@index([inmuebleId])
+  @@map("ordenes")
+}
+
 // 1. Cabecera + 2. Motivo de consulta
 model VisitaTecnica {
-  id                     String   @id @default(cuid())
-  numeroExpediente       String?  @unique
-  fecha                  DateTime
-  hora                   String?
-  arquitectaResponsable  String   @default("Julieta Rojo")
+  id                    String   @id @default(cuid())
+  numeroExpediente      String?  @unique
+  fecha                 DateTime
+  hora                  String?
+  arquitectaResponsable String   @default("Julieta Rojo")
 
   // Motivo de consulta
-  motivosConsulta        TipoMotivoConsulta[]
-  motivoOtroDetalle       String?  @db.Text
-  observacionesCliente    String?  @db.Text
+  motivosConsulta      TipoMotivoConsulta[]
+  motivoOtroDetalle    String?              @db.Text
+  observacionesCliente String?              @db.Text
 
   // Cierre de visita (sección 9)
   requiereInformeCompleto Boolean @default(false)
@@ -222,13 +248,18 @@ model VisitaTecnica {
   inmuebleId String
   inmueble   Inmueble @relation(fields: [inmuebleId], references: [id], onDelete: Restrict)
 
-  inspeccionGeneral    InspeccionGeneral?
-  patologias           PatologiaRelevada[]
-  sectoresAfectados    SectorAfectado[]
-  hipotesisPreliminar  HipotesisPreliminar?
-  registroFotografico  RegistroFotografico?
+  inspeccionGeneral      InspeccionGeneral?
+  patologias             PatologiaRelevada[]
+  sectoresAfectados      SectorAfectado[]
+  hipotesisPreliminar    HipotesisPreliminar?
+  registroFotografico    RegistroFotografico?
   instrumentosUtilizados TipoInstrumento[]
   instrumentoOtroDetalle String?
+
+  informeGenerado InformeGenerado?
+  ordenId         String?          @unique
+  orden           Orden?           @relation(fields: [ordenId], references: [id], onDelete: SetNull)
+  // 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -293,9 +324,9 @@ model HipotesisPreliminar {
   visitaId String        @unique
   visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
 
-  hipotesis            TipoHipotesis[]
-  hipotesisOtraDetalle String?
-  observacionesTecnicas String? @db.Text
+  hipotesis             TipoHipotesis[]
+  hipotesisOtraDetalle  String?
+  observacionesTecnicas String?         @db.Text
 
   @@map("hipotesis_preliminares")
 }
@@ -307,7 +338,7 @@ model RegistroFotografico {
   visitaId String        @unique
   visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
 
-  realizado Boolean @default(false)
+  realizado Boolean            @default(false)
   fotos     FotoRelevamiento[]
 
   @@map("registros_fotograficos")
@@ -316,8 +347,8 @@ model RegistroFotografico {
 model FotoRelevamiento {
   id String @id @default(cuid())
 
-  registroId String               @map("registro_id")
-  registro   RegistroFotografico  @relation(fields: [registroId], references: [id], onDelete: Cascade)
+  registroId String              @map("registro_id")
+  registro   RegistroFotografico @relation(fields: [registroId], references: [id], onDelete: Cascade)
 
   url         String
   descripcion String?
@@ -327,3 +358,19 @@ model FotoRelevamiento {
   @@map("fotos_relevamiento")
 }
 
+model InformeGenerado {
+  id String @id @default(cuid())
+
+  visitaId String        @unique
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  version Int @default(1)
+
+  contenido Json
+
+  modelo        String?
+  promptVersion String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

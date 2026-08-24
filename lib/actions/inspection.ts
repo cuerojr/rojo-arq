@@ -177,6 +177,9 @@ export async function getReports(): Promise<any[]> {
         cliente: true,
         inmueble: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return reportes;
   } catch (err) {
@@ -196,7 +199,11 @@ export async function getInformeDetalle(id: string) {
         inspeccionGeneral: true,
         patologias: true,
         hipotesisPreliminar: true,
-        registroFotografico: true,
+        registroFotografico: {
+          include: {
+            fotos: true,
+          },
+        },
       },
     });
     if (!informe) {
@@ -206,5 +213,164 @@ export async function getInformeDetalle(id: string) {
   } catch (err) {
     console.error("Error obteniendo informe detalle:", err);
     return null;
+  }
+}
+
+export async function createInformeGenerado(resultado: any, id: string) {
+  try {
+    const informeGuardado = await prisma.informeGenerado.upsert({
+      where: {
+        visitaId: id,
+      },
+
+      create: {
+        visitaId: id,
+        version: 1,
+        contenido: resultado.contenido,
+        modelo: resultado.modelo,
+        promptVersion: resultado.promptVersion,
+      },
+
+      update: {
+        version: {
+          increment: 1,
+        },
+
+        contenido: resultado.contenido,
+
+        modelo: resultado.modelo,
+
+        promptVersion: resultado.promptVersion,
+      },
+    });
+  } catch (err) {
+    console.error("Error creando informe generado:", err);
+  }
+}
+
+export async function crearInspeccionDesdeOrden(
+  ordenId: string,
+  _prevState: InspectionState,
+  formData: FormData,
+): Promise<InspectionState> {
+  const orden = await prisma.orden.findUnique({
+    where: { id: ordenId },
+    select: { clienteId: true, inmuebleId: true, estado: true },
+  });
+
+  if (!orden) {
+    return { status: "error", message: "Orden no encontrada" };
+  }
+
+  const raw = Object.fromEntries(formData) as Record<string, unknown>;
+  const asArray = (key: string) => formData.getAll(key).map(String);
+  raw.motivo = asArray("motivo");
+  raw.exterior = asArray("exterior");
+  raw.interior = asArray("interior");
+  raw.hipotesis = asArray("hipotesis");
+  raw.instrumentos = asArray("instrumentos");
+  raw.registroFotografico = formData.get("registroFotografico") === "on";
+  raw.requiereInforme = formData.get("requiereInforme") === "on";
+
+  const parsed = inspectionSchema.safeParse(raw);
+  if (!parsed.success) {
+    const errors: Record<string, string> = {};
+    for (const issue of parsed.error.issues) {
+      errors[issue.path[0] as string] = issue.message;
+    }
+    return { status: "error", errors, message: "Revisá los campos marcados" };
+  }
+
+  const data: InspectionData = parsed.data;
+
+  const patologias = patologiaRows
+    .map((row) => {
+      const estado = data[`pat_${row.value}_estado` as any] as string | undefined;
+      if (!estado) return null;
+      const nivel = data[`pat_${row.value}_nivel` as any] as string | undefined;
+      return {
+        tipo: patologiaMap[row.value],
+        presente: estado === "si",
+        severidad: nivel ? severidadMap[nivel] : null,
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
+  const sectoresAfectados = ambientes
+    .map((amb) => {
+      const problema = data[`amb_${amb.value}_problema` as any] as string | undefined;
+      const medicion = data[`amb_${amb.value}_medicion` as any] as string | undefined;
+      const obs = data[`amb_${amb.value}_obs` as any] as string | undefined;
+      if (!problema && !medicion && !obs) return null;
+      return {
+        ambiente: ambienteMap[amb.value],
+        ambienteOtroDetalle: amb.value === "otro" ? amb.label : null,
+        problemaDetectado: problema || null,
+        medicionAprox: medicion || null,
+        observaciones: obs || null,
+      };
+    })
+    .filter((s): s is NonNullable<typeof s> => s !== null);
+
+  try {
+    const visita = await prisma.$transaction(async (tx) => {
+      const nuevaVisita = await tx.visitaTecnica.create({
+        data: {
+          numeroExpediente: data.expediente || null,
+          fecha: data.fecha ? new Date(data.fecha) : new Date(),
+          hora: data.hora || null,
+          arquitectaResponsable: data.arquitecta,
+
+          motivosConsulta: data.motivo.map((m: any) => motivoMap[m]),
+          motivoOtroDetalle: data.motivoOtro || null,
+          observacionesCliente: data.observacionesCliente || null,
+
+          requiereInformeCompleto: data.requiereInforme,
+
+          clienteId: orden.clienteId,
+          inmuebleId: orden.inmuebleId,
+          ordenId: ordenId,
+
+          instrumentosUtilizados: data.instrumentos.map((i: any) => instrumentoMap[i]),
+
+          inspeccionGeneral: {
+            create: {
+              sectoresExterior: data.exterior.map((e: any) => exteriorMap[e]),
+              observacionesExterior: data.exteriorObs || null,
+              sectoresInterior: data.interior.map((i: any) => interiorMap[i]),
+              observacionesInterior: data.interiorObs || null,
+            },
+          },
+
+          patologias: { create: patologias },
+          sectoresAfectados: { create: sectoresAfectados },
+
+          hipotesisPreliminar: {
+            create: {
+              hipotesis: data.hipotesis.map((h: any) => hipotesisMap[h]),
+              observacionesTecnicas: data.observacionesTecnicas || null,
+            },
+          },
+
+          registroFotografico: {
+            create: { realizado: data.registroFotografico },
+          },
+        },
+      });
+
+      await tx.orden.update({
+        where: { id: ordenId },
+        data: { estado: "COMPLETADA" },
+      });
+
+      return nuevaVisita;
+    });
+
+    revalidatePath("/visitas");
+    revalidatePath("/ordenes");
+    return { status: "success", inspeccion: visita.id };
+  } catch (err) {
+    console.error("Error creando inspección desde orden:", err);
+    return { status: "error", message: "No se pudo guardar la inspección" };
   }
 }

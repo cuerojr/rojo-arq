@@ -1,75 +1,57 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { cn } from "@/lib/utils";
+
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+
 import {
   BarChart3,
-  ChevronDown,
   FileText,
-  FolderKanban,
-  LayoutDashboard,
-  LineChart,
-  PieChart,
-  Settings,
-  Users,
   X,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
+} from "lucide-react";
 
-type MenuItem = { label: string; icon: React.ElementType }
 
 type MenuGroup = {
-  id: string
-  label: string
-  icon: React.ElementType
-  items: MenuItem[]
-}
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  link: string;
+};
 
 const menuGroups: MenuGroup[] = [
+  {
+    id: "ordenes",
+    label: "Órdenes",
+    icon: BarChart3,
+    link: "/panel",
+  },
   {
     id: "informes",
     label: "Informes",
     icon: FileText,
-    items: [
-      { label: "Todos los informes", icon: FolderKanban },
-      { label: "Ventas", icon: BarChart3 },
-      { label: "Finanzas", icon: LineChart },
-      { label: "Marketing", icon: PieChart },
-    ],
-  },
-  {
-    id: "analitica",
-    label: "Analítica",
-    icon: BarChart3,
-    items: [
-      { label: "Panel general", icon: LayoutDashboard },
-      { label: "Tendencias", icon: LineChart },
-    ],
-  },
-  {
-    id: "administracion",
-    label: "Administración",
-    icon: Settings,
-    items: [
-      { label: "Usuarios", icon: Users },
-      { label: "Configuración", icon: Settings },
-    ],
-  },
-]
+    link: "/panel/informes",
+  }
+];
 
 export function AppSidebar({
   open,
   onClose,
 }: {
-  open: boolean
-  onClose?: () => void
+  open: boolean;
+  onClose?: () => void;
 }) {
+  const { data: session, status } = useSession();
+  console.log("🚀 ~ AppSidebar ~ session:", session?.user.name);
+
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     informes: true,
-  })
-  const [active, setActive] = useState("Todos los informes")
+  });
+  const [active, setActive] = useState("Todos los informes");
 
   function toggleGroup(id: string) {
-    setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }))
+    setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   return (
@@ -109,51 +91,21 @@ export function AppSidebar({
         <nav className="flex-1 overflow-y-auto p-3">
           <ul className="flex flex-col gap-1">
             {menuGroups.map((group) => {
-              const isOpen = openGroups[group.id]
+              const isOpen = openGroups[group.id];
               return (
-                <li key={group.id}>
-                  <button
-                    type="button"
-                    onClick={() => toggleGroup(group.id)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                <li key={group.label}>
+                  <Link
+                    href={group.link}
+                    onClick={() => setActive(group.label)}
+                    className={cn(
+                      "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                    )}
                   >
                     <group.icon className="size-4 shrink-0" />
-                    <span className="flex-1 text-left">{group.label}</span>
-                    <ChevronDown
-                      className={cn(
-                        "size-4 shrink-0 transition-transform duration-200",
-                        isOpen && "rotate-180",
-                      )}
-                    />
-                  </button>
-
-                  {isOpen && (
-                    <ul className="mt-1 flex flex-col gap-0.5 pl-4">
-                      {group.items.map((item) => {
-                        const isActive = active === item.label
-                        return (
-                          <li key={item.label}>
-                            <button
-                              type="button"
-                              onClick={() => setActive(item.label)}
-                              className={cn(
-                                "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                                isActive
-                                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                              )}
-                            >
-                              <item.icon className="size-4 shrink-0" />
-                              <span className="text-left">{item.label}</span>
-                            </button>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  )}
+                    <span className="text-left">{group.label}</span>
+                  </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </nav>
@@ -161,15 +113,19 @@ export function AppSidebar({
         <div className="border-t border-sidebar-border p-3">
           <div className="flex items-center gap-3 rounded-md px-3 py-2">
             <div className="flex size-8 items-center justify-center rounded-full bg-sidebar-accent text-sidebar-accent-foreground text-xs font-semibold">
-              AT
+              {session?.user.name?.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium">Ana Torres</p>
-              <p className="truncate text-xs text-sidebar-foreground/60">Administradora</p>
+              <p className="truncate text-sm font-medium">
+                {session?.user.name}
+              </p>
+              <p className="truncate text-xs text-sidebar-foreground/60">
+                Administrador
+              </p>
             </div>
           </div>
         </div>
       </aside>
     </>
-  )
+  );
 }
