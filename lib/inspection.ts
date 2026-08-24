@@ -181,4 +181,6 @@ export type InspectionState = {
   errors?: FieldErrors
   fotos?: number,
   inspeccion?: string,
+  ordenId?: string,
+  informeId?: string,
 }

@@ -115,12 +115,14 @@ export function TextAreaField({
   errors,
   placeholder,
   rows = 3,
+  defaultValue,
 }: {
   name: string
   label: string
   errors?: FieldErrors
   placeholder?: string
   rows?: number
+  defaultValue?: string
 }) {
   const error = errors?.[name]
   return (
@@ -131,6 +133,7 @@ export function TextAreaField({
         name={name}
         rows={rows}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         aria-invalid={error ? true : undefined}
       />
       {error ? <FieldError>{error}</FieldError> : null}
@@ -192,12 +195,14 @@ export function RadioField({
   options,
   errors,
   orientation = "horizontal",
+  defaultValue,
 }: {
   name: string
   legend: string
   options: Option[]
   errors?: FieldErrors
   orientation?: "horizontal" | "vertical"
+  defaultValue?: string
 }) {
   const error = errors?.[name]
   return (
@@ -205,6 +210,7 @@ export function RadioField({
       <FieldLegend variant="label">{legend}</FieldLegend>
       <RadioGroup
         name={name}
+        defaultValue={defaultValue}
         aria-invalid={error ? true : undefined}
         className={
           orientation === "horizontal"

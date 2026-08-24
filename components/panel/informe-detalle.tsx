@@ -127,7 +127,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
   const patologiasPresentes = informe.patologias?.filter((p: { presente: any }) => p.presente)
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 md:px-6 md:py-12">
+    <div className="px-4 py-8 md:px-6 md:py-12">
       {/* Encabezado */}
       <header className="mb-8 overflow-hidden rounded-xl border border-border bg-card">
         <div className="flex flex-col gap-4 border-b border-border bg-primary px-6 py-5 text-primary-foreground sm:flex-row sm:items-center sm:justify-between">
@@ -254,7 +254,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
           <SectionTitle icon={AlertTriangle} title="Motivo de Consulta" step="Sección 03" />
           <div className="mt-5 flex flex-col gap-4">
             <Chips items={informe.motivosConsulta} labels={MOTIVO_LABELS} icon={AlertTriangle} />
-            {informe.motivosConsulta.includes("OTRO") && informe.motivoOtroDetalle ? (
+            {informe.motivosConsulta?.includes("OTRO") && informe.motivoOtroDetalle ? (
               <ObsBox label='Detalle "Otro"' value={informe.motivoOtroDetalle} />
             ) : null}
             <ObsBox label="Observaciones del cliente" value={informe.observacionesCliente} />
@@ -420,7 +420,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
           <SectionTitle icon={Wrench} title="Instrumentos Utilizados" step="Sección 09" />
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {informe.instrumentosUtilizados.map((i: string, index: number) => (
+            {informe.instrumentosUtilizados?.map((i: string, index: number) => (
               <li
                 key={i || String(index)}
                 className="flex items-center gap-2.5 rounded-md border border-border bg-background px-3 py-2.5 text-sm font-medium text-foreground"
@@ -430,7 +430,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
               </li>
             ))}
           </ul>
-          {informe.instrumentosUtilizados.includes("OTRO") && informe.instrumentoOtroDetalle ? (
+          {informe.instrumentosUtilizados?.includes("OTRO") && informe.instrumentoOtroDetalle ? (
             <div className="mt-4">
               <ObsBox label='Detalle "Otro"' value={informe.instrumentoOtroDetalle} />
             </div>
