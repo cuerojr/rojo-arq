@@ -1,4 +1,3 @@
-
 import "./globals.css";
 
 import { Client } from "./components/client";
@@ -8,39 +7,39 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { cn } from "@/lib/utils";
 
-import { GTMScript, GTMNoScript } from '@/app/components/tag-manager/GoogleTagManager';
+import {
+  GTMScript,
+  GTMNoScript,
+} from "@/app/components/tag-manager/GoogleTagManager";
 
-import Navbar from "./components/navbar";
-import Footer from "./components/footer-new";
-import Cotizador from "./components/asesoria/asesoria";
-import { SessionProvider } from "@/components/auth/SessionProvider";
+import SessionProvider from "@/components/auth/SessionProvider";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const funnel = Funnel_Display({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={cn(funnel.className, "font-sans", geist.variable)}>
+    <html
+      lang="es"
+      className={cn(funnel.className, "font-sans", geist.variable)}
+    >
       <head>
         <GTMScript />
       </head>
       <body className="text-rojoarq-black bg-rojoarq-white selection:text-rojoarq-pink">
         <GTMNoScript />
         <Client />
-        <Cotizador />
-        <Navbar />
-        <SessionProvider>
-        {children}
-        </SessionProvider>
-        <Footer />
+
+        <SessionProvider>{children}</SessionProvider>
+
         <SpeedInsights />
         <Analytics />
       </body>

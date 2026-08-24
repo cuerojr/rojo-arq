@@ -5,5 +5,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen mx-auto py-22 px-4">{children}</div>;
+  return <div className="min-h-screen mx-auto">{children}</div>;
 }

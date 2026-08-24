@@ -14,7 +14,7 @@ const estadoClasses: Record<any, string> = {
   error: "bg-destructive/10 text-destructive",
 };
 
-export function ReportsList({ reports }: { reports?: any }) {
+export function ReportsList({ reports, titulo = "Informe" }: { reports?: any; titulo?: string }) {
   const [query, setQuery] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [page, setPage] = useState(1);
@@ -87,7 +87,7 @@ export function ReportsList({ reports }: { reports?: any }) {
       {/* Lista de informes */}
       <div className="overflow-hidden rounded-lg border border-border bg-card">
         <div className="hidden grid-cols-12 gap-4 border-b border-border bg-muted/50 px-4 py-3 text-xs font-medium uppercase tracking-wide text-muted-foreground md:grid">
-          <span className="col-span-5">Informe</span>
+          <span className="col-span-5">{titulo}</span>
           <span className="col-span-2">Autor</span>
           <span className="col-span-2">Fecha</span>
           <span className="col-span-1 text-right">Estado</span>
@@ -106,7 +106,7 @@ export function ReportsList({ reports }: { reports?: any }) {
               >
                 <div className="col-span-5 min-w-0">
                   <Link
-                    href={`/panel/informe/${r.id}`}
+                    href={`/panel/${titulo.toLowerCase()}/${r.id}`}
                     className="font-medium text-foreground hover:underline"
                   >
                     <p className="truncate text-sm font-medium text-foreground">
@@ -121,7 +121,7 @@ export function ReportsList({ reports }: { reports?: any }) {
                   {r.arquitectaResponsable}
                 </div>
                 <div className="col-span-2 text-sm text-muted-foreground">
-                  {r.fecha.toLocaleDateString("es-AR")}
+                  {r.fecha?.toLocaleDateString("es-AR")}
                 </div>
                 <div className="col-span-1 flex items-center justify-between gap-2 md:justify-end">
                   <span
