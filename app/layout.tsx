@@ -1,28 +1,47 @@
-import "./style/globals.scss";
-import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import "./globals.css";
 
-const montserrat = Montserrat({
+import { Client } from "./components/client";
+import { Funnel_Display, Geist } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
+
+import { cn } from "@/lib/utils";
+
+import {
+  GTMScript,
+  GTMNoScript,
+} from "@/app/components/tag-manager/GoogleTagManager";
+
+import SessionProvider from "@/components/auth/SessionProvider";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+
+const funnel = Funnel_Display({
   subsets: ["latin"],
-  weight: ["900", "800", "700", "600", "500", "400", "200"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "ROJO ARQ",
-  description: "Arquitectura, diseño y construcción.",
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>
-        {children}
+    <html
+      lang="es"
+      className={cn(funnel.className, "font-sans", geist.variable)}
+    >
+      <head>
+        <GTMScript />
+      </head>
+      <body className="text-rojoarq-black bg-rojoarq-white selection:text-rojoarq-pink">
+        <GTMNoScript />
+        <Client />
+
+        <SessionProvider>{children}</SessionProvider>
+
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

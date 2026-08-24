@@ -1,0 +1,58 @@
+{
+  "type": "SharedSlice",
+  "id": "card_carousel",
+  "name": "CardCarousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Heading with a group of cards below, suitable for use cases like reviews or highlights.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Section title"
+          }
+        },
+        "cards": {
+          "type": "Group",
+          "config": {
+            "label": "Cards",
+            "fields": {
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,strong,em,hyperlink",
+                  "label": "Card content"
+                }
+              },
+              "reviewer": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "reviewer",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em"
+                }
+              },
+              "profesion": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "profesion",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

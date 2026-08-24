@@ -1,0 +1,51 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Breathe"
+						}
+					}
+				]
+			},
+			"subtitle": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Fugiat amet nisi Lorem pariatur aute proident in nulla. Pariatur incididunt reprehenderit ipsum elit sit culpa. Sunt labore nisi tempor esse culpa dolore adipisicing."
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Cupidatat occaecat qui aliquip veniam laborum consequat. Dolore laborum et fugiat occaecat elit elit ipsum nostrud reprehenderit ea culpa fugiat consectetur Lorem excepteur. Incididunt ullamco ea officia culpa non."
+						}
+					}
+				]
+			},
+			"primary_cta": {
+				"__TYPE__": "LinkContent",
+				"key": "2facfc94-0ef0-47a7-bbe5-6a5cf5d002d5",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "north"
+				}
+			}
+		},
+		"items": []
+	}
+]

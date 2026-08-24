@@ -1,0 +1,6 @@
+{
+  "repositoryName": "rojo-arq",
+  "adapter": "@slicemachine/adapter-next",
+  "libraries": ["./slices"],
+  "localSliceSimulatorURL": "http://localhost:3000/app/slice-simulator"
+}

@@ -1,0 +1,66 @@
+{
+  "type": "SharedSlice",
+  "id": "grid_feature_collection",
+  "name": "GridFeatureCollection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Grid variation presenting multiple items side-by-side with heading and description.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Title"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image"
+                }
+              },
+              "item_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Item Title"
+                }
+              },
+              "item_description": {
+                "type": "Text",
+                "config": {
+                  "label": "Item Description"
+                }
+              },
+              "item_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Item Link",
+                  "allowText": false,
+                  "repeat": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Description"
+          }
+        }
+      }
+    }
+  ]
+}

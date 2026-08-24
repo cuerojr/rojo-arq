@@ -1,0 +1,42 @@
+{
+  "type": "SharedSlice",
+  "id": "side_title_content",
+  "name": "SideTitleContent",
+  "variations": [
+    {
+      "id": "basic_right_content",
+      "name": "Basic (Right Content)",
+      "description": "Side title on the left, and a large content area to the right (can be text or other media).",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "section_title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titulo",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2"
+          }
+        },
+        "main_content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink",
+            "label": "Main Content"
+          }
+        },
+        "main_image": {
+          "type": "Image",
+          "config": {
+            "label": "Imagen de fondo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

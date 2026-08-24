@@ -1,0 +1,74 @@
+{
+  "id": "blog_content",
+  "type": "SharedSlice",
+  "name": "BlogContent",
+  "description": "BlogContent",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "portada": {
+          "type": "Image",
+          "config": {
+            "label": "Portada",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "titulo": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Titulo",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "bajada": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Bajada",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,strong,em"
+          }
+        },
+        "cuerpo_de_la_noticia": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Cuerpo de la noticia",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,image,list-item,o-list-item"
+          }
+        },
+        "otros_blogs": {
+          "type": "Group",
+          "config": {
+            "label": "Otros blogs",
+            "repeat": true,
+            "fields": {
+              "blog": {
+                "type": "Link",
+                "config": {
+                  "label": "blog",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "blog"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

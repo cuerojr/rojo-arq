@@ -1,0 +1,376 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum TipoPropiedad {
+  CASA
+  DEPARTAMENTO
+  LOCAL
+  OFICINA
+  PH
+}
+
+enum TipoMotivoConsulta {
+  HUMEDAD
+  GRIETAS
+  FISURAS
+  FILTRACIONES
+  RAJADURAS
+  DESPRENDIMIENTO_PINTURA
+  MOHO_HONGOS
+  OTRO
+}
+
+enum SectorExterior {
+  FACHADAS
+  MEDIANERAS
+  CUBIERTA
+  AZOTEA_TERRAZA
+  PATIOS
+  DESAGUES_PLUVIALES
+}
+
+enum SectorInterior {
+  MUROS
+  CIELORRASOS
+  PISOS
+  CARPINTERIAS
+  INSTALACIONES_SANITARIAS_ELECTRICIDAD
+}
+
+enum TipoPatologia {
+  HUMEDAD_ASCENDENTE_CAPILARIDAD
+  CONDENSACION
+  FILTRACION_PERDIDA_CANERIA
+  GRIETA_MURO
+  FISURA_MURO
+}
+
+enum NivelSeveridad {
+  LEVE
+  MEDIA
+  ALTA
+}
+
+enum Ambiente {
+  LIVING
+  COCINA
+  DORMITORIO_1
+  DORMITORIO_2
+  BANO
+  OTRO
+}
+
+enum TipoHipotesis {
+  CAPILARIDAD
+  FALTA_IMPERMEABILIZACION
+  PUENTE_TERMICO
+  FALLA_CONSTRUCTIVA
+  ASENTAMIENTO_ESTRUCTURAL
+  INSTALACION_DEFECTUOSA
+  MOVIMIENTO_SUELO
+  OTRA
+}
+
+enum TipoInstrumento {
+  INSPECCION_VISUAL
+  MEDIDOR_HUMEDAD
+  CAMARA_TERMICA
+  NIVEL_LASER
+  CINTA_METRICA
+  OTROS
+}
+
+// ─────────────────────────────────────────────
+// AUTH MODELS (NextAuth)
+// ─────────────────────────────────────────────
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  isSuperAdmin  Boolean   @default(false)
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+}
+
+// ============================================================
+// MODELOS
+// ============================================================
+
+model Cliente {
+  id        String   @id @default(cuid())
+  nombre    String
+  telefono  String?
+  email     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isSuperAdmin Boolean @default(false)
+
+  ordenes Orden[]
+
+  inmuebles Inmueble[]
+  visitas   VisitaTecnica[]
+
+  @@map("clientes")
+}
+
+model Inmueble {
+  id              String        @id @default(cuid())
+  direccion       String
+  barrioCiudad    String?
+  tipoPropiedad   TipoPropiedad
+  antiguedadAnios Int?
+  tieneReformas   Boolean       @default(false)
+  detalleReformas String?       @db.Text
+
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  visitas VisitaTecnica[]
+
+  ordenes Orden[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clienteId])
+  @@map("inmuebles")
+}
+
+enum EstadoOrden {
+  PENDIENTE
+  EN_PROCESO
+  COMPLETADA
+  CANCELADA
+}
+
+model Orden {
+  id     String      @id @default(cuid())
+  estado EstadoOrden @default(PENDIENTE)
+
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Restrict)
+
+  inmuebleId String
+  inmueble   Inmueble @relation(fields: [inmuebleId], references: [id], onDelete: Restrict)
+
+  visitaTecnica VisitaTecnica?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clienteId])
+  @@index([inmuebleId])
+  @@map("ordenes")
+}
+
+// 1. Cabecera + 2. Motivo de consulta
+model VisitaTecnica {
+  id                    String   @id @default(cuid())
+  numeroExpediente      String?  @unique
+  fecha                 DateTime
+  hora                  String?
+  arquitectaResponsable String   @default("Julieta Rojo")
+
+  // Motivo de consulta
+  motivosConsulta      TipoMotivoConsulta[]
+  motivoOtroDetalle    String?              @db.Text
+  observacionesCliente String?              @db.Text
+
+  // Cierre de visita (sección 9)
+  requiereInformeCompleto Boolean @default(false)
+  firmaProfesionalUrl     String?
+  firmaClienteUrl         String?
+
+  clienteId  String
+  cliente    Cliente  @relation(fields: [clienteId], references: [id], onDelete: Restrict)
+  inmuebleId String
+  inmueble   Inmueble @relation(fields: [inmuebleId], references: [id], onDelete: Restrict)
+
+  inspeccionGeneral      InspeccionGeneral?
+  patologias             PatologiaRelevada[]
+  sectoresAfectados      SectorAfectado[]
+  hipotesisPreliminar    HipotesisPreliminar?
+  registroFotografico    RegistroFotografico?
+  instrumentosUtilizados TipoInstrumento[]
+  instrumentoOtroDetalle String?
+
+  informeGenerado InformeGenerado?
+  ordenId         String?          @unique
+  orden           Orden?           @relation(fields: [ordenId], references: [id], onDelete: SetNull)
+  // 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clienteId])
+  @@index([inmuebleId])
+  @@map("visitas_tecnicas")
+}
+
+// 3. Inspección general del inmueble
+model InspeccionGeneral {
+  id String @id @default(cuid())
+
+  visitaId String        @unique
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  sectoresExterior      SectorExterior[]
+  observacionesExterior String?          @db.Text
+
+  sectoresInterior      SectorInterior[]
+  observacionesInterior String?          @db.Text
+
+  @@map("inspecciones_generales")
+}
+
+// 4. Relevamiento patológico (general) — una fila por tipo de patología evaluada
+model PatologiaRelevada {
+  id String @id @default(cuid())
+
+  visitaId String        @map("visita_id")
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  tipo      TipoPatologia
+  presente  Boolean
+  severidad NivelSeveridad?
+
+  @@unique([visitaId, tipo])
+  @@map("patologias_relevadas")
+}
+
+// 5. Sectores afectados (por ambiente)
+model SectorAfectado {
+  id String @id @default(cuid())
+
+  visitaId String        @map("visita_id")
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  ambiente            Ambiente
+  ambienteOtroDetalle String?
+  problemaDetectado   String?  @db.Text
+  medicionAprox       String?
+  observaciones       String?  @db.Text
+
+  @@index([visitaId])
+  @@map("sectores_afectados")
+}
+
+// 6. Hipótesis preliminar (posibles causas detectadas)
+model HipotesisPreliminar {
+  id String @id @default(cuid())
+
+  visitaId String        @unique
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  hipotesis             TipoHipotesis[]
+  hipotesisOtraDetalle  String?
+  observacionesTecnicas String?         @db.Text
+
+  @@map("hipotesis_preliminares")
+}
+
+// 7. Registro fotográfico
+model RegistroFotografico {
+  id String @id @default(cuid())
+
+  visitaId String        @unique
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  realizado Boolean            @default(false)
+  fotos     FotoRelevamiento[]
+
+  @@map("registros_fotograficos")
+}
+
+model FotoRelevamiento {
+  id String @id @default(cuid())
+
+  registroId String              @map("registro_id")
+  registro   RegistroFotografico @relation(fields: [registroId], references: [id], onDelete: Cascade)
+
+  url         String
+  descripcion String?
+  createdAt   DateTime @default(now())
+
+  @@index([registroId])
+  @@map("fotos_relevamiento")
+}
+
+model InformeGenerado {
+  id String @id @default(cuid())
+
+  visitaId String        @unique
+  visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
+
+  version Int @default(1)
+
+  contenido Json
+
+  modelo        String?
+  promptVersion String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
