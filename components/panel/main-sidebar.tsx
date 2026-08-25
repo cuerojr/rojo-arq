@@ -3,15 +3,11 @@
 import { cn } from "@/lib/utils";
 
 import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-import {
-  BarChart3,
-  FileText,
-  X,
-} from "lucide-react";
-
+import { BarChart3, FileText, Settings, X } from "lucide-react";
+import { Button } from "../ui/button";
 
 type MenuGroup = {
   id: string;
@@ -32,7 +28,7 @@ const menuGroups: MenuGroup[] = [
     label: "Informes",
     icon: FileText,
     link: "/panel/informes",
-  }
+  },
 ];
 
 export function AppSidebar({
@@ -122,6 +118,14 @@ export function AppSidebar({
               <p className="truncate text-xs text-sidebar-foreground/60">
                 Administrador
               </p>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="cursor-pointer text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                onClick={() => signOut({ callbackUrl: "/acceso" })}
+              >
+                Salir
+              </Button>
             </div>
           </div>
         </div>

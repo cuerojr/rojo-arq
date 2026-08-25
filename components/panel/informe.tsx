@@ -131,11 +131,10 @@ export default function Page() {
         <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight">
-              Nueva orden, sin complicaciones.
+              Órdenes de trabajo
             </h2>
             <p className="mt-2 max-w-xl text-muted-foreground">
-              Registra el cliente y el inmueble para iniciar una nueva solicitud
-              de servicio.
+              Gestioná tus órdenes de trabajo y accedé a los informes de inspección
             </p>
           </div>
           <OrderDialog />
