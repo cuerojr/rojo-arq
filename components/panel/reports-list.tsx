@@ -39,6 +39,7 @@ export function ReportsList({ reports, titulo = "Informe" }: { reports?: any; ti
   const currentPage = Math.min(page, totalPages);
   const start = (currentPage - 1) * PAGE_SIZE;
   const pageItems = filtered.slice(start, start + PAGE_SIZE);
+  console.log("🚀 ~ ReportsList ~ pageItems:", pageItems)
 
   function resetToFirstPage<T>(setter: (v: T) => void) {
     return (v: T) => {
@@ -130,15 +131,8 @@ export function ReportsList({ reports, titulo = "Informe" }: { reports?: any; ti
                       estadoClasses[r.estado],
                     )}
                   >
-                    {/*estadoLabels[r.estado]*/}
+                    { r.estado }
                   </span>
-                  <button
-                    type="button"
-                    className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                    aria-label={`Descargar ${r.nombre}`}
-                  >
-                    <Download className="size-4" />
-                  </button>
                 </div>
               </li>
             ))}
