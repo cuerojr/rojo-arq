@@ -43,6 +43,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { cn } from "@/lib/utils";
+import { useCloudinaryUpload } from "@/hooks/use-cloudinary-upload";
 
 const initialState: InspectionState = {
   status: "idle",
@@ -419,8 +420,8 @@ function SubmitButton() {
 }
 
 function PhotoUpload({ error }: { error?: string }) {
-  const [files, setFiles] = useState<File[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { items, uploadFiles, removeItem, isUploading, uploadedUrls } =
+    useCloudinaryUpload();
 
   return (
     <Field data-invalid={error ? true : undefined}>
@@ -428,45 +429,43 @@ function PhotoUpload({ error }: { error?: string }) {
       <FieldDescription>
         Hasta 12 imágenes (JPG/PNG), máximo 8 MB cada una.
       </FieldDescription>
-      <label
-        htmlFor="fotos"
-        className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-input bg-muted/30 px-4 py-8 text-center transition-colors hover:border-primary/50 hover:bg-accent"
-      >
+
+      <label htmlFor="fotos" className="/* ... */">
         <ImageIcon className="size-6 text-muted-foreground" />
-        <span className="text-sm font-medium">
-          Hacé clic para seleccionar imágenes
-        </span>
-        <span className="text-xs text-muted-foreground">
-          o arrastrá los archivos aquí
-        </span>
+        <span className="text-sm font-medium">Hacé clic para seleccionar imágenes</span>
       </label>
       <input
-        ref={inputRef}
         id="fotos"
-        name="fotos"
         type="file"
         accept="image/*"
         multiple
         className="sr-only"
-        aria-invalid={error ? true : undefined}
-        onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
+        onChange={(e) => {
+          const files = Array.from(e.target.files ?? []);
+          if (files.length) uploadFiles(files);
+        }}
       />
-      {files.length > 0 ? (
-        <ul className="flex flex-col gap-1.5 pt-1">
-          {files.map((file, index) => (
-            <li
-              key={`${file.name}-${index}`}
-              className="flex items-center gap-2 text-sm text-muted-foreground"
-            >
-              <ImageIcon className="size-4 shrink-0" />
-              <span className="truncate">{file.name}</span>
-              <span className="ml-auto shrink-0 tabular-nums">
-                {(file.size / 1024 / 1024).toFixed(1)} MB
-              </span>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+
+      {/* hidden inputs para que las URLs finales viajen en el FormData del server action */}
+      {uploadedUrls.map((url) => (
+        <input key={url} type="hidden" name="fotos" value={url} />
+      ))}
+
+      <ul className="flex flex-col gap-1.5 pt-1">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-center gap-2 text-sm">
+            <img src={item.previewUrl} className="size-8 rounded object-cover" />
+            <span className="truncate">{item.file.name}</span>
+            {item.status === "uploading" && <span>{item.progress}%</span>}
+            {item.status === "success" && <CheckCircle2Icon className="size-4 text-green-600" />}
+            {item.status === "error" && <span className="text-destructive">{item.error}</span>}
+            <button type="button" onClick={() => removeItem(index)}>
+              <XIcon className="size-4" />
+            </button>
+          </li>
+        ))}
+      </ul>
+
       {error ? <FieldError>{error}</FieldError> : null}
     </Field>
   );
