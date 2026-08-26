@@ -104,7 +104,7 @@ export async function createOrden(
 export async function getOrdenes() {
   try {
     return await prisma.orden.findMany({
-      include: { cliente: true, inmueble: true, visitaTecnica: true },
+      include: { cliente: true, inmueble: true },
       orderBy: { createdAt: "desc" },
     });
   } catch (err) {

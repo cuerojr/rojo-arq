@@ -28,6 +28,7 @@ function uploadFileToCloudinary(
   file: File,
   onProgress: (percent: number) => void,
 ): Promise<CloudinaryResponse> {
+    console.log("cloud:", CLOUD_NAME, "preset:", UPLOAD_PRESET);
   return new Promise((resolve, reject) => {
     if (!CLOUD_NAME || !UPLOAD_PRESET) {
       reject(
@@ -62,12 +63,31 @@ function uploadFileToCloudinary(
           reject(new Error("Respuesta inválida de Cloudinary"));
         }
       } else {
+        const cldError = xhr.getResponseHeader("X-Cld-Error");
+        let bodyMessage: string | undefined;
         try {
           const parsed = JSON.parse(xhr.responseText);
-          reject(new Error(parsed?.error?.message ?? "Error al subir la imagen"));
+          bodyMessage = parsed?.error?.message;
         } catch {
-          reject(new Error(`Error al subir la imagen (status ${xhr.status})`));
+          // respuesta no era JSON, seguimos con lo que tengamos
         }
+
+        const fullMessage = [bodyMessage, cldError]
+          .filter(Boolean)
+          .join(" — ");
+
+        console.error("Cloudinary upload error", {
+          status: xhr.status,
+          bodyMessage,
+          cldError,
+          raw: xhr.responseText,
+        });
+
+        reject(
+          new Error(
+            fullMessage || `Error al subir la imagen (status ${xhr.status})`,
+          ),
+        );
       }
     };
 
