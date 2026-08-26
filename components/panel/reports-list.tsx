@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Download, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 10;
 
 const estadoClasses: Record<any, string> = {
   completado: "bg-primary/10 text-primary",

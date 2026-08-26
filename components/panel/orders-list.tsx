@@ -18,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 10;
 
 const estadoClasses: Record<any, string> = {
   completado: "bg-primary/10 text-primary",
