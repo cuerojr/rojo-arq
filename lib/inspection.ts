@@ -184,3 +184,50 @@ export type InspectionState = {
   ordenId?: string,
   informeId?: string,
 }
+
+
+
+
+export const elementoOptions = [
+  { value: "MURO", label: "Muro" },
+  { value: "PISO", label: "Piso" },
+  { value: "CIELORRASO", label: "Cielorraso" },
+] as const;
+
+export const sectorElementoOptionsByElemento: Record<
+  string,
+  { value: string; label: string }[]
+> = {
+  MURO: [
+    { value: "MURO_INFERIOR", label: "Sector inferior" },
+    { value: "MURO_MEDIO", label: "Sector medio" },
+    { value: "MURO_SUPERIOR", label: "Sector superior" },
+    { value: "MURO_ENCUENTRO_TECHO", label: "Esquina / encuentro muro-techo" },
+    { value: "MURO_ENCUENTRO_PISO", label: "Encuentro muro-piso" },
+  ],
+  PISO: [
+    { value: "PISO_CENTRO", label: "Centro" },
+    { value: "PISO_LATERAL", label: "Laterales" },
+  ],
+  CIELORRASO: [
+    { value: "PISO_CENTRO", label: "Centro" },
+    { value: "PISO_LATERAL", label: "Perímetro / laterales" },
+  ],
+};
+
+export const tipoPatologiaSectorOptions = [
+  { value: "FISURA", label: "Fisura" },
+  { value: "GRIETA", label: "Grieta" },
+  { value: "MANCHA_HUMEDAD", label: "Mancha de humedad" },
+  { value: "SALITRE", label: "Salitre" },
+  { value: "DETERIORO_REVOQUE", label: "Deterioro de revoque" },
+  { value: "MOHO", label: "Moho" },
+] as const;
+
+export const colorManchaOptions = [
+  { value: "AMARILLO", label: "Amarillo" },
+  { value: "MARRON", label: "Marrón" },
+  { value: "VERDE", label: "Verde" },
+] as const;
+
+export const exteriorPresets = ["Patio", "Jardín", "Terraza", "Techo de chapa"];

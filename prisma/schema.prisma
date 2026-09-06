@@ -90,6 +90,37 @@ enum TipoInstrumento {
   OTROS
 }
 
+enum ElementoArquitectura {
+  MURO
+  PISO
+  CIELORRASO
+}
+
+enum SectorElemento {
+  MURO_INFERIOR
+  MURO_MEDIO
+  MURO_SUPERIOR
+  MURO_ENCUENTRO_TECHO
+  MURO_ENCUENTRO_PISO
+  PISO_CENTRO
+  PISO_LATERAL
+}
+
+enum TipoPatologiaSector {
+  FISURA
+  GRIETA
+  MANCHA_HUMEDAD
+  SALITRE
+  DETERIORO_REVOQUE
+  MOHO
+}
+
+enum ColorMancha {
+  AMARILLO
+  MARRON
+  VERDE
+}
+
 // ─────────────────────────────────────────────
 // AUTH MODELS (NextAuth)
 // ─────────────────────────────────────────────
@@ -220,6 +251,9 @@ model Orden {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  sena      Float?  @default(0.0)
+  disclamer String? @default("La seña es del 50% del servicio y en caso de cancelación, por parte del cliente, no habrá devolución.")
+
   @@index([clienteId])
   @@index([inmuebleId])
   @@map("ordenes")
@@ -307,11 +341,17 @@ model SectorAfectado {
   visitaId String        @map("visita_id")
   visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
 
-  ambiente            Ambiente
-  ambienteOtroDetalle String?
-  problemaDetectado   String?  @db.Text
-  medicionAprox       String?
-  observaciones       String?  @db.Text
+  ambienteNombre String  // "Ambiente 1", "Patio", etc — reemplaza el enum fijo
+  esExterior     Boolean @default(false)
+
+  elemento       ElementoArquitectura?
+  sectorElemento SectorElemento?
+
+  tiposPatologia TipoPatologiaSector[]
+  colorMancha    ColorMancha[]
+
+  tamanioPatologia String? // reutilizo el concepto de "medición aprox." como tamaño
+  observaciones    String? @db.Text
 
   @@index([visitaId])
   @@map("sectores_afectados")
