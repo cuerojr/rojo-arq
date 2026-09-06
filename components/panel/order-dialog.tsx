@@ -46,6 +46,7 @@ const orderSchema = z
       .max(200, "Revisa la antigüedad"),
     reforms: z.boolean(),
     reformDetails: z.string().optional(),
+    sena: z.coerce.number().min(0, "La seña no puede ser negativa"),
   })
   .superRefine((data, ctx) => {
     if (
@@ -77,6 +78,7 @@ const initialOrders: Order[] = [
     reformDetails: "Cocina y baños renovados",
     status: "En revisión",
     createdAt: "Hoy, 9:42 AM",
+    sena: 0,
   },
   {
     id: "ORD-1047",
@@ -91,6 +93,7 @@ const initialOrders: Order[] = [
     reformDetails: "",
     status: "Pendiente",
     createdAt: "Ayer, 4:16 PM",
+    sena: 0,
   },
   {
     id: "ORD-1046",
@@ -105,6 +108,7 @@ const initialOrders: Order[] = [
     reformDetails: "",
     status: "Completada",
     createdAt: "12 Jun, 11:08 AM",
+    sena: 0,
   },
 ];
 
@@ -153,6 +157,7 @@ function OrderDialog() {
     formData.append("propertyType", data.propertyType);
     formData.append("age", String(data.age));
     formData.append("reforms", data.reforms ? "true" : "false");
+    formData.append("sena", String(data.sena));
     if (data.reformDetails) {
       formData.append("reformDetails", data.reformDetails);
     }
@@ -213,6 +218,7 @@ function OrderDialog() {
               />
             </Field>
           </section>
+
           <section className="flex flex-col gap-4 border-t pt-6">
             <div className="flex items-center gap-2 text-sm font-semibold">
               <span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -270,6 +276,23 @@ function OrderDialog() {
             >
               <Input type="number" min="0" {...form.register("age")} />
             </Field>
+            <div className="flex flex-col gap-4 border-t pt-6">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  3
+                </span>{" "}
+                Datos de la orden
+              </div>
+              <Field label="Seña" error={form.formState.errors.sena?.message}>
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  {...form.register("sena")}
+                />
+              </Field>
+            </div>
             <div className="flex items-center justify-between rounded-lg border bg-muted/30 p-4">
               <div>
                 <Label htmlFor="reforms">¿Tiene reformas?</Label>
@@ -299,6 +322,7 @@ function OrderDialog() {
               </Field>
             )}
           </section>
+
           <div className="flex flex-col-reverse gap-2 border-t pt-5 sm:flex-row sm:justify-end">
             <Button
               type="button"

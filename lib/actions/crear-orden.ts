@@ -21,6 +21,10 @@ const ordenSchema = z
       .max(200, "Revisa la antigüedad"),
     reforms: z.preprocess((val) => val === "true", z.boolean()),
     reformDetails: z.string().optional(),
+    sena: z.preprocess(
+      (val) => (val === "" || val === undefined ? undefined : val),
+      z.coerce.number().min(0, "La seña no puede ser negativa").optional(),
+    ),
   })
   .superRefine((data, ctx) => {
     if (
@@ -89,11 +93,12 @@ export async function createOrden(
         data: {
           clienteId: cliente.id,
           inmuebleId: inmueble.id,
+          sena: data.sena,
         },
       });
     });
 
-    revalidatePath("/ordenes");
+    revalidatePath("/panel");
     return { status: "success", ordenId: orden.id };
   } catch (err) {
     console.error("Error creando orden:", err);
