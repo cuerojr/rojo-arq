@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import {
   obtenerOrdenParaDescarga,
   type OrdenParaPDF,
-} from "@/lib/actions/orders"; // ajustá el path según donde lo guardes
+} from "@/lib/actions/orders";
 
 const ESTADO_LABEL: Record<string, string> = {
   PENDIENTE: "Pendiente",
@@ -21,7 +21,29 @@ const TIPO_PROPIEDAD_LABEL: Record<string, string> = {
   PH: "PH",
 };
 
-const NOMBRE_ESTUDIO = "Rojo Arq"; // TODO: reemplazar por el nombre real del estudio
+const NOMBRE_ESTUDIO = "Rojo Arq";
+const LOGO_URL = "/black-logo.png"; // debe estar en /public para que este path funcione
+
+/**
+ * Convierte una imagen pública (ej: /public/black-logo.png) a base64,
+ * que es el único formato que pdfmake acepta para imágenes.
+ */
+async function cargarLogoBase64(): Promise<string | null> {
+  try {
+    const response = await fetch(LOGO_URL);
+    if (!response.ok) throw new Error(`No se pudo cargar ${LOGO_URL}`);
+    const blob = await response.blob();
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (err) {
+    console.error("Error al cargar el logo para el PDF:", err);
+    return null; // el PDF se genera igual, sin logo
+  }
+}
 
 function formatFecha(fecha: Date | string) {
   return new Intl.DateTimeFormat("es-AR", {
@@ -39,24 +61,43 @@ function formatMoneda(valor: number | null) {
   }).format(valor);
 }
 
-function construirDocDefinition(orden: OrdenParaPDF) {
+function construirDocDefinition(
+  orden: OrdenParaPDF,
+  logoBase64: string | null
+) {
   const fechaEmision = formatFecha(new Date());
+
+  const columnasHeader: any[] = [];
+
+  if (logoBase64) {
+    columnasHeader.push({ image: "logo", width: 55, margin: [0, 0, 10, 0] });
+  }
+
+  columnasHeader.push({
+    text: '',
+    bold: true,
+    fontSize: 12,
+    color: "#1f2937",
+    margin: logoBase64 ? [0, 10, 0, 0] : [0, 0, 0, 0],
+  });
+
+  columnasHeader.push({
+    text: `Orden Nº ${orden.id.slice(-8).toUpperCase()}`,
+    alignment: "right",
+    fontSize: 10,
+    color: "#6b7280",
+    margin: logoBase64 ? [0, 10, 0, 0] : [0, 0, 0, 0],
+  });
 
   return {
     pageSize: "A4",
-    pageMargins: [40, 70, 40, 60] as [number, number, number, number],
+    pageMargins: [40, 80, 40, 60] as [number, number, number, number],
+
+    images: logoBase64 ? { logo: logoBase64 } : undefined,
 
     header: {
       margin: [40, 20, 40, 0],
-      columns: [
-        { text: NOMBRE_ESTUDIO, bold: true, fontSize: 12, color: "#1f2937" },
-        {
-          text: `Orden Nº ${orden.id.slice(-8).toUpperCase()}`,
-          alignment: "right",
-          fontSize: 10,
-          color: "#6b7280",
-        },
-      ],
+      columns: columnasHeader,
     },
 
     footer: (currentPage: number, pageCount: number) => ({
@@ -75,10 +116,7 @@ function construirDocDefinition(orden: OrdenParaPDF) {
     content: [
       { text: "Orden de Servicio", style: "titulo" },
       orden.numeroExpediente
-        ? {
-            text: `Expediente Nº ${orden.numeroExpediente}`,
-            style: "subtitulo",
-          }
+        ? { text: `Expediente Nº ${orden.numeroExpediente}`, style: "subtitulo" }
         : null,
 
       { text: " ", margin: [0, 4] },
@@ -173,12 +211,7 @@ function construirDocDefinition(orden: OrdenParaPDF) {
     ].filter(Boolean),
 
     styles: {
-      titulo: {
-        fontSize: 18,
-        bold: true,
-        color: "#111827",
-        margin: [0, 0, 0, 2],
-      },
+      titulo: { fontSize: 18, bold: true, color: "#111827", margin: [0, 0, 0, 2] },
       subtitulo: { fontSize: 10, color: "#6b7280" },
       seccion: {
         fontSize: 9,
@@ -221,7 +254,10 @@ export function useDescargarOrdenPDF() {
     setError(null);
 
     try {
-      const orden = await obtenerOrdenParaDescarga(ordenId);
+      const [orden, logoBase64] = await Promise.all([
+        obtenerOrdenParaDescarga(ordenId),
+        cargarLogoBase64(),
+      ]);
 
       // pdfmake toca `window`, por eso se importa dinámicamente (sólo corre en el cliente)
       const pdfMakeModule = await import("pdfmake/build/pdfmake");
@@ -233,7 +269,7 @@ export function useDescargarOrdenPDF() {
       // Compatibilidad entre versiones de pdfmake: algunas exponen .pdfMake.vfs, otras .vfs directo
       pdfMake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfFonts.vfs;
 
-      const docDefinition = construirDocDefinition(orden);
+      const docDefinition = construirDocDefinition(orden, logoBase64);
       const nombreArchivo = `orden-${orden.id.slice(-8)}.pdf`;
 
       pdfMake.createPdf(docDefinition).download(nombreArchivo);
