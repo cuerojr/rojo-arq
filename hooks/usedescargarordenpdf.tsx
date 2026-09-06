@@ -21,7 +21,7 @@ const TIPO_PROPIEDAD_LABEL: Record<string, string> = {
   PH: "PH",
 };
 
-const NOMBRE_ESTUDIO = "Rojo Arquitectura"; // TODO: reemplazar por el nombre real del estudio
+const NOMBRE_ESTUDIO = "Rojo Arq"; // TODO: reemplazar por el nombre real del estudio
 
 function formatFecha(fecha: Date | string) {
   return new Intl.DateTimeFormat("es-AR", {
