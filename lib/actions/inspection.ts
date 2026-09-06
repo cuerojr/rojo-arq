@@ -22,6 +22,41 @@ import {
   hipotesisMap,
   instrumentoMap,
 } from "@/lib/mappers/inspection-enums";
+import { Ambiente, ElementoArquitectura, SectorElemento, TipoPatologiaSector, ColorMancha } from "@/generated/prisma/client";
+
+
+function parseSectoresAfectados(formData: FormData) {
+  const sectores: {
+    ambienteNombre: string;
+    esExterior: boolean;
+    elemento: ElementoArquitectura | null;
+    sectorElemento: SectorElemento | null;
+    tiposPatologia: TipoPatologiaSector[];
+    colorMancha: ColorMancha[];
+    tamanioPatologia: string | null;
+    observaciones: string | null;
+  }[] = [];
+
+  let i = 0;
+  while (formData.has(`sectores[${i}][ambienteNombre]`)) {
+    const ambienteNombre = formData.get(`sectores[${i}][ambienteNombre]`) as string;
+    if (ambienteNombre) {
+      sectores.push({
+        ambienteNombre,
+        esExterior: formData.get(`sectores[${i}][esExterior]`) === "on",
+        elemento: (formData.get(`sectores[${i}][elemento]`) as ElementoArquitectura) || null,
+        sectorElemento: (formData.get(`sectores[${i}][sectorElemento]`) as SectorElemento) || null,
+        tiposPatologia: formData.getAll(`sectores[${i}][tiposPatologia]`) as TipoPatologiaSector[],
+        colorMancha: formData.getAll(`sectores[${i}][colorMancha]`) as ColorMancha[],
+        tamanioPatologia: (formData.get(`sectores[${i}][tamanio]`) as string) || null,
+        observaciones: (formData.get(`sectores[${i}][observaciones]`) as string) || null,
+      });
+    }
+    i++;
+  }
+
+  return sectores;
+}
 
 export async function crearInspeccion(
   _prevState: InspectionState,
@@ -66,23 +101,7 @@ export async function crearInspeccion(
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
   // ---- Sectores afectados: sólo ambientes con algún dato cargado ----
-  const sectoresAfectados = ambientes
-    .map((amb) => {
-      const problema = data[`amb_${amb.value}_problema` as any] as
-        string | undefined;
-      const medicion = data[`amb_${amb.value}_medicion` as any] as
-        string | undefined;
-      const obs = data[`amb_${amb.value}_obs` as any] as string | undefined;
-      if (!problema && !medicion && !obs) return null;
-      return {
-        ambiente: ambienteMap[amb.value],
-        ambienteOtroDetalle: amb.value === "otro" ? amb.label : null,
-        problemaDetectado: problema || null,
-        medicionAprox: medicion || null,
-        observaciones: obs || null,
-      };
-    })
-    .filter((s): s is NonNullable<typeof s> => s !== null);
+  const sectoresAfectados = parseSectoresAfectados(formData);
 
   try {
     const visita = await prisma.$transaction(async (tx) => {
@@ -285,7 +304,8 @@ export async function crearInspeccionDesdeOrden(
 
   const patologias = patologiaRows
     .map((row) => {
-      const estado = data[`pat_${row.value}_estado` as any] as string | undefined;
+      const estado = data[`pat_${row.value}_estado` as any] as
+        string | undefined;
       if (!estado) return null;
       const nivel = data[`pat_${row.value}_nivel` as any] as string | undefined;
       return {
@@ -296,21 +316,7 @@ export async function crearInspeccionDesdeOrden(
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
-  const sectoresAfectados = ambientes
-    .map((amb) => {
-      const problema = data[`amb_${amb.value}_problema` as any] as string | undefined;
-      const medicion = data[`amb_${amb.value}_medicion` as any] as string | undefined;
-      const obs = data[`amb_${amb.value}_obs` as any] as string | undefined;
-      if (!problema && !medicion && !obs) return null;
-      return {
-        ambiente: ambienteMap[amb.value],
-        ambienteOtroDetalle: amb.value === "otro" ? amb.label : null,
-        problemaDetectado: problema || null,
-        medicionAprox: medicion || null,
-        observaciones: obs || null,
-      };
-    })
-    .filter((s): s is NonNullable<typeof s> => s !== null);
+  const sectoresAfectados = parseSectoresAfectados(formData);
 
   try {
     const visita = await prisma.$transaction(async (tx) => {
@@ -331,7 +337,9 @@ export async function crearInspeccionDesdeOrden(
           inmuebleId: orden.inmuebleId,
           ordenId: ordenId,
 
-          instrumentosUtilizados: data.instrumentos.map((i: any) => instrumentoMap[i]),
+          instrumentosUtilizados: data.instrumentos.map(
+            (i: any) => instrumentoMap[i],
+          ),
 
           inspeccionGeneral: {
             create: {

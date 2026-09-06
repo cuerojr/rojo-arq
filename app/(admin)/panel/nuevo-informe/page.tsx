@@ -23,7 +23,7 @@ export default function Page() {
           </p>
         </div>
       </header>
-      <InspectionForm />
+      
     </>
   );
 }

@@ -15,9 +15,16 @@ import { obtenerRecomendaciones } from "./informe-recomendaciones";
 
 import type { DatosInformeIA } from "../informe/preparar-datos";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai: OpenAI | null = null;
+
+function getOpenAI() {
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+}
 
 export async function generarInformeIA(
   datos: DatosInformeIA,
@@ -70,7 +77,7 @@ no inventes información y expresá la limitación.
     );
   }
 
-  const response = await openai.responses.parse({
+  const response = await getOpenAI().responses.parse({
     model,
 
     instructions: INFORME_SYSTEM_PROMPT,
