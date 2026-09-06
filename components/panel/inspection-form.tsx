@@ -175,7 +175,7 @@ export function InspectionForm({
             <TextField
               name="nombre"
               label="Nombre y apellido"
-              defaultValue={orden.cliente.nombre}
+              defaultValue={orden?.cliente.nombre}
               required
               errors={state.errors}
             />
@@ -184,7 +184,7 @@ export function InspectionForm({
               label="Teléfono"
               type="tel"
               inputMode="tel"
-              defaultValue={orden.cliente.telefono ?? ""}
+              defaultValue={orden?.cliente.telefono ?? ""}
               required
               errors={state.errors}
             />
@@ -193,21 +193,21 @@ export function InspectionForm({
               label="Email"
               type="email"
               inputMode="email"
-              defaultValue={orden.cliente.email ?? ""}
+              defaultValue={orden?.cliente.email ?? ""}
               required
               errors={state.errors}
             />
             <TextField
               name="barrioCiudad"
               label="Barrio / Ciudad"
-              defaultValue={orden.inmueble.barrioCiudad ?? ""}
+              defaultValue={orden?.inmueble.barrioCiudad ?? ""}
               errors={state.errors}
             />
           </div>
           <TextField
             name="direccion"
             label="Dirección del inmueble"
-            defaultValue={orden.inmueble.direccion}
+            defaultValue={orden?.inmueble.direccion}
             required
             errors={state.errors}
           />
@@ -217,7 +217,7 @@ export function InspectionForm({
               legend="Tipo de propiedad"
               options={tipoPropiedadOptions}
               defaultValue={
-                tipoPropiedadReverseMap[orden.inmueble.tipoPropiedad]
+                tipoPropiedadReverseMap[orden?.inmueble.tipoPropiedad]
               }
               errors={state.errors}
             />
@@ -228,7 +228,7 @@ export function InspectionForm({
               inputMode="numeric"
               placeholder="Ej. 45"
               defaultValue={
-                orden.inmueble.antiguedadAnios != null
+                orden?.inmueble.antiguedadAnios != null
                   ? String(orden.inmueble.antiguedadAnios)
                   : undefined
               }
@@ -242,14 +242,14 @@ export function InspectionForm({
               { value: "si", label: "Sí" },
               { value: "no", label: "No" },
             ]}
-            defaultValue={orden.inmueble.tieneReformas ? "si" : "no"}
+            defaultValue={orden?.inmueble.tieneReformas ? "si" : "no"}
             errors={state.errors}
           />
           <TextAreaField
             name="reformasCuales"
             label="¿Cuáles?"
             placeholder="Detalle de reformas realizadas"
-            defaultValue={orden.inmueble.detalleReformas ?? ""}
+            defaultValue={orden?.inmueble.detalleReformas ?? ""}
             errors={state.errors}
           />
         </FieldGroup>
