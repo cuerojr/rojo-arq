@@ -374,8 +374,7 @@ export async function crearInspeccionDesdeOrden(
       return nuevaVisita;
     });
 
-    revalidatePath("/visitas");
-    revalidatePath("/ordenes");
+    revalidatePath("/informes");
     return { status: "success", inspeccion: visita.id };
   } catch (err) {
     console.error("Error creando inspección desde orden:", err);
