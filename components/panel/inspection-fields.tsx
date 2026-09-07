@@ -332,7 +332,7 @@ export function PatologiaTable() {
 /* -------------------------------------------------------------------------- */
 
 
-type SectorAfectadoDraft = {
+export type SectorAfectadoDraft = {
   ambienteNombre: string
   esExterior: boolean
   elemento: string

@@ -17,6 +17,8 @@ import {
   Search,
   User,
   Wrench,
+  MapPinIcon,
+  Trash2Icon,
 } from "lucide-react"
 import {
   type Informe,
@@ -31,7 +33,17 @@ import {
   formatFecha,
 } from "@/lib/schemas/informe-detalle";
 
+import {
+  elementoOptions,
+  sectorElementoOptionsByElemento,
+  tipoPatologiaSectorOptions,
+  colorManchaOptions,
+  exteriorPresets,
+} from "@/lib/inspection"
+
 import { PrintButton } from "@/components/panel/print-button"
+import { SectorAfectadoDraft } from "./inspection-fields";
+import { Button } from "../ui/button";
 
 function SectionTitle({
   icon: Icon,
@@ -350,24 +362,34 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             {informe.sectoresAfectados?.length === 0 ? (
               <p className="text-sm text-muted-foreground">Sin sectores registrados.</p>
             ) : (
-              informe.sectoresAfectados?.map((s: { ambiente: string; medicion: string | null; problema: string; observaciones: string | null }, i: any) => (
-                <div key={`${s.ambiente}-${i}`} className="rounded-md border border-border bg-background p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="flex items-center gap-2 font-semibold text-foreground">
-                      <MapPin className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-                      {s.ambiente}
-                    </h3>
-                    {s.medicion ? (
-                      <span className="rounded-md bg-secondary px-2.5 py-1 font-mono text-xs text-secondary-foreground">
-                        {s.medicion}
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="mt-2 text-sm text-foreground">{s.problema}</p>
-                  {s.observaciones ? (
-                    <p className="mt-1.5 text-sm text-muted-foreground">{s.observaciones}</p>
-                  ) : null}
-                </div>
+              informe.sectoresAfectados?.map((s: any, i: any) => (
+                <div key={i} className="flex items-start justify-between gap-3 rounded-md border border-border bg-background p-3">
+              <div className="flex flex-col gap-1">
+                <p className="flex items-center gap-1.5 text-sm font-medium">
+                  <MapPinIcon className="size-3.5 text-muted-foreground" />
+                  {s.ambienteNombre} {s.esExterior ? "(exterior)" : ""}
+                </p>
+                <p className="text-sm text-foreground">
+                  {[
+                    elementoOptions.find((e: { value: string }) => e.value === s.elemento)?.label,
+                    sectorElementoOptionsByElemento[s.elemento]?.find((se: { value: string }) => se.value === s.sectorElemento)?.label,
+                  ]
+                    .filter(Boolean)
+                    .join(" — ")}
+                </p>
+                <p className="text-sm text-foreground">
+                  {s.tiposPatologia
+                    .map((tp: string) => tipoPatologiaSectorOptions.find((o: { value: string }) => o.value === tp)?.label)
+                    .join(", ")}
+                  {s.colorMancha.length > 0
+                    ? ` (${s.colorMancha.map((c: string) => colorManchaOptions.find((o: { value: string }) => o.value === c)?.label).join(", ")})`
+                    : ""}
+                  {s.tamanio ? ` · ${s.tamanio}` : ""}
+                </p>
+                {s.observaciones ? <p className="text-sm text-muted-foreground">{s.observaciones}</p> : null}
+              </div>
+             
+            </div>
               ))
             )}
           </div>
