@@ -64,7 +64,7 @@ export async function createOrden(
       });
     });
 
-    revalidatePath("/panel", "page");
+    revalidatePath("/panel");
     return { status: "success", ordenId: orden.id };
   } catch (err) {
     console.error("Error creando orden:", err);
