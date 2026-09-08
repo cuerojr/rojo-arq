@@ -5,41 +5,9 @@ import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { tipoPropiedadMap } from "@/lib/mappers/inspection-enums";
+import { orderSchema } from "@/lib/schemas/ordenes";
 
-const ordenSchema = z
-  .object({
-    clientName: z.string().min(2, "Ingresa el nombre del cliente"),
-    phone: z.string().min(8, "Ingresa un teléfono válido"),
-    email: z.string().email("Ingresa un correo válido"),
-    address: z.string().min(5, "Ingresa la dirección del inmueble"),
-    city: z.string().min(2, "Ingresa la ciudad o barrio"),
-    propertyType: z.string().min(1, "Selecciona un tipo de inmueble"),
-    age: z.coerce
-      .number()
-      .int()
-      .min(0, "Debe ser 0 o mayor")
-      .max(200, "Revisa la antigüedad"),
-    reforms: z.preprocess((val) => val === "true", z.boolean()),
-    reformDetails: z.string().optional(),
-    sena: z.preprocess(
-      (val) => (val === "" || val === undefined ? undefined : val),
-      z.coerce.number().min(0, "La seña no puede ser negativa").optional(),
-    ),
-  })
-  .superRefine((data, ctx) => {
-    if (
-      data.reforms &&
-      (!data.reformDetails || data.reformDetails.trim().length < 3)
-    ) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["reformDetails"],
-        message: "Describe brevemente las reformas",
-      });
-    }
-  });
-
-export type OrdenData = z.infer<typeof ordenSchema>;
+export type OrdenData = z.infer<typeof orderSchema>;
 
 export type OrdenState =
   | { status: "idle" }
@@ -51,11 +19,7 @@ export async function createOrden(
   formData: FormData,
 ): Promise<OrdenState> {
   const raw = Object.fromEntries(formData) as Record<string, unknown>;
-  //console.log("🚀 ~ createOrden ~ formData:", formData)
- //console.log("🚀 ~ createOrden ~ raw:", raw)
-
-  const parsed = ordenSchema.safeParse(raw);
-  //console.log("🚀 ~ createOrden ~ parsed:", parsed)
+  const parsed = orderSchema.safeParse(raw);
 
   if (!parsed.success) {
     const errors: Record<string, string> = {};
@@ -94,11 +58,13 @@ export async function createOrden(
           clienteId: cliente.id,
           inmuebleId: inmueble.id,
           sena: data.sena,
+          fechaVisita: new Date(data.visitDate),
+          horaVisita: data.visitTime,
         },
       });
     });
 
-    revalidatePath("/panel");
+    revalidatePath("/panel", "page");
     return { status: "success", ordenId: orden.id };
   } catch (err) {
     console.error("Error creando orden:", err);
@@ -113,7 +79,7 @@ export async function getOrdenes() {
       orderBy: { createdAt: "desc" },
     });
   } catch (err) {
-    console.error("Error obteniendo órdenes:", err);
+    //console.error("Error obteniendo órdenes:", err);
     return [];
   }
 }

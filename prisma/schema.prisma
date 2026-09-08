@@ -254,6 +254,9 @@ model Orden {
   sena      Float?  @default(0.0)
   disclamer String? @default("La seña es del 50% del servicio y en caso de cancelación, por parte del cliente, no habrá devolución.")
 
+  fechaVisita DateTime
+  horaVisita  String?
+
   @@index([clienteId])
   @@index([inmuebleId])
   @@map("ordenes")
@@ -341,7 +344,7 @@ model SectorAfectado {
   visitaId String        @map("visita_id")
   visita   VisitaTecnica @relation(fields: [visitaId], references: [id], onDelete: Cascade)
 
-  ambienteNombre String  // "Ambiente 1", "Patio", etc — reemplaza el enum fijo
+  ambienteNombre String // "Ambiente 1", "Patio", etc — reemplaza el enum fijo
   esExterior     Boolean @default(false)
 
   elemento       ElementoArquitectura?
