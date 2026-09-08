@@ -30,36 +30,7 @@ import { SelectContent } from "../ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "../ui/card";
 import { createOrden, OrdenState } from "@/lib/actions/crear-orden";
-
-const orderSchema = z
-  .object({
-    clientName: z.string().min(2, "Ingresa el nombre del cliente"),
-    phone: z.string().min(8, "Ingresa un teléfono válido"),
-    email: z.string().email("Ingresa un correo válido"),
-    address: z.string().min(5, "Ingresa la dirección del inmueble"),
-    city: z.string().min(2, "Ingresa la ciudad o barrio"),
-    propertyType: z.string().min(1, "Selecciona un tipo de inmueble"),
-    age: z.coerce
-      .number()
-      .int()
-      .min(0, "Debe ser 0 o mayor")
-      .max(200, "Revisa la antigüedad"),
-    reforms: z.boolean(),
-    reformDetails: z.string().optional(),
-    sena: z.coerce.number().min(0, "La seña no puede ser negativa"),
-  })
-  .superRefine((data, ctx) => {
-    if (
-      data.reforms &&
-      (!data.reformDetails || data.reformDetails.trim().length < 3)
-    ) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["reformDetails"],
-        message: "Describe brevemente las reformas",
-      });
-    }
-  });
+import { orderSchema } from "@/lib/schemas/ordenes";
 
 type OrderForm = z.infer<typeof orderSchema>;
 type Order = OrderForm & { id: string; status: string; createdAt: string };
@@ -79,6 +50,8 @@ const initialOrders: Order[] = [
     status: "En revisión",
     createdAt: "Hoy, 9:42 AM",
     sena: 0,
+    visitDate: "",
+    visitTime: "",
   },
   {
     id: "ORD-1047",
@@ -94,6 +67,8 @@ const initialOrders: Order[] = [
     status: "Pendiente",
     createdAt: "Ayer, 4:16 PM",
     sena: 0,
+    visitDate: "",
+    visitTime: "",
   },
   {
     id: "ORD-1046",
@@ -109,6 +84,8 @@ const initialOrders: Order[] = [
     status: "Completada",
     createdAt: "12 Jun, 11:08 AM",
     sena: 0,
+    visitDate: "",
+    visitTime: "",
   },
 ];
 
@@ -158,6 +135,10 @@ function OrderDialog() {
     formData.append("age", String(data.age));
     formData.append("reforms", data.reforms ? "true" : "false");
     formData.append("sena", String(data.sena));
+    formData.append("visitDate", data.visitDate);
+    if (data.visitTime) {
+      formData.append("visitTime", data.visitTime);
+    }
     if (data.reformDetails) {
       formData.append("reformDetails", data.reformDetails);
     }
@@ -282,6 +263,20 @@ function OrderDialog() {
                   3
                 </span>{" "}
                 Datos de la orden
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field
+                  label="Fecha de la visita"
+                  error={form.formState.errors.visitDate?.message}
+                >
+                  <Input type="date" {...form.register("visitDate")} />
+                </Field>
+                <Field
+                  label="Hora de la visita"
+                  error={form.formState.errors.visitTime?.message}
+                >
+                  <Input type="time" {...form.register("visitTime")} />
+                </Field>
               </div>
               <Field label="Seña" error={form.formState.errors.sena?.message}>
                 <Input
