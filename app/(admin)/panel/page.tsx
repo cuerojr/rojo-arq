@@ -1,9 +1,9 @@
-import Header from "@/components/panel/header";
 import Informe from "@/components/panel/informe";
 import { AppSidebar } from "@/components/panel/main-sidebar";
 import { ReportsList } from "@/components/panel/reports-list";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { getOrdenes } from "@/lib/actions/crear-orden";
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   const ordenes = await getOrdenes();
