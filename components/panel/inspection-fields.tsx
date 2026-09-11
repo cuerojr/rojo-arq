@@ -163,19 +163,17 @@ export function CheckboxGroup({
   description,
   options,
   columns = 2,
+  defaultValues, // 👈 nuevo
 }: {
   name: string
   legend: string
   description?: string
   options: Option[]
   columns?: 1 | 2 | 3
+  defaultValues?: string[] // 👈 nuevo
 }) {
   const cols =
-    columns === 3
-      ? "sm:grid-cols-3"
-      : columns === 2
-        ? "sm:grid-cols-2"
-        : "sm:grid-cols-1"
+    columns === 3 ? "sm:grid-cols-3" : columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-1"
   return (
     <FieldSet>
       <FieldLegend variant="label">{legend}</FieldLegend>
@@ -185,7 +183,12 @@ export function CheckboxGroup({
           const id = `${name}-${option.value}`
           return (
             <Field key={option.value} orientation="horizontal">
-              <Checkbox id={id} name={name} value={option.value} />
+              <Checkbox
+                id={id}
+                name={name}
+                value={option.value}
+                defaultChecked={defaultValues?.includes(option.value)} // 👈
+              />
               <FieldLabel htmlFor={id} className="font-normal">
                 {option.label}
               </FieldLabel>
@@ -251,77 +254,81 @@ export function RadioField({
 /*  4. Pathology table                                                         */
 /* -------------------------------------------------------------------------- */
 
-export function PatologiaTable() {
+export type PatologiaDefault = {
+  tipo: string       // enum de Prisma, ej "HUMEDAD_ASCENDENTE_CAPILARIDAD"
+  presente: boolean
+  severidad: string | null
+}
+
+export function PatologiaTable({
+  defaultPatologias,
+  patologiaEnumByValue, // patologiaMap: { humedad_ascendente: "HUMEDAD_ASCENDENTE_CAPILARIDAD", ... }
+  severidadEnumReverse, // { LEVE: "leve", MEDIA: "media", ALTA: "alta" }
+}: {
+  defaultPatologias?: PatologiaDefault[]
+  patologiaEnumByValue: Record<string, string>
+  severidadEnumReverse: Record<string, string>
+}) {
+  const byTipo = new Map(defaultPatologias?.map((p) => [p.tipo, p]) ?? [])
+
   return (
     <div className="overflow-x-auto">
       <div className="min-w-[560px]">
-        {/* Header */}
         <div className="grid grid-cols-[1.6fr_1fr_1.4fr] gap-3 border-b border-border pb-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
           <span>Patología</span>
           <span>¿Presenta?</span>
           <span>Nivel</span>
         </div>
         <div className="flex flex-col">
-          {patologiaRows.map((row) => (
-            <div
-              key={row.value}
-              className="grid grid-cols-[1.6fr_1fr_1.4fr] items-center gap-3 border-b border-border py-3 last:border-b-0"
-            >
-              <span className="text-sm font-medium text-pretty">{row.label}</span>
-              <RadioGroup
-                name={`pat_${row.value}_estado`}
-                className="flex gap-4"
+          {patologiaRows.map((row) => {
+            const enumValue = patologiaEnumByValue[row.value]
+            const existing = byTipo.get(enumValue)
+            const defaultEstado = existing ? (existing.presente ? "si" : "no") : undefined
+            const defaultNivel = existing?.severidad
+              ? severidadEnumReverse[existing.severidad]
+              : undefined
+
+            return (
+              <div
+                key={row.value}
+                className="grid grid-cols-[1.6fr_1fr_1.4fr] items-center gap-3 border-b border-border py-3 last:border-b-0"
               >
-                <Field orientation="horizontal" className="w-auto">
-                  <RadioGroupItem
-                    id={`pat_${row.value}_estado-si`}
-                    value="si"
-                  />
-                  <FieldLabel
-                    htmlFor={`pat_${row.value}_estado-si`}
-                    className="font-normal"
-                  >
-                    Sí
-                  </FieldLabel>
-                </Field>
-                <Field orientation="horizontal" className="w-auto">
-                  <RadioGroupItem
-                    id={`pat_${row.value}_estado-no`}
-                    value="no"
-                  />
-                  <FieldLabel
-                    htmlFor={`pat_${row.value}_estado-no`}
-                    className="font-normal"
-                  >
-                    No
-                  </FieldLabel>
-                </Field>
-              </RadioGroup>
-              <RadioGroup
-                name={`pat_${row.value}_nivel`}
-                className="flex flex-wrap gap-3"
-              >
-                {severidadOptions.map((sev) => (
-                  <Field
-                    key={sev.value}
-                    orientation="horizontal"
-                    className="w-auto"
-                  >
-                    <RadioGroupItem
-                      id={`pat_${row.value}_nivel-${sev.value}`}
-                      value={sev.value}
-                    />
-                    <FieldLabel
-                      htmlFor={`pat_${row.value}_nivel-${sev.value}`}
-                      className="font-normal"
-                    >
-                      {sev.label}
+                <span className="text-sm font-medium text-pretty">{row.label}</span>
+                <RadioGroup
+                  name={`pat_${row.value}_estado`}
+                  defaultValue={defaultEstado} // 👈
+                  className="flex gap-4"
+                >
+                  <Field orientation="horizontal" className="w-auto">
+                    <RadioGroupItem id={`pat_${row.value}_estado-si`} value="si" />
+                    <FieldLabel htmlFor={`pat_${row.value}_estado-si`} className="font-normal">
+                      Sí
                     </FieldLabel>
                   </Field>
-                ))}
-              </RadioGroup>
-            </div>
-          ))}
+                  <Field orientation="horizontal" className="w-auto">
+                    <RadioGroupItem id={`pat_${row.value}_estado-no`} value="no" />
+                    <FieldLabel htmlFor={`pat_${row.value}_estado-no`} className="font-normal">
+                      No
+                    </FieldLabel>
+                  </Field>
+                </RadioGroup>
+                <RadioGroup
+                  name={`pat_${row.value}_nivel`}
+                  defaultValue={defaultNivel} // 👈
+                  className="flex flex-wrap gap-3"
+                >
+                  {severidadOptions.map((sev) => (
+                    <Field key={sev.value} orientation="horizontal" className="w-auto">
+                      <RadioGroupItem id={`pat_${row.value}_nivel-${sev.value}`} value={sev.value} />
+                      <FieldLabel htmlFor={`pat_${row.value}_nivel-${sev.value}`} className="font-normal">
+                        {sev.label}
+                      </FieldLabel>
+                    </Field>
+                  ))}
+                </RadioGroup>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
@@ -383,8 +390,12 @@ function ToggleChip({
   )
 }
 
-export function AmbientesTable() {
-  const [sectores, setSectores] = useState<SectorAfectadoDraft[]>([])
+export function AmbientesTable({
+  defaultSectores = [],
+}: {
+  defaultSectores?: SectorAfectadoDraft[]
+}) {
+  const [sectores, setSectores] = useState<SectorAfectadoDraft[]>(defaultSectores) // 👈 antes: []
   const [draft, setDraft] = useState<SectorAfectadoDraft>(EMPTY_SECTOR)
   const [error, setError] = useState<string | null>(null)
 

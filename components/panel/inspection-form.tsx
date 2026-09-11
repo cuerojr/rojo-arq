@@ -6,8 +6,8 @@ import { toast } from "sonner";
 import { CheckCircle2Icon, ImageIcon, XIcon, LoaderIcon } from "lucide-react";
 
 import {
-  crearInspeccion,
   crearInspeccionDesdeOrden,
+  actualizarInspeccionDesdeOrden,
 } from "@/lib/actions/inspection";
 import {
   exteriorOptions,
@@ -19,14 +19,24 @@ import {
   tipoPropiedadOptions,
   type InspectionState,
 } from "@/lib/inspection";
-import { tipoPropiedadMap } from "@/lib/mappers/inspection-enums";
+import {
+  tipoPropiedadMap,
+  motivoMap,
+  exteriorMap,
+  interiorMap,
+  hipotesisMap,
+  instrumentoMap,
+  patologiaMap,
+  severidadMap,
+} from "@/lib/mappers/inspection-enums";
 import {
   AmbientesTable,
   CheckboxGroup,
-  PatologiaTable,  
+  PatologiaTable,
   Section,
   TextAreaField,
   TextField,
+  type SectorAfectadoDraft,
 } from "@/components/panel/inspection-fields";
 import {
   Field,
@@ -44,6 +54,7 @@ import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { cn } from "@/lib/utils";
 import { useCloudinaryUpload } from "@/hooks/use-cloudinary-upload";
+import { Orden, VisitaTecnica, Cliente, Inmueble } from "@/generated/prisma/client";
 
 const initialState: InspectionState = {
   status: "idle",
@@ -57,30 +68,47 @@ const initialState: InspectionState = {
 
 const todayISO = () => new Date().toISOString().slice(0, 10);
 
-// tipoPropiedadMap va de string del form ("Apartamento") -> enum de Prisma ("DEPARTAMENTO")
-// acá lo invertimos para ir de enum -> string del form
-const tipoPropiedadReverseMap = Object.fromEntries(
-  Object.entries(tipoPropiedadMap).map(([formValue, enumValue]) => [
-    enumValue,
-    formValue,
-  ]),
-) as Record<string, string>;
+// helper genérico: invierte un Record<formValue, enumValue> -> Record<enumValue, formValue>
+function reverseMap(map: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(map).map(([formValue, enumValue]) => [enumValue, formValue]),
+  ) as Record<string, string>;
+}
 
-type OrdenConDetalle = {
-  id: string;
-  cliente: {
-    nombre: string;
-    telefono: string | null;
-    email: string | null;
-  };
-  inmueble: {
-    direccion: string;
-    barrioCiudad: string | null;
-    tipoPropiedad: string;
-    antiguedadAnios: number | null;
-    tieneReformas: boolean;
-    detalleReformas: string | null;
-  };
+const tipoPropiedadReverseMap = reverseMap(tipoPropiedadMap);
+const motivoReverseMap = reverseMap(motivoMap);
+const exteriorReverseMap = reverseMap(exteriorMap);
+const interiorReverseMap = reverseMap(interiorMap);
+const hipotesisReverseMap = reverseMap(hipotesisMap);
+const instrumentoReverseMap = reverseMap(instrumentoMap);
+const severidadReverseMap = reverseMap(severidadMap);
+
+type VisitaConRelaciones = VisitaTecnica & {
+  patologias?: { tipo: string; presente: boolean; severidad: string | null }[];
+  sectoresAfectados?: {
+    ambienteNombre: string;
+    esExterior: boolean;
+    elemento: string | null;
+    sectorElemento: string | null;
+    tiposPatologia: string[];
+    colorMancha: string[];
+    tamanioPatologia: string | null;
+    observaciones: string | null;
+  }[];
+  inspeccionGeneral?: {
+    sectoresExterior: string[];
+    observacionesExterior: string | null;
+    sectoresInterior: string[];
+    observacionesInterior: string | null;
+  } | null;
+  hipotesisPreliminar?: {
+    hipotesis: string[];
+    observacionesTecnicas: string | null;
+  } | null;
+  registroFotografico?: {
+    realizado: boolean;
+    fotos?: { url: string }[];
+  } | null;
 };
 
 export function InspectionForm({
@@ -88,10 +116,19 @@ export function InspectionForm({
   orden,
 }: {
   ordenId: string;
-  orden: OrdenConDetalle;
+  orden: Orden & {
+    visitaTecnica: VisitaConRelaciones | null;
+    cliente: Cliente;
+    inmueble: Inmueble;
+  };
 }) {
+  const visitaExistente = orden?.visitaTecnica ?? null;
+  const isEditing = Boolean(visitaExistente);
+
   const [state, formAction] = useActionState(
-    crearInspeccionDesdeOrden.bind(null, ordenId),
+    isEditing
+      ? actualizarInspeccionDesdeOrden.bind(null, visitaExistente!.id)
+      : crearInspeccionDesdeOrden.bind(null, ordenId),
     initialState,
   );
   const formRef = useRef<HTMLFormElement>(null);
@@ -99,14 +136,52 @@ export function InspectionForm({
 
   useEffect(() => {
     if (state.status === "success") {
-      toast.success("Ficha registrada", { description: state.message });
-      formRef.current?.reset();
+      toast.success(isEditing ? "Ficha actualizada" : "Ficha registrada", {
+        description: state.message,
+      });
+      if (!isEditing) formRef.current?.reset();
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (state.status === "error") {
-      toast.error("No se pudo registrar", { description: state.message });
+      toast.error("No se pudo guardar", { description: state.message });
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
+
+  // ---- Defaults derivados de la visita existente (enum -> value de form) ----
+  const defaultMotivo =
+    visitaExistente?.motivosConsulta.map((m) => motivoReverseMap[m]) ?? [];
+  const defaultExterior =
+    visitaExistente?.inspeccionGeneral?.sectoresExterior.map(
+      (s) => exteriorReverseMap[s],
+    ) ?? [];
+  const defaultInterior =
+    visitaExistente?.inspeccionGeneral?.sectoresInterior.map(
+      (s) => interiorReverseMap[s],
+    ) ?? [];
+  const defaultHipotesis =
+    visitaExistente?.hipotesisPreliminar?.hipotesis.map(
+      (h) => hipotesisReverseMap[h],
+    ) ?? [];
+  const defaultInstrumentos =
+    visitaExistente?.instrumentosUtilizados.map(
+      (i) => instrumentoReverseMap[i],
+    ) ?? [];
+
+  const defaultSectores: SectorAfectadoDraft[] =
+    visitaExistente?.sectoresAfectados?.map((s) => ({
+      ambienteNombre: s.ambienteNombre,
+      esExterior: s.esExterior,
+      elemento: s.elemento ?? "",
+      sectorElemento: s.sectorElemento ?? "",
+      tiposPatologia: s.tiposPatologia ?? [],
+      colorMancha: s.colorMancha ?? [],
+      tamanio: s.tamanioPatologia ?? "",
+      observaciones: s.observaciones ?? "",
+    })) ?? [];
+
+  const defaultFotos =
+    visitaExistente?.registroFotografico?.fotos?.map((f) => f.url) ?? [];
 
   return (
     <form
@@ -120,7 +195,9 @@ export function InspectionForm({
       {state.status === "success" ? (
         <Alert>
           <CheckCircle2Icon />
-          <AlertTitle>Ficha registrada correctamente</AlertTitle>
+          <AlertTitle>
+            {isEditing ? "Ficha actualizada correctamente" : "Ficha registrada correctamente"}
+          </AlertTitle>
           <AlertDescription>
             {state.message}
             {state.fotos ? ` Se adjuntaron ${state.fotos} fotografía(s).` : ""}
@@ -143,25 +220,31 @@ export function InspectionForm({
             name="expediente"
             label="N° de visita / expediente"
             placeholder="Ej. 2026-014"
+            defaultValue={visitaExistente?.numeroExpediente ?? ""}
             errors={state.errors}
           />
           <TextField
             name="fecha"
             label="Fecha"
             type="date"
-            defaultValue={todayISO()}
+            defaultValue={
+              visitaExistente?.fecha
+                ? new Date(visitaExistente.fecha).toISOString().slice(0, 10)
+                : (orden?.fechaVisita.toISOString()?.slice(0, 10) ?? todayISO())
+            }
             errors={state.errors}
           />
           <TextField
             name="hora"
             label="Hora"
+            defaultValue={visitaExistente?.hora ?? orden?.horaVisita ?? ""}
             type="time"
             errors={state.errors}
           />
           <TextField
             name="arquitecta"
             label="Profesional responsable"
-            defaultValue="Julieta Rojo"
+            defaultValue={visitaExistente?.arquitectaResponsable ?? ""}
             required
             errors={state.errors}
           />
@@ -216,9 +299,7 @@ export function InspectionForm({
               name="tipoPropiedad"
               legend="Tipo de propiedad"
               options={tipoPropiedadOptions}
-              defaultValue={
-                tipoPropiedadReverseMap[orden?.inmueble.tipoPropiedad]
-              }
+              defaultValue={tipoPropiedadReverseMap[orden?.inmueble.tipoPropiedad]}
               errors={state.errors}
             />
             <TextField
@@ -255,7 +336,6 @@ export function InspectionForm({
         </FieldGroup>
       </Section>
 
-      {/* resto del form sin cambios */}
       {/* 2. Motivo de consulta */}
       <Section number={2} title="Motivo de consulta">
         <FieldGroup>
@@ -263,16 +343,19 @@ export function InspectionForm({
             name="motivo"
             legend="Patologías reportadas"
             options={motivoOptions}
+            defaultValues={defaultMotivo}
           />
           <TextField
             name="motivoOtro"
             label="Otro (especificar)"
             placeholder="Otro motivo de consulta"
+            defaultValue={visitaExistente?.motivoOtroDetalle ?? ""}
             errors={state.errors}
           />
           <TextAreaField
             name="observacionesCliente"
             label="Observaciones del cliente"
+            defaultValue={visitaExistente?.observacionesCliente ?? ""}
             errors={state.errors}
           />
         </FieldGroup>
@@ -285,10 +368,12 @@ export function InspectionForm({
             name="exterior"
             legend="Exterior"
             options={exteriorOptions}
+            defaultValues={defaultExterior}
           />
           <TextAreaField
             name="exteriorObs"
             label="Observaciones exteriores"
+            defaultValue={visitaExistente?.inspeccionGeneral?.observacionesExterior ?? ""}
             errors={state.errors}
           />
           <Separator />
@@ -296,10 +381,12 @@ export function InspectionForm({
             name="interior"
             legend="Interior"
             options={interiorOptions}
+            defaultValues={defaultInterior}
           />
           <TextAreaField
             name="interiorObs"
             label="Observaciones interiores"
+            defaultValue={visitaExistente?.inspeccionGeneral?.observacionesInterior ?? ""}
             errors={state.errors}
           />
         </FieldGroup>
@@ -311,7 +398,11 @@ export function InspectionForm({
         title="Relevamiento patológico"
         description="Indicá presencia y nivel de severidad de cada patología."
       >
-        <PatologiaTable />
+        <PatologiaTable
+          defaultPatologias={visitaExistente?.patologias}
+          patologiaEnumByValue={patologiaMap}
+          severidadEnumReverse={severidadReverseMap}
+        />
       </Section>
 
       {/* 5. Sectores afectados */}
@@ -320,7 +411,7 @@ export function InspectionForm({
         title="Sectores afectados por ambiente"
         description="Problema detectado, medición aproximada y observaciones por ambiente."
       >
-        <AmbientesTable />
+        <AmbientesTable defaultSectores={defaultSectores} />
       </Section>
 
       {/* 6. Hipótesis preliminar */}
@@ -334,10 +425,12 @@ export function InspectionForm({
             name="hipotesis"
             legend="Causas probables"
             options={hipotesisOptions}
+            defaultValues={defaultHipotesis}
           />
           <TextAreaField
             name="observacionesTecnicas"
             label="Observaciones técnicas"
+            defaultValue={visitaExistente?.hipotesisPreliminar?.observacionesTecnicas ?? ""}
             errors={state.errors}
           />
         </FieldGroup>
@@ -351,12 +444,13 @@ export function InspectionForm({
               id="registroFotografico"
               name="registroFotografico"
               value="on"
+              defaultChecked={visitaExistente?.registroFotografico?.realizado ?? false}
             />
             <FieldLabel htmlFor="registroFotografico" className="font-normal">
               Registro fotográfico realizado
             </FieldLabel>
           </Field>
-          <PhotoUpload error={state.errors?.fotos} />
+          <PhotoUpload error={state.errors?.fotos} defaultFotos={defaultFotos} />
         </FieldGroup>
       </Section>
 
@@ -367,6 +461,7 @@ export function InspectionForm({
           legend="Seleccioná los instrumentos empleados"
           options={instrumentosOptions}
           columns={3}
+          defaultValues={defaultInstrumentos}
         />
       </Section>
 
@@ -380,6 +475,7 @@ export function InspectionForm({
                 id="requiereInforme"
                 name="requiereInforme"
                 value="on"
+                defaultChecked={visitaExistente?.requiereInformeCompleto ?? false}
               />
               <FieldLabel htmlFor="requiereInforme" className="font-normal">
                 Requiere informe completo
@@ -401,27 +497,38 @@ export function InspectionForm({
         >
           Limpiar ficha
         </Button>
-        <SubmitButton />
+        <SubmitButton isEditing={isEditing} />
       </div>
     </form>
   );
 }
 
-function SubmitButton() {
+function SubmitButton({ isEditing }: { isEditing: boolean }) {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending} className="sm:min-w-48">
       {pending ? (
         <LoaderIcon data-icon="inline-start" className="animate-spin" />
       ) : null}
-      {pending ? "Registrando..." : "Registrar ficha"}
+      {pending ? "Guardando..." : isEditing ? "Actualizar ficha" : "Registrar ficha"}
     </Button>
   );
 }
 
-function PhotoUpload({ error }: { error?: string }) {
+function PhotoUpload({
+  error,
+  defaultFotos = [],
+}: {
+  error?: string;
+  defaultFotos?: string[];
+}) {
+  const [existingUrls, setExistingUrls] = useState<string[]>(defaultFotos);
   const { items, uploadFiles, removeItem, isUploading, uploadedUrls } =
     useCloudinaryUpload();
+
+  function removeExisting(url: string) {
+    setExistingUrls((prev) => prev.filter((u) => u !== url));
+  }
 
   return (
     <Field data-invalid={error ? true : undefined}>
@@ -441,16 +548,32 @@ function PhotoUpload({ error }: { error?: string }) {
         multiple
         className="sr-only"
         onChange={(e) => {
-          const files = Array.from(e.target.files ?? []);          
+          const files = Array.from(e.target.files ?? []);
           if (files.length) uploadFiles(files);
-          
         }}
       />
 
-      {/* hidden inputs para que las URLs finales viajen en el FormData del server action */}
+      {/* hidden inputs: fotos ya existentes (que el usuario no borró) + nuevas subidas */}
+      {existingUrls.map((url) => (
+        <input key={url} type="hidden" name="fotos" value={url} />
+      ))}
       {uploadedUrls.map((url) => (
         <input key={url} type="hidden" name="fotos" value={url} />
       ))}
+
+      {existingUrls.length > 0 ? (
+        <ul className="flex flex-col gap-1.5 pt-1">
+          {existingUrls.map((url) => (
+            <li key={url} className="flex items-center gap-2 text-sm">
+              <img src={url} className="size-8 rounded object-cover" />
+              <span className="truncate">Foto guardada</span>
+              <button type="button" onClick={() => removeExisting(url)}>
+                <XIcon className="size-4" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       <ul className="flex flex-col gap-1.5 pt-1">
         {items.map((item, index) => (
@@ -472,7 +595,7 @@ function PhotoUpload({ error }: { error?: string }) {
   );
 }
 
-// components/panel/inspection-fields.tsx
+// components/panel/inspection-fields.tsx (RadioField local, ya lo tenías así)
 
 type Option = { value: string; label: string };
 
@@ -482,21 +605,21 @@ function RadioField({
   options,
   errors,
   orientation,
-  defaultValue, // 👈 agregar acá
+  defaultValue,
 }: {
   name: string;
   legend: string;
   options: Option[];
   errors?: FieldErrors;
   orientation?: "horizontal" | "vertical";
-  defaultValue?: string; // 👈 y acá
+  defaultValue?: string;
 }) {
   return (
     <FieldSet>
       <FieldLegend variant="label">{legend}</FieldLegend>
       <RadioGroup
         name={name}
-        defaultValue={defaultValue} // 👈 y pasarlo al RadioGroup
+        defaultValue={defaultValue}
         className={cn(
           "flex gap-4",
           orientation === "vertical" && "flex-col",

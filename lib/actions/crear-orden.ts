@@ -88,7 +88,19 @@ export async function getOrdenDetalle(id: string) {
   try {
     return await prisma.orden.findUnique({
       where: { id },
-      include: { cliente: true, inmueble: true, visitaTecnica: true },
+      include: { cliente: true, inmueble: true, visitaTecnica: {
+        include: {
+          patologias: true,
+          sectoresAfectados: true,
+          inspeccionGeneral: true,
+          hipotesisPreliminar: true,
+          registroFotografico: {
+            include: {
+              fotos: true,
+            },
+          },
+        }
+      } },
     });
   } catch (err) {
     console.error("Error obteniendo orden:", err);

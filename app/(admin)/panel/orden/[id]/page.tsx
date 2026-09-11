@@ -1,15 +1,16 @@
 
+import { Cliente, Inmueble, Orden, VisitaTecnica } from "@/generated/prisma/client";
 import DownloadButton from "@/components/panel/downloadButton";
-import { InformeDetalle } from "@/components/panel/informe-detalle";
 import { InspectionForm } from "@/components/panel/inspection-form";
-import { Button } from "@/components/ui/button";
+
 import { getOrdenDetalle } from "@/lib/actions/crear-orden";
-import { ArrowBigLeft, ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const orden = (await getOrdenDetalle(id)) as any;
+  const orden = (await getOrdenDetalle(id)) as Orden | null;
+  console.log("🚀 ~ Page ~ orden:", orden)
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
@@ -26,7 +27,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       <DownloadButton ordenId={id} />
       
       <main>
-        <InspectionForm ordenId={id} orden={orden} />
+        <InspectionForm ordenId={id} orden={orden as Orden & { visitaTecnica: VisitaTecnica | null; cliente: Cliente; inmueble: Inmueble; }} />
       </main>
     </div>
   );

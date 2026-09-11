@@ -322,7 +322,6 @@ export async function crearInspeccionDesdeOrden(
   }
 
   const data: InspectionData = parsed.data;
-  console.log("🚀 ~ crearInspeccionDesdeOrden ~ data:", data);
 
   const patologias = patologiaRows
     .map((row) => {
@@ -411,5 +410,139 @@ export async function crearInspeccionDesdeOrden(
   } catch (err) {
     console.error("Error creando inspección desde orden:", err);
     return { status: "error", message: "No se pudo guardar la inspección" };
+  }
+}
+
+export async function actualizarInspeccionDesdeOrden(
+  visitaId: string,
+  _prevState: InspectionState,
+  formData: FormData,
+): Promise<InspectionState> {
+  const raw = Object.fromEntries(formData) as Record<string, unknown>;
+  const asArray = (key: string) => formData.getAll(key).map(String);
+  raw.motivo = asArray("motivo");
+  raw.exterior = asArray("exterior");
+  raw.interior = asArray("interior");
+  raw.hipotesis = asArray("hipotesis");
+  raw.instrumentos = asArray("instrumentos");
+  raw.registroFotografico = formData.get("registroFotografico") === "on";
+  raw.fotos = asArray("fotos").map((img) => ({ url: img }));
+  raw.requiereInforme = formData.get("requiereInforme") === "on";
+
+  const parsed = inspectionSchema.safeParse(raw);
+  if (!parsed.success) {
+    const errors: Record<string, string> = {};
+    for (const issue of parsed.error.issues) {
+      errors[issue.path[0] as string] = issue.message;
+    }
+    return { status: "error", errors, message: "Revisá los campos marcados" };
+  }
+
+  const data: InspectionData = parsed.data;
+
+  const patologias = patologiaRows
+    .map((row) => {
+      const estado = data[`pat_${row.value}_estado` as any] as string | undefined;
+      if (!estado) return null;
+      const nivel = data[`pat_${row.value}_nivel` as any] as string | undefined;
+      return {
+        tipo: patologiaMap[row.value],
+        presente: estado === "si",
+        severidad: nivel ? severidadMap[nivel] : null,
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
+  const sectoresAfectados = parseSectoresAfectados(formData);
+
+  try {
+    const visita = await prisma.$transaction(async (tx) => {
+      const visitaActualizada = await tx.visitaTecnica.update({
+        where: { id: visitaId },
+        data: {
+          numeroExpediente: data.expediente || null,
+          fecha: data.fecha ? new Date(data.fecha) : new Date(),
+          hora: data.hora || null,
+          arquitectaResponsable: data.arquitecta,
+
+          motivosConsulta: data.motivo.map((m: any) => motivoMap[m]),
+          motivoOtroDetalle: data.motivoOtro || null,
+          observacionesCliente: data.observacionesCliente || null,
+
+          requiereInformeCompleto: data.requiereInforme,
+
+          instrumentosUtilizados: data.instrumentos.map((i: any) => instrumentoMap[i]),
+
+          inspeccionGeneral: {
+            upsert: {
+              create: {
+                sectoresExterior: data.exterior.map((e: any) => exteriorMap[e]),
+                observacionesExterior: data.exteriorObs || null,
+                sectoresInterior: data.interior.map((i: any) => interiorMap[i]),
+                observacionesInterior: data.interiorObs || null,
+              },
+              update: {
+                sectoresExterior: data.exterior.map((e: any) => exteriorMap[e]),
+                observacionesExterior: data.exteriorObs || null,
+                sectoresInterior: data.interior.map((i: any) => interiorMap[i]),
+                observacionesInterior: data.interiorObs || null,
+              },
+            },
+          },
+
+          patologias: {
+            deleteMany: {},
+            create: patologias,
+          },
+
+          sectoresAfectados: {
+            deleteMany: {},
+            create: sectoresAfectados,
+          },
+
+          hipotesisPreliminar: {
+            upsert: {
+              create: {
+                hipotesis: data.hipotesis.map((h: any) => hipotesisMap[h]),
+                observacionesTecnicas: data.observacionesTecnicas || null,
+              },
+              update: {
+                hipotesis: data.hipotesis.map((h: any) => hipotesisMap[h]),
+                observacionesTecnicas: data.observacionesTecnicas || null,
+              },
+            },
+          },
+
+          registroFotografico: {
+            upsert: {
+              create: { realizado: data.registroFotografico },
+              update: { realizado: data.registroFotografico },
+            },
+          },
+        },
+        include: { registroFotografico: true },
+      });
+
+      // fotos: reemplazamos el set completo
+      await tx.fotoRelevamiento.deleteMany({
+        where: { registroId: visitaActualizada.registroFotografico!.id },
+      });
+      if (data.fotos?.length) {
+        await tx.fotoRelevamiento.createMany({
+          data: data.fotos.map((f: any) => ({
+            registroId: visitaActualizada.registroFotografico!.id,
+            url: f.url,
+          })),
+        });
+      }
+
+      return visitaActualizada;
+    });
+
+    revalidatePath("/panel/informes");
+    return { status: "success", inspeccion: visita.id };
+  } catch (err) {
+    console.error("Error actualizando inspección:", err);
+    return { status: "error", message: "No se pudo actualizar la inspección" };
   }
 }
