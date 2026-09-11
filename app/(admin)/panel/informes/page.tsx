@@ -14,7 +14,6 @@ export default async function Page() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <AppSidebar open={true} />
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/*<Header title="Informes" description="Consulta, filtra y descarga tus informes" />*/}

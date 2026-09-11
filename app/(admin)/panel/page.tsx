@@ -19,8 +19,8 @@ export default async function Page() {
 
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <AppSidebar open={true} />
+    <div className="flex bg-background">
+      
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/*<Header title="Ordenes" description="Gestiona tus órdenes de trabajo" />*/}
