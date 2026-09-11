@@ -1,15 +1,20 @@
+import { authOptions } from "@/auth.config";
 import Header from "@/components/panel/header";
 import { AppSidebar } from "@/components/panel/main-sidebar";
 import { ReportsList } from "@/components/panel/reports-list";
 import { getReports } from "@/lib/actions/inspection";
 import { Building2, Menu } from "lucide-react";
+import { getServerSession, Session } from "next-auth";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
+  const session: Session | null = await getServerSession(authOptions);
+  if (!session) redirect("/acceso");
   const reports = await getReports();
 
   return (
     <div className="flex min-h-screen bg-background">
-      <AppSidebar open={false} />
+      <AppSidebar open={true} />
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/*<Header title="Informes" description="Consulta, filtra y descarga tus informes" />*/}

@@ -135,6 +135,7 @@ export function useCloudinaryUpload() {
             url: result.secure_url,
             publicId: result.public_id,
           });
+          return result;
         } catch (err) {
           updateItem(index, {
             status: "error",

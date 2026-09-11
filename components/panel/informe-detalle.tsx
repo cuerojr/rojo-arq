@@ -19,7 +19,7 @@ import {
   Wrench,
   MapPinIcon,
   Trash2Icon,
-} from "lucide-react"
+} from "lucide-react";
 import {
   type Informe,
   type Severidad,
@@ -39,9 +39,9 @@ import {
   tipoPatologiaSectorOptions,
   colorManchaOptions,
   exteriorPresets,
-} from "@/lib/inspection"
+} from "@/lib/inspection";
 
-import { PrintButton } from "@/components/panel/print-button"
+import { PrintButton } from "@/components/panel/print-button";
 import { SectorAfectadoDraft } from "./inspection-fields";
 import { Button } from "../ui/button";
 
@@ -51,10 +51,10 @@ function SectionTitle({
   step,
   description,
 }: {
-  icon: React.ElementType
-  title: string
-  step: string
-  description?: string
+  icon: React.ElementType;
+  title: string;
+  step: string;
+  description?: string;
 }) {
   return (
     <div className="flex items-start gap-3 border-b border-border pb-3">
@@ -62,21 +62,29 @@ function SectionTitle({
         <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
       </span>
       <div className="flex flex-col">
-        <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{step}</span>
-        <h2 className="text-lg font-semibold leading-tight text-foreground">{title}</h2>
-        {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+        <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          {step}
+        </span>
+        <h2 className="text-lg font-semibold leading-tight text-foreground">
+          {title}
+        </h2>
+        {description ? (
+          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+        ) : null}
       </div>
     </div>
-  )
+  );
 }
 
 function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <dt className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</dt>
+      <dt className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+        {label}
+      </dt>
       <dd className="text-sm font-medium text-foreground">{value || "—"}</dd>
     </div>
-  )
+  );
 }
 
 function Chips({
@@ -84,12 +92,14 @@ function Chips({
   labels,
   icon: Icon,
 }: {
-  items: string[]
-  labels: Record<string, string>
-  icon: React.ElementType
+  items: string[];
+  labels: Record<string, string>;
+  icon: React.ElementType;
 }) {
   if (items?.length === 0) {
-    return <p className="text-sm text-muted-foreground">Sin ítems registrados.</p>
+    return (
+      <p className="text-sm text-muted-foreground">Sin ítems registrados.</p>
+    );
   }
   return (
     <div className="flex flex-wrap gap-2">
@@ -98,45 +108,57 @@ function Chips({
           key={item}
           className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground"
         >
-          <Icon className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+          <Icon
+            className="h-3.5 w-3.5 text-muted-foreground"
+            aria-hidden="true"
+          />
           {labels[item] ?? item}
         </span>
       ))}
     </div>
-  )
+  );
 }
 
 function ObsBox({ label, value }: { label: string; value: string | null }) {
-  if (!value) return null
+  if (!value) return null;
   return (
     <div className="rounded-md bg-muted p-3">
-      <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</p>
-      <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-foreground">{value}</p>
+      <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-foreground">
+        {value}
+      </p>
     </div>
-  )
+  );
 }
 
 const SEVERIDAD_STYLES: Record<Severidad, string> = {
   LEVE: "bg-primary/10 text-primary",
   MEDIA: "bg-chart-4/15 text-foreground",
   ALTA: "bg-destructive/10 text-destructive",
-}
+};
 
 function SeveridadBadge({ severidad }: { severidad: Severidad | null }) {
-    if (!severidad) return <span className="text-muted-foreground">—</span>
+  if (!severidad) return <span className="text-muted-foreground">—</span>;
   return (
     <span
       className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${SEVERIDAD_STYLES[severidad]}`}
     >
       {SEVERIDAD_LABELS[severidad]}
     </span>
-  )
+  );
 }
 
 export function InformeDetalle({ informe }: { informe: Informe }) {
-  const { cliente, inmueble } = informe
-  //console.log("🚀 ~ InformeDetalle ~ informe:", informe.inspeccionGeneral)
-  const patologiasPresentes = informe.patologias?.filter((p: { presente: any }) => p.presente)
+  const { cliente, inmueble, registroFotografico } = informe;
+  console.log(
+    "🚀 ~ InformeDetalle ~ registroFotografico:",
+    registroFotografico,
+  );
+  const patologiasPresentes = informe.patologias?.filter(
+    (p: { presente: any }) => p.presente,
+  );
 
   return (
     <div className="px-4 py-8 md:px-6 md:py-12">
@@ -151,7 +173,9 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
               <p className="font-mono text-xs uppercase tracking-widest text-primary-foreground/70">
                 Informe de Relevamiento
               </p>
-              <h1 className="text-xl font-bold leading-tight">Expediente Nº {informe.numeroExpediente}</h1>
+              <h1 className="text-xl font-bold leading-tight">
+                Expediente Nº {informe.numeroExpediente}
+              </h1>
             </div>
           </div>
           <PrintButton />
@@ -162,7 +186,10 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             label="Fecha"
             value={
               <span className="flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+                <Calendar
+                  className="h-3.5 w-3.5 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 {formatFecha(informe.fecha)}
               </span>
             }
@@ -171,7 +198,10 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             label="Hora"
             value={
               <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+                <Clock
+                  className="h-3.5 w-3.5 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 {informe.hora} hs
               </span>
             }
@@ -180,7 +210,10 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             label="Arquitecta responsable"
             value={
               <span className="flex items-center gap-1.5">
-                <User className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+                <User
+                  className="h-3.5 w-3.5 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 {informe.arquitectaResponsable}
               </span>
             }
@@ -204,7 +237,11 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
       <div className="grid gap-6 md:grid-cols-2">
         {/* Cliente */}
         <section className="rounded-xl border border-border bg-card p-6">
-          <SectionTitle icon={User} title="Datos del Cliente" step="Sección 01" />
+          <SectionTitle
+            icon={User}
+            title="Datos del Cliente"
+            step="Sección 01"
+          />
           <dl className="mt-5 flex flex-col gap-5">
             <Field label="Nombre" value={cliente.nombre} />
             <Field
@@ -214,7 +251,10 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
                   href={`tel:${cliente.telefono}`}
                   className="flex items-center gap-1.5 text-foreground underline-offset-2 hover:underline"
                 >
-                  <Phone className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+                  <Phone
+                    className="h-3.5 w-3.5 text-muted-foreground"
+                    aria-hidden="true"
+                  />
                   {cliente.telefono}
                 </a>
               }
@@ -226,7 +266,10 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
                   href={`mailto:${cliente.email}`}
                   className="flex items-center gap-1.5 break-all text-foreground underline-offset-2 hover:underline"
                 >
-                  <Mail className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                  <Mail
+                    className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
+                    aria-hidden="true"
+                  />
                   {cliente.email}
                 </a>
               }
@@ -236,26 +279,48 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
 
         {/* Inmueble */}
         <section className="rounded-xl border border-border bg-card p-6">
-          <SectionTitle icon={Building2} title="Datos del Inmueble" step="Sección 02" />
+          <SectionTitle
+            icon={Building2}
+            title="Datos del Inmueble"
+            step="Sección 02"
+          />
           <dl className="mt-5 grid grid-cols-2 gap-5">
             <div className="col-span-2">
               <Field
                 label="Dirección"
                 value={
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5 text-muted-foreground" aria-hidden="true" />
+                    <MapPin
+                      className="h-3.5 w-3.5 text-muted-foreground"
+                      aria-hidden="true"
+                    />
                     {inmueble.direccion}
                   </span>
                 }
               />
             </div>
             <Field label="Barrio / Ciudad" value={inmueble.barrioCiudad} />
-            <Field label="Tipo de propiedad" value={TIPO_PROPIEDAD_LABELS[inmueble.tipoPropiedad] ?? inmueble.tipoPropiedad} />
-            <Field label="Antigüedad" value={`${inmueble.antiguedadAnios} años`} />
-            <Field label="Reformas" value={inmueble.tieneReformas ? "Sí" : "No registra"} />
+            <Field
+              label="Tipo de propiedad"
+              value={
+                TIPO_PROPIEDAD_LABELS[inmueble.tipoPropiedad] ??
+                inmueble.tipoPropiedad
+              }
+            />
+            <Field
+              label="Antigüedad"
+              value={`${inmueble.antiguedadAnios} años`}
+            />
+            <Field
+              label="Reformas"
+              value={inmueble.tieneReformas ? "Sí" : "No registra"}
+            />
             {inmueble.tieneReformas && inmueble.detalleReformas ? (
               <div className="col-span-2">
-                <Field label="Detalle de reformas" value={inmueble.detalleReformas} />
+                <Field
+                  label="Detalle de reformas"
+                  value={inmueble.detalleReformas}
+                />
               </div>
             ) : null}
           </dl>
@@ -263,35 +328,74 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
 
         {/* Motivos de consulta */}
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
-          <SectionTitle icon={AlertTriangle} title="Motivo de Consulta" step="Sección 03" />
+          <SectionTitle
+            icon={AlertTriangle}
+            title="Motivo de Consulta"
+            step="Sección 03"
+          />
           <div className="mt-5 flex flex-col gap-4">
-            <Chips items={informe.motivosConsulta} labels={MOTIVO_LABELS} icon={AlertTriangle} />
-            {informe.motivosConsulta?.includes("OTRO") && informe.motivoOtroDetalle ? (
-              <ObsBox label='Detalle "Otro"' value={informe.motivoOtroDetalle} />
+            <Chips
+              items={informe.motivosConsulta}
+              labels={MOTIVO_LABELS}
+              icon={AlertTriangle}
+            />
+            {informe.motivosConsulta?.includes("OTRO") &&
+            informe.motivoOtroDetalle ? (
+              <ObsBox
+                label='Detalle "Otro"'
+                value={informe.motivoOtroDetalle}
+              />
             ) : null}
-            <ObsBox label="Observaciones del cliente" value={informe.observacionesCliente} />
+            <ObsBox
+              label="Observaciones del cliente"
+              value={informe.observacionesCliente}
+            />
           </div>
         </section>
 
         {/* Inspección general */}
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
-          <SectionTitle icon={Search} title="Inspección General del Inmueble" step="Sección 04" />
+          <SectionTitle
+            icon={Search}
+            title="Inspección General del Inmueble"
+            step="Sección 04"
+          />
           <div className="mt-5 grid gap-6 md:grid-cols-2">
             <div className="flex flex-col gap-3">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                <Home className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                <Home
+                  className="h-4 w-4 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 Exterior
               </h3>
-              <Chips items={informe.inspeccionGeneral?.sectoresExterior} labels={EXTERIOR_LABELS} icon={Building2} />
-              <ObsBox label="Observaciones exteriores" value={informe.inspeccionGeneral?.observacionesExterior} />
+              <Chips
+                items={informe.inspeccionGeneral?.sectoresExterior}
+                labels={EXTERIOR_LABELS}
+                icon={Building2}
+              />
+              <ObsBox
+                label="Observaciones exteriores"
+                value={informe.inspeccionGeneral?.observacionesExterior}
+              />
             </div>
             <div className="flex flex-col gap-3">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                <LayoutGrid className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                <LayoutGrid
+                  className="h-4 w-4 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 Interior
               </h3>
-              <Chips items={informe.inspeccionGeneral?.sectoresInterior} labels={INTERIOR_LABELS} icon={Home} />
-              <ObsBox label="Observaciones interiores" value={informe.inspeccionGeneral?.observacionesInterior} />
+              <Chips
+                items={informe.inspeccionGeneral?.sectoresInterior}
+                labels={INTERIOR_LABELS}
+                icon={Home}
+              />
+              <ObsBox
+                label="Observaciones interiores"
+                value={informe.inspeccionGeneral?.observacionesInterior}
+              />
             </div>
           </div>
         </section>
@@ -320,31 +424,51 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
                 </tr>
               </thead>
               <tbody>
-                {informe.patologias?.map((p: { tipo: string; presente: boolean; severidad: unknown }, index: number) => {
-                  const severidad =
-                    typeof p.severidad === "string" && p.severidad in SEVERIDAD_LABELS
-                      ? (p.severidad as Severidad)
-                      : null
+                {informe.patologias?.map(
+                  (
+                    p: { tipo: string; presente: boolean; severidad: unknown },
+                    index: number,
+                  ) => {
+                    const severidad =
+                      typeof p.severidad === "string" &&
+                      p.severidad in SEVERIDAD_LABELS
+                        ? (p.severidad as Severidad)
+                        : null;
 
-                  return (
-                    <tr key={String(p.tipo) || index} className="border-b border-border/60 last:border-0">
-                      <td className="py-2.5 pr-4 font-medium text-foreground">{p.tipo}</td>
-                      <td className="py-2.5 pr-4">
-                        {p.presente ? (
-                          <span className="inline-flex items-center gap-1.5 text-foreground">
-                            <CheckCircle2 className="h-4 w-4 text-primary" aria-hidden="true" />
-                            Presente
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground">No detectada</span>
-                        )}
-                      </td>
-                      <td className="py-2.5">
-                        {p.presente && severidad ? <SeveridadBadge severidad={severidad} /> : <span className="text-muted-foreground">—</span>}
-                      </td>
-                    </tr>
-                  )
-                })}
+                    return (
+                      <tr
+                        key={String(p.tipo) || index}
+                        className="border-b border-border/60 last:border-0"
+                      >
+                        <td className="py-2.5 pr-4 font-medium text-foreground">
+                          {p.tipo}
+                        </td>
+                        <td className="py-2.5 pr-4">
+                          {p.presente ? (
+                            <span className="inline-flex items-center gap-1.5 text-foreground">
+                              <CheckCircle2
+                                className="h-4 w-4 text-primary"
+                                aria-hidden="true"
+                              />
+                              Presente
+                            </span>
+                          ) : (
+                            <span className="text-muted-foreground">
+                              No detectada
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-2.5">
+                          {p.presente && severidad ? (
+                            <SeveridadBadge severidad={severidad} />
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  },
+                )}
               </tbody>
             </table>
           </div>
@@ -360,36 +484,54 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
           />
           <div className="mt-5 flex flex-col gap-3">
             {informe.sectoresAfectados?.length === 0 ? (
-              <p className="text-sm text-muted-foreground">Sin sectores registrados.</p>
+              <p className="text-sm text-muted-foreground">
+                Sin sectores registrados.
+              </p>
             ) : (
               informe.sectoresAfectados?.map((s: any, i: any) => (
-                <div key={i} className="flex items-start justify-between gap-3 rounded-md border border-border bg-background p-3">
-              <div className="flex flex-col gap-1">
-                <p className="flex items-center gap-1.5 text-sm font-medium">
-                  <MapPinIcon className="size-3.5 text-muted-foreground" />
-                  {s.ambienteNombre} {s.esExterior ? "(exterior)" : ""}
-                </p>
-                <p className="text-sm text-foreground">
-                  {[
-                    elementoOptions.find((e: { value: string }) => e.value === s.elemento)?.label,
-                    sectorElementoOptionsByElemento[s.elemento]?.find((se: { value: string }) => se.value === s.sectorElemento)?.label,
-                  ]
-                    .filter(Boolean)
-                    .join(" — ")}
-                </p>
-                <p className="text-sm text-foreground">
-                  {s.tiposPatologia
-                    .map((tp: string) => tipoPatologiaSectorOptions.find((o: { value: string }) => o.value === tp)?.label)
-                    .join(", ")}
-                  {s.colorMancha.length > 0
-                    ? ` (${s.colorMancha.map((c: string) => colorManchaOptions.find((o: { value: string }) => o.value === c)?.label).join(", ")})`
-                    : ""}
-                  {s.tamanio ? ` · ${s.tamanio}` : ""}
-                </p>
-                {s.observaciones ? <p className="text-sm text-muted-foreground">{s.observaciones}</p> : null}
-              </div>
-             
-            </div>
+                <div
+                  key={i}
+                  className="flex items-start justify-between gap-3 rounded-md border border-border bg-background p-3"
+                >
+                  <div className="flex flex-col gap-1">
+                    <p className="flex items-center gap-1.5 text-sm font-medium">
+                      <MapPinIcon className="size-3.5 text-muted-foreground" />
+                      {s.ambienteNombre} {s.esExterior ? "(exterior)" : ""}
+                    </p>
+                    <p className="text-sm text-foreground">
+                      {[
+                        elementoOptions.find(
+                          (e: { value: string }) => e.value === s.elemento,
+                        )?.label,
+                        sectorElementoOptionsByElemento[s.elemento]?.find(
+                          (se: { value: string }) =>
+                            se.value === s.sectorElemento,
+                        )?.label,
+                      ]
+                        .filter(Boolean)
+                        .join(" — ")}
+                    </p>
+                    <p className="text-sm text-foreground">
+                      {s.tiposPatologia
+                        .map(
+                          (tp: string) =>
+                            tipoPatologiaSectorOptions.find(
+                              (o: { value: string }) => o.value === tp,
+                            )?.label,
+                        )
+                        .join(", ")}
+                      {s.colorMancha.length > 0
+                        ? ` (${s.colorMancha.map((c: string) => colorManchaOptions.find((o: { value: string }) => o.value === c)?.label).join(", ")})`
+                        : ""}
+                      {s.tamanio ? ` · ${s.tamanio}` : ""}
+                    </p>
+                    {s.observaciones ? (
+                      <p className="text-sm text-muted-foreground">
+                        {s.observaciones}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
               ))
             )}
           </div>
@@ -404,94 +546,172 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             description="Posibles causas detectadas."
           />
           <div className="mt-5 flex flex-col gap-4">
-            <Chips items={informe.hipotesis} labels={HIPOTESIS_LABELS} icon={FlaskConical} />
-            <ObsBox label="Observaciones técnicas" value={informe.observacionesTecnicas} />
+            <Chips
+              items={informe.hipotesis}
+              labels={HIPOTESIS_LABELS}
+              icon={FlaskConical}
+            />
+            <ObsBox
+              label="Observaciones técnicas"
+              value={informe.observacionesTecnicas}
+            />
           </div>
         </section>
 
         {/* Registro fotográfico */}
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
-          <SectionTitle icon={Camera} title="Registro Fotográfico" step="Sección 08" />
+          <SectionTitle
+            icon={Camera}
+            title="Registro Fotográfico"
+            step="Sección 08"
+          />
           <div className="mt-5">
             <p className="mb-4 text-sm">
               {informe.registroFotografico ? (
                 <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
-                  <CheckCircle2 className="h-4 w-4 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="h-4 w-4 text-primary"
+                    aria-hidden="true"
+                  />
                   Registro fotográfico realizado
                 </span>
               ) : (
-                <span className="text-muted-foreground">Sin registro fotográfico.</span>
+                <span className="text-muted-foreground">
+                  Sin registro fotográfico.
+                </span>
               )}
             </p>
-            {informe.fotos?.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {informe.fotos?.map((foto: any, i: number) => (
-                  <div key={i} className="aspect-square overflow-hidden rounded-md border border-border bg-muted">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={foto || "/placeholder.svg"} alt={`Fotografía ${i + 1}`} className="h-full w-full object-cover" />
-                  </div>
-                ))}
+            {registroFotografico?.fotos?.length > 0 ? (
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-2">
+                {registroFotografico.fotos?.map(
+                  (
+                    foto: {
+                      url: string;
+                      descripcion: string;
+                      id: string;
+                      registroId: string;
+                    },
+                    i: number,
+                  ) => (
+                    <div
+                      key={i}
+                      className="aspect-square overflow-hidden rounded-md border border-border bg-muted"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={foto.url || "/placeholder.svg"}
+                        alt={`Fotografía ${i + 1}`}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ),
+                )}
               </div>
             ) : informe.registroFotografico ? (
-              <p className="text-sm text-muted-foreground">Las fotografías se adjuntan al documento del informe.</p>
+              <p className="text-sm text-muted-foreground">
+                Las fotografías se adjuntan al documento del informe.
+              </p>
             ) : null}
           </div>
         </section>
 
         {/* Instrumentos */}
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
-          <SectionTitle icon={Wrench} title="Instrumentos Utilizados" step="Sección 09" />
+          <SectionTitle
+            icon={Wrench}
+            title="Instrumentos Utilizados"
+            step="Sección 09"
+          />
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {informe.instrumentosUtilizados?.map((i: string, index: number) => (
               <li
                 key={i || String(index)}
                 className="flex items-center gap-2.5 rounded-md border border-border bg-background px-3 py-2.5 text-sm font-medium text-foreground"
               >
-                <Wrench className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                <Wrench
+                  className="h-4 w-4 shrink-0 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 {INSTRUMENTO_LABELS[i] ?? i}
               </li>
             ))}
           </ul>
-          {informe.instrumentosUtilizados?.includes("OTRO") && informe.instrumentoOtroDetalle ? (
+          {informe.instrumentosUtilizados?.includes("OTRO") &&
+          informe.instrumentoOtroDetalle ? (
             <div className="mt-4">
-              <ObsBox label='Detalle "Otro"' value={informe.instrumentoOtroDetalle} />
+              <ObsBox
+                label='Detalle "Otro"'
+                value={informe.instrumentoOtroDetalle}
+              />
             </div>
           ) : null}
         </section>
 
         {/* Cierre y firmas */}
         <section className="rounded-xl border border-border bg-card p-6 md:col-span-2">
-          <SectionTitle icon={ClipboardList} title="Cierre de Visita" step="Sección 10" />
+          <SectionTitle
+            icon={ClipboardList}
+            title="Cierre de Visita"
+            step="Sección 10"
+          />
           <div className="mt-5 grid gap-6 sm:grid-cols-2">
-            <FirmaBox label="Firma profesional" url={informe.firmaProfesionalUrl} nombre={informe.arquitectaResponsable} />
-            <FirmaBox label="Firma del cliente" url={informe.firmaClienteUrl} nombre={cliente.nombre} />
+            <FirmaBox
+              label="Firma profesional"
+              url={informe.firmaProfesionalUrl}
+              nombre={informe.arquitectaResponsable}
+            />
+            <FirmaBox
+              label="Firma del cliente"
+              url={informe.firmaClienteUrl}
+              nombre={cliente.nombre}
+            />
           </div>
         </section>
       </div>
 
       <footer className="mt-8 flex flex-col gap-1 border-t border-border pt-5 text-center">
-        <p className="font-mono text-xs text-muted-foreground">ID del informe: {informe.id}</p>
-        <p className="font-mono text-xs text-muted-foreground">Generado el {formatFecha(informe.createdAt)}</p>
+        <p className="font-mono text-xs text-muted-foreground">
+          ID del informe: {informe.id}
+        </p>
+        <p className="font-mono text-xs text-muted-foreground">
+          Generado el {formatFecha(informe.createdAt)}
+        </p>
       </footer>
     </div>
-  )
+  );
 }
 
-function FirmaBox({ label, url, nombre }: { label: string; url: string | null; nombre: string }) {
+function FirmaBox({
+  label,
+  url,
+  nombre,
+}: {
+  label: string;
+  url: string | null;
+  nombre: string;
+}) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/40">
         {url ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={url || "/placeholder.svg"} alt={label} className="max-h-full max-w-full object-contain" />
+          <img
+            src={url || "/placeholder.svg"}
+            alt={label}
+            className="max-h-full max-w-full object-contain"
+          />
         ) : (
-          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">Pendiente de firma</span>
+          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            Pendiente de firma
+          </span>
         )}
       </div>
       <div className="border-t border-border pt-2 text-center">
         <p className="text-sm font-medium text-foreground">{nombre}</p>
-        <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</p>
+        <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+          {label}
+        </p>
       </div>
     </div>
-  )
+  );
 }

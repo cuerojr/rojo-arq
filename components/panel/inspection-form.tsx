@@ -441,8 +441,9 @@ function PhotoUpload({ error }: { error?: string }) {
         multiple
         className="sr-only"
         onChange={(e) => {
-          const files = Array.from(e.target.files ?? []);
+          const files = Array.from(e.target.files ?? []);          
           if (files.length) uploadFiles(files);
+          
         }}
       />
 

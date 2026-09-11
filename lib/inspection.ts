@@ -169,6 +169,7 @@ export const inspectionSchema = z.object({
   registroFotografico: z.boolean().default(false),
   instrumentos: z.array(z.string()).default([]),
   requiereInforme: z.boolean().default(false),
+  fotos: z.array(z.any()).optional(),
 })
 
 export type InspectionData = z.infer<typeof inspectionSchema>

@@ -39,7 +39,7 @@ export function ReportsList({ reports, titulo = "Informe" }: { reports?: any; ti
   const currentPage = Math.min(page, totalPages);
   const start = (currentPage - 1) * PAGE_SIZE;
   const pageItems = filtered.slice(start, start + PAGE_SIZE);
-  console.log("🚀 ~ ReportsList ~ pageItems:", pageItems)
+  //console.log("🚀 ~ ReportsList ~ pageItems:", pageItems)
 
   function resetToFirstPage<T>(setter: (v: T) => void) {
     return (v: T) => {

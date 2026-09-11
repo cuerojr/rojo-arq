@@ -22,8 +22,13 @@ import {
   hipotesisMap,
   instrumentoMap,
 } from "@/lib/mappers/inspection-enums";
-import { Ambiente, ElementoArquitectura, SectorElemento, TipoPatologiaSector, ColorMancha } from "@/generated/prisma/client";
-
+import {
+  Ambiente,
+  ElementoArquitectura,
+  SectorElemento,
+  TipoPatologiaSector,
+  ColorMancha,
+} from "@/generated/prisma/client";
 
 function parseSectoresAfectados(formData: FormData) {
   const sectores: {
@@ -39,17 +44,29 @@ function parseSectoresAfectados(formData: FormData) {
 
   let i = 0;
   while (formData.has(`sectores[${i}][ambienteNombre]`)) {
-    const ambienteNombre = formData.get(`sectores[${i}][ambienteNombre]`) as string;
+    const ambienteNombre = formData.get(
+      `sectores[${i}][ambienteNombre]`,
+    ) as string;
     if (ambienteNombre) {
       sectores.push({
         ambienteNombre,
         esExterior: formData.get(`sectores[${i}][esExterior]`) === "on",
-        elemento: (formData.get(`sectores[${i}][elemento]`) as ElementoArquitectura) || null,
-        sectorElemento: (formData.get(`sectores[${i}][sectorElemento]`) as SectorElemento) || null,
-        tiposPatologia: formData.getAll(`sectores[${i}][tiposPatologia]`) as TipoPatologiaSector[],
-        colorMancha: formData.getAll(`sectores[${i}][colorMancha]`) as ColorMancha[],
-        tamanioPatologia: (formData.get(`sectores[${i}][tamanio]`) as string) || null,
-        observaciones: (formData.get(`sectores[${i}][observaciones]`) as string) || null,
+        elemento:
+          (formData.get(`sectores[${i}][elemento]`) as ElementoArquitectura) ||
+          null,
+        sectorElemento:
+          (formData.get(`sectores[${i}][sectorElemento]`) as SectorElemento) ||
+          null,
+        tiposPatologia: formData.getAll(
+          `sectores[${i}][tiposPatologia]`,
+        ) as TipoPatologiaSector[],
+        colorMancha: formData.getAll(
+          `sectores[${i}][colorMancha]`,
+        ) as ColorMancha[],
+        tamanioPatologia:
+          (formData.get(`sectores[${i}][tamanio]`) as string) || null,
+        observaciones:
+          (formData.get(`sectores[${i}][observaciones]`) as string) || null,
       });
     }
     i++;
@@ -289,6 +306,10 @@ export async function crearInspeccionDesdeOrden(
   raw.hipotesis = asArray("hipotesis");
   raw.instrumentos = asArray("instrumentos");
   raw.registroFotografico = formData.get("registroFotografico") === "on";
+  raw.fotos = asArray("fotos").map((img, index) => ({
+    url: img,
+  }));
+
   raw.requiereInforme = formData.get("requiereInforme") === "on";
 
   const parsed = inspectionSchema.safeParse(raw);
@@ -301,6 +322,7 @@ export async function crearInspeccionDesdeOrden(
   }
 
   const data: InspectionData = parsed.data;
+  console.log("🚀 ~ crearInspeccionDesdeOrden ~ data:", data);
 
   const patologias = patologiaRows
     .map((row) => {
@@ -364,6 +386,16 @@ export async function crearInspeccionDesdeOrden(
             create: { realizado: data.registroFotografico },
           },
         },
+        include: {
+          registroFotografico: true, 
+        },
+      });
+
+      await tx.fotoRelevamiento.createMany({
+        data: data.fotos.map((f: any) => ({
+          registroId: nuevaVisita.registroFotografico!.id,
+          url: f.url,
+        })),
       });
 
       await tx.orden.update({

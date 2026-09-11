@@ -60,8 +60,8 @@ export type Informe = {
   hipotesis: string[]
   observacionesTecnicas: string | null
   // Registro fotográfico
-  registroFotografico: boolean
-  fotos: string[]
+  registroFotografico: any
+  fotos: { url: string; descripcion: string; id: string; registroId: string }[]
   // Instrumentos
   instrumentosUtilizados: string[]
   instrumentoOtroDetalle: string | null

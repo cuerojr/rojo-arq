@@ -3,27 +3,30 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req: NextRequestWithAuth, res) {
-    /*if (
-      req.nextUrl.pathname.startsWith("/admin") &&
-      //req.nextauth.token?.role !== "ADMIN"
-    ) {
+    const { pathname } = req.nextUrl;
+    const role = req.nextauth.token?.role;
+
+    // Solo super-admin (o el rol que definas como "ADMIN") puede entrar a /admin
+    if (pathname.startsWith("/admin") && role !== "ADMIN") {
       return NextResponse.rewrite(new URL("/denied", req.url));
     }
 
-    if (
-      (req.nextUrl.pathname.startsWith("/bienvenido") ||
-        req.nextUrl.pathname.startsWith("/finalizado") ||
-        req.nextUrl.pathname.startsWith("/estado")) &&
-      //req.nextauth.token?.role !== "USER"
-    ) {
-      return NextResponse.rewrite(new URL('/admin', req.url))
-    }*/
+    // Dentro de /panel: el super-admin entra a todo (incluida la raíz /panel).
+    // Un "user" común solo puede ver /panel/informes y /panel/informe/[uid].
+    if (pathname.startsWith("/panel") && role !== "ADMIN") {
+      const isInformesList = pathname === "/panel/informes";
+      const isInformeDetail = /^\/panel\/informe\/[^/]+$/.test(pathname);
+
+      if (!isInformesList && !isInformeDetail) {
+        return NextResponse.rewrite(new URL("/panel/informes", req.url));
+      }
+    }
   },
   {
     callbacks: {
       authorized: ({ token }) => !!token,
     },
-  }
+  },
 );
 
 export const config = {

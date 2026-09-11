@@ -1,20 +1,10 @@
 // actions/user.actions.ts
 "use server";
 
-import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/prisma";
 import { revalidatePath } from "next/cache";
-
-const createUserSchema = z.object({
-  name: z.string().min(1, "El nombre es requerido").optional(),
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres").optional(),
-  image: z.string().url("URL inválida").optional().or(z.literal("")),
-  isSuperAdmin: z.boolean().optional().default(false),
-});
-
-export type CreateUserInput = z.infer<typeof createUserSchema>;
+import { CreateUserInput, createUserSchema } from "../schemas/user";
 
 export async function createUser(input: CreateUserInput) {
   const parsed = createUserSchema.safeParse(input);
@@ -69,3 +59,14 @@ export async function createUser(input: CreateUserInput) {
   }
 }
 
+export async function getUserByEmail(email: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+    return user;
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    return null;
+  }
+}
