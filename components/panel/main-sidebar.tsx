@@ -88,8 +88,8 @@ export function AppSidebar({
         <nav className="flex-1 overflow-y-auto p-3">
           <ul className="flex flex-col gap-1">
             {menuGroups.map((group) => {
-              if (group.id === "informes" && !session?.user.isSuperAdmin) {
-                return null; // Oculta el grupo "Informes" si el usuario no es superadministrador
+              if (group.id === "ordenes" && !session?.user.isSuperAdmin) {
+                return null; // Oculta el grupo "Órdenes" si el usuario no es superadministrador
               }
               const isOpen = openGroups[group.id];
               return (
