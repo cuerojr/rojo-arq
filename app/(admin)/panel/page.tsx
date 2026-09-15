@@ -20,8 +20,6 @@ export default async function Page() {
 
   return (
     <div className="flex bg-background">
-      
-
       <div className="flex min-w-0 flex-1 flex-col">
         {/*<Header title="Ordenes" description="Gestiona tus órdenes de trabajo" />*/}
         <main className="flex-1 p-4 sm:p-6">

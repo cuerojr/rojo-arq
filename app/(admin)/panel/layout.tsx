@@ -11,10 +11,10 @@ export default function DashboardLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="flex flex-col p-6">
+    <div className="flex flex-col p-6 pt-0 min-h-screen">
       <AppSidebar open={true} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 flex flex-col ">
+      <div className="flex-1 flex flex-col pt-20">
         
 
         <main className="flex-1">{children}</main>

@@ -32,6 +32,7 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.10.1",
     "clsx": "^2.1.1",
+    "cn": "^0.3.0",
     "delegate-it": "^6.1.0",
     "dotenv": "^16.6.1",
     "gsap": "^3.12.2",
