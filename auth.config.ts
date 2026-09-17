@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/panel",
+    signIn: "/acceso",
     signOut: "/",
     error: "/",
     verifyRequest: "/auth/verify-request",
