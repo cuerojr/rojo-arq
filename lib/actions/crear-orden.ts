@@ -19,6 +19,7 @@ export async function createOrden(
   formData: FormData,
 ): Promise<OrdenState> {
   const raw = Object.fromEntries(formData) as Record<string, unknown>;
+  raw.visitTypes = formData.getAll("visitTypes");
   const parsed = orderSchema.safeParse(raw);
 
   if (!parsed.success) {
@@ -60,6 +61,7 @@ export async function createOrden(
           sena: data.sena,
           fechaVisita: new Date(data.visitDate),
           horaVisita: data.visitTime,
+          tiposVisita: data.visitTypes,
         },
       });
     });

@@ -31,6 +31,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "../ui/card";
 import { createOrden, OrdenState } from "@/lib/actions/crear-orden";
 import { orderSchema } from "@/lib/schemas/ordenes";
+import { Checkbox } from "@/components/ui/checkbox";
+
+export const visitTypeOptions = [
+  { value: "VISITA", label: "Visita técnica y relevamiento" },
+  { value: "PLANOS", label: "Elaboración de planos y documentación" },
+  { value: "TRAMITE", label: "Trámites municipales y en Colegio" },
+  { value: "DIAGNOSTICO", label: "Diagnóstico constructivo e informe técnico" },
+] as const;
 
 type OrderForm = z.infer<typeof orderSchema>;
 type Order = OrderForm & { id: string; status: string; createdAt: string };
@@ -52,6 +60,7 @@ const initialOrders: Order[] = [
     sena: 0,
     visitDate: "",
     visitTime: "",
+    visitTypes: [],
   },
   {
     id: "ORD-1047",
@@ -69,6 +78,7 @@ const initialOrders: Order[] = [
     sena: 0,
     visitDate: "",
     visitTime: "",
+    visitTypes: [],
   },
   {
     id: "ORD-1046",
@@ -86,6 +96,7 @@ const initialOrders: Order[] = [
     sena: 0,
     visitDate: "",
     visitTime: "",
+    visitTypes: [],
   },
 ];
 
@@ -102,9 +113,23 @@ function OrderDialog() {
   const [query, setQuery] = useState("");
   const form = useForm<OrderForm>({
     resolver: zodResolver(orderSchema),
-    defaultValues: { reforms: false, age: 0, propertyType: "Apartamento" },
+    defaultValues: {
+      reforms: false,
+      age: 0,
+      propertyType: "Departamento",
+      visitTypes: [],
+    },
   });
   const reforms = form.watch("reforms");
+  const visitTypes = form.watch("visitTypes") ?? [];
+
+  const toggleVisitType = (value: any) => {
+    const current = form.getValues("visitTypes") ?? [];
+    const next = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value];
+    form.setValue("visitTypes", next, { shouldValidate: true });
+  };
 
   const filteredOrders = orders.filter((order) =>
     `${order.id} ${order.clientName} ${order.address}`
@@ -142,6 +167,8 @@ function OrderDialog() {
     if (data.reformDetails) {
       formData.append("reformDetails", data.reformDetails);
     }
+    
+    data.visitTypes.forEach((type) => formData.append("visitTypes", type));
 
     startTransition(() => {
       formAction(formData);
@@ -286,6 +313,25 @@ function OrderDialog() {
                   placeholder="0.00"
                   {...form.register("sena")}
                 />
+              </Field>
+              <Field
+                label="Tipo de visita"
+                error={form.formState.errors.visitTypes?.message}
+              >
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {visitTypeOptions.map((option) => (
+                    <label
+                      key={option.value}
+                      className="flex items-center gap-2 rounded-md border p-2 text-sm cursor-pointer"
+                    >
+                      <Checkbox
+                        checked={visitTypes.includes(option.value)}
+                        onCheckedChange={() => toggleVisitType(option.value)}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
               </Field>
             </div>
             <div className="flex items-center justify-between rounded-lg border bg-muted/30 p-4">

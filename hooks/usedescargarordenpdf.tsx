@@ -21,6 +21,13 @@ const TIPO_PROPIEDAD_LABEL: Record<string, string> = {
   PH: "PH",
 };
 
+const TIPO_VISITA_LABEL: Record<string, string> = {
+  VISITA: "Visita técnica y relevamiento",
+  PLANOS: "Planos y documentación técnica",
+  TRAMITE: "Trámites municipales y en Colegio",
+  DIAGNOSTICO: "Diagnóstico constructivo e informe técnico",
+};
+
 const NOMBRE_ESTUDIO = "Rojo Arq";
 const LOGO_URL = "/black-logo.png"; // debe estar en /public para que este path funcione
 
@@ -63,7 +70,7 @@ function formatMoneda(valor: number | null) {
 
 function construirDocDefinition(
   orden: OrdenParaPDF,
-  logoBase64: string | null
+  logoBase64: string | null,
 ) {
   const fechaEmision = formatFecha(new Date());
 
@@ -74,7 +81,7 @@ function construirDocDefinition(
   }
 
   columnasHeader.push({
-    text: '',
+    text: "",
     bold: true,
     fontSize: 12,
     color: "#1f2937",
@@ -116,7 +123,10 @@ function construirDocDefinition(
     content: [
       { text: "Orden de Servicio", style: "titulo" },
       orden.numeroExpediente
-        ? { text: `Expediente Nº ${orden.numeroExpediente}`, style: "subtitulo" }
+        ? {
+            text: `Expediente Nº ${orden.numeroExpediente}`,
+            style: "subtitulo",
+          }
         : null,
 
       { text: " ", margin: [0, 4] },
@@ -169,16 +179,36 @@ function construirDocDefinition(
           body: [
             [
               { text: "Estado de la orden", style: "tablaHeader" },
-              { text: "Fecha de creación", style: "tablaHeader" },
+              { text: "Fecha de visita", style: "tablaHeader" },
             ],
             [
               { text: ESTADO_LABEL[orden.estado], style: "tablaValor" },
-              { text: formatFecha(orden.createdAt), style: "tablaValor" },
+              {
+                text: `${formatFecha(orden.fechaVisita)} ${orden.horaVisita}hs`,
+                style: "tablaValor",
+              },
             ],
           ],
         },
         layout: "lightHorizontalLines",
       },
+
+      // 👇 nuevo bloque
+      orden.tiposVisita?.length
+        ? {
+            margin: [0, 10, 0, 0] as [number, number, number, number],
+            stack: [
+              { text: "Tipo de visita", style: "seccion" },
+              {
+                text: orden.tiposVisita
+                  .map((t) => TIPO_VISITA_LABEL[t] ?? t)
+                  .join("  ·  "),
+                style: "dato",
+                fontSize: 10,
+              },
+            ],
+          }
+        : null,
 
       { text: " ", margin: [0, 14] },
 
@@ -211,7 +241,12 @@ function construirDocDefinition(
     ].filter(Boolean),
 
     styles: {
-      titulo: { fontSize: 18, bold: true, color: "#111827", margin: [0, 0, 0, 2] },
+      titulo: {
+        fontSize: 18,
+        bold: true,
+        color: "#111827",
+        margin: [0, 0, 0, 2],
+      },
       subtitulo: { fontSize: 10, color: "#6b7280" },
       seccion: {
         fontSize: 9,

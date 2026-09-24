@@ -19,6 +19,9 @@ export const orderSchema = z
     sena: z.coerce.number().min(0, "La seña no puede ser negativa"),
     visitDate: z.string().min(1, "Selecciona la fecha de la visita"),
     visitTime: z.string().optional(),
+    visitTypes: z
+      .array(z.enum(["VISITA", "PLANOS", "TRAMITE", "DIAGNOSTICO"]))
+      .min(1, "Selecciona al menos un tipo de visita"),
   })
   .superRefine((data, ctx) => {
     if (

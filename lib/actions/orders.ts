@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@/prisma";
-import type { TipoPropiedad, EstadoOrden } from "@/generated/prisma/client"; // ajustá el path al output de tu schema
- 
+import type { TipoPropiedad, EstadoOrden, TipoVisita  } from "@/generated/prisma/client"; // ajustá el path al output de tu schema
+
 export type OrdenParaPDF = {
   id: string;
   estado: EstadoOrden;
@@ -20,15 +20,18 @@ export type OrdenParaPDF = {
     tipoPropiedad: TipoPropiedad;
     antiguedadAnios: number | null;
   };
+  fechaVisita: Date;
+  horaVisita: string;
+  tiposVisita: TipoVisita[];
 };
- 
+
 /**
  * Trae únicamente los datos que necesita el PDF de la Orden.
  * Incluye numeroExpediente (de la VisitaTecnica asociada, si existe)
  * porque suele ser el número de referencia del documento profesional.
  */
 export async function obtenerOrdenParaDescarga(
-  ordenId: string
+  ordenId: string,
 ): Promise<OrdenParaPDF> {
   const orden = await prisma.orden.findUniqueOrThrow({
     where: { id: ordenId },
@@ -48,9 +51,12 @@ export async function obtenerOrdenParaDescarga(
           antiguedadAnios: true,
         },
       },
+      fechaVisita: true,
+      horaVisita: true,
+      tiposVisita: true
     },
   });
- 
+
   return {
     id: orden.id,
     estado: orden.estado,
@@ -60,5 +66,8 @@ export async function obtenerOrdenParaDescarga(
     numeroExpediente: orden.visitaTecnica?.numeroExpediente ?? null,
     cliente: orden.cliente,
     inmueble: orden.inmueble,
+    fechaVisita: orden.fechaVisita,
+    horaVisita: orden.horaVisita!,
+    tiposVisita: orden.tiposVisita,
   };
 }

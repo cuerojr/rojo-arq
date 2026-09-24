@@ -121,6 +121,13 @@ enum ColorMancha {
   VERDE
 }
 
+enum TipoVisita {
+  VISITA //Visita Técnica y relevamiento 
+  PLANOS //Elaboración de planos y documentación técnica 
+  TRAMITE //Realización de trámites municipales y en Colegio
+  DIAGNOSTICO //Diagnóstico constructivo e informe técnico
+}
+
 // ─────────────────────────────────────────────
 // AUTH MODELS (NextAuth)
 // ─────────────────────────────────────────────
@@ -247,6 +254,8 @@ model Orden {
   inmueble   Inmueble @relation(fields: [inmuebleId], references: [id], onDelete: Restrict)
 
   visitaTecnica VisitaTecnica?
+
+  tiposVisita TipoVisita[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
