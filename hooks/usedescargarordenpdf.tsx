@@ -21,7 +21,7 @@ const TIPO_PROPIEDAD_LABEL: Record<string, string> = {
   PH: "PH",
 };
 
-const TIPO_VISITA_LABEL: Record<string, string> = {
+const TIPO_SERVICIO_LABEL: Record<string, string> = {
   VISITA: "Visita técnica y relevamiento",
   PLANOS: "Planos y documentación técnica",
   TRAMITE: "Trámites municipales y en Colegio",
@@ -198,10 +198,10 @@ function construirDocDefinition(
         ? {
             margin: [0, 10, 0, 0] as [number, number, number, number],
             stack: [
-              { text: "Tipo de visita", style: "seccion" },
+              { text: "Tipo de servicio", style: "seccion" },
               {
                 text: orden.tiposVisita
-                  .map((t) => TIPO_VISITA_LABEL[t] ?? t)
+                  .map((t) => TIPO_SERVICIO_LABEL[t] ?? t)
                   .join("  ·  "),
                 style: "dato",
                 fontSize: 10,
