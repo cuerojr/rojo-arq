@@ -151,7 +151,8 @@ function SeveridadBadge({ severidad }: { severidad: Severidad | null }) {
 }
 
 export function InformeDetalle({ informe }: { informe: Informe }) {
-  const { cliente, inmueble, registroFotografico } = informe;
+  const { cliente, inmueble, registroFotografico, hipotesisPreliminar } = informe;
+  console.log("🚀 ~ InformeDetalle ~ hipotesis:", hipotesisPreliminar)
   
   const patologiasPresentes = informe.patologias?.filter(
     (p: { presente: any }) => p.presente,
@@ -544,13 +545,13 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
           />
           <div className="mt-5 flex flex-col gap-4">
             <Chips
-              items={informe.hipotesis}
+              items={hipotesisPreliminar.hipotesis}
               labels={HIPOTESIS_LABELS}
               icon={FlaskConical}
             />
             <ObsBox
               label="Observaciones técnicas"
-              value={informe.observacionesTecnicas}
+              value={hipotesisPreliminar.observacionesTecnicas}
             />
           </div>
         </section>

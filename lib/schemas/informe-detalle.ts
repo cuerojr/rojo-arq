@@ -57,7 +57,7 @@ export type Informe = {
   // Sectores afectados por ambiente
   sectoresAfectados: SectorAfectado[]
   // Hipótesis preliminar
-  hipotesis: string[]
+  hipotesisPreliminar: any
   observacionesTecnicas: string | null
   // Registro fotográfico
   registroFotografico: any
