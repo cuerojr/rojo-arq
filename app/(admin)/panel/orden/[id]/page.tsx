@@ -10,7 +10,6 @@ import Link from "next/link";
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const orden = (await getOrdenDetalle(id)) as Orden | null;
-  console.log("🚀 ~ Page ~ orden:", orden)
 
   return (
     <div className="max-w-4xl mx-auto mt-10">

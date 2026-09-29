@@ -386,7 +386,7 @@ export async function crearInspeccionDesdeOrden(
           },
         },
         include: {
-          registroFotografico: true, 
+          registroFotografico: true,
         },
       });
 
@@ -414,12 +414,15 @@ export async function crearInspeccionDesdeOrden(
 }
 
 export async function actualizarInspeccionDesdeOrden(
+  clienteId: string,
+  inmuebleId: string,
   visitaId: string,
   _prevState: InspectionState,
   formData: FormData,
 ): Promise<InspectionState> {
   const raw = Object.fromEntries(formData) as Record<string, unknown>;
   const asArray = (key: string) => formData.getAll(key).map(String);
+
   raw.motivo = asArray("motivo");
   raw.exterior = asArray("exterior");
   raw.interior = asArray("interior");
@@ -442,7 +445,8 @@ export async function actualizarInspeccionDesdeOrden(
 
   const patologias = patologiaRows
     .map((row) => {
-      const estado = data[`pat_${row.value}_estado` as any] as string | undefined;
+      const estado = data[`pat_${row.value}_estado` as any] as
+        string | undefined;
       if (!estado) return null;
       const nivel = data[`pat_${row.value}_nivel` as any] as string | undefined;
       return {
@@ -457,6 +461,27 @@ export async function actualizarInspeccionDesdeOrden(
 
   try {
     const visita = await prisma.$transaction(async (tx) => {
+      await tx.cliente.update({
+        where: { id: clienteId },
+        data: {
+          nombre: data.nombre,
+          telefono: data.telefono || null,
+          email: data.email || null,
+        },
+      });
+
+      await tx.inmueble.update({
+        where: { id: inmuebleId },
+        data: {
+          direccion: data.direccion,
+          barrioCiudad: data.barrioCiudad,
+          tipoPropiedad: tipoPropiedadMap[data.tipoPropiedad],
+          antiguedadAnios: data.antiguedad,
+          tieneReformas: data.reformas === "si" ? true : false,
+          detalleReformas: data.reformasCuales,
+        },
+      });
+
       const visitaActualizada = await tx.visitaTecnica.update({
         where: { id: visitaId },
         data: {
@@ -471,7 +496,9 @@ export async function actualizarInspeccionDesdeOrden(
 
           requiereInformeCompleto: data.requiereInforme,
 
-          instrumentosUtilizados: data.instrumentos.map((i: any) => instrumentoMap[i]),
+          instrumentosUtilizados: data.instrumentos.map(
+            (i: any) => instrumentoMap[i],
+          ),
 
           inspeccionGeneral: {
             upsert: {
@@ -539,7 +566,7 @@ export async function actualizarInspeccionDesdeOrden(
       return visitaActualizada;
     });
 
-    revalidatePath("/panel/informes");
+    revalidatePath("/panel");
     return { status: "success", inspeccion: visita.id };
   } catch (err) {
     console.error("Error actualizando inspección:", err);

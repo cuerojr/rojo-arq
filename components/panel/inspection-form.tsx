@@ -127,7 +127,7 @@ export function InspectionForm({
 
   const [state, formAction] = useActionState(
     isEditing
-      ? actualizarInspeccionDesdeOrden.bind(null, visitaExistente!.id)
+      ? actualizarInspeccionDesdeOrden.bind(null, orden.cliente.id, orden.inmueble.id, visitaExistente!.id)
       : crearInspeccionDesdeOrden.bind(null, ordenId),
     initialState,
   );
