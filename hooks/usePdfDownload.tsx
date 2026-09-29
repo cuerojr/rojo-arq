@@ -7,7 +7,7 @@
 import { useState, useCallback } from "react";
 
 // Carga pdfmake lazy para no inflar el bundle inicial
-async function loadPdfMake() {
+export async function loadPdfMake() {
   const [pdfMakeModule, fontsModule] = await Promise.all([
     import("pdfmake/build/pdfmake"),
     import("pdfmake/build/vfs_fonts"),
@@ -40,7 +40,7 @@ async function loadPdfMake() {
 // Constantes
 // ─────────────────────────────────────────────────────────────────────
 
-const COLORS = {
+export const COLORS = {
   primary:      "#244b80",
   primaryLight: "#c7d2fe",
   headerBg:     "#244b80",

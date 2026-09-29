@@ -44,6 +44,7 @@ import {
 import { PrintButton } from "@/components/panel/print-button";
 import { SectorAfectadoDraft } from "./inspection-fields";
 import { Button } from "../ui/button";
+import DownloadInfirmePdfButton from "@/components/panel/downloadInformeButton";
 
 function SectionTitle({
   icon: Icon,
@@ -175,7 +176,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
               </h1>
             </div>
           </div>
-          <PrintButton />
+          <DownloadInfirmePdfButton informe={informe}/>
         </div>
 
         <dl className="grid grid-cols-2 gap-x-6 gap-y-5 px-6 py-5 sm:grid-cols-4">
@@ -544,13 +545,13 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
           />
           <div className="mt-5 flex flex-col gap-4">
             <Chips
-              items={hipotesisPreliminar.hipotesis}
+              items={hipotesisPreliminar?.hipotesis ?? []}
               labels={HIPOTESIS_LABELS}
               icon={FlaskConical}
             />
             <ObsBox
               label="Observaciones técnicas"
-              value={hipotesisPreliminar.observacionesTecnicas}
+              value={hipotesisPreliminar?.observacionesTecnicas ?? ""}
             />
           </div>
         </section>
