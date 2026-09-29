@@ -92,7 +92,7 @@ export const instrumentosOptions: Option[] = [
 const optional = z
   .string()
   .trim()
-  .max(2000, "Máximo 2000 caracteres")
+  .max(5000, "Máximo 5000 caracteres")
   .optional()
 
 const patologiaEstado = z.enum(["si", "no"]).optional()
