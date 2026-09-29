@@ -1,18 +1,17 @@
-"use client"
+"use client";
 
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
 
-
-import { useState } from "react"
-import { PlusIcon, Trash2Icon, MapPinIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { PlusIcon, Trash2Icon, MapPinIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   elementoOptions,
   sectorElementoOptionsByElemento,
   tipoPatologiaSectorOptions,
   colorManchaOptions,
   exteriorPresets,
-} from "@/lib/inspection"
+} from "@/lib/inspection";
 
 import {
   Field,
@@ -22,25 +21,27 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ambientes,
   patologiaRows,
   severidadOptions,
   type FieldErrors,
   type Option,
-} from "@/lib/inspection"
+} from "@/lib/inspection";
+
+import { useSyncedState } from "@/hooks/useSyncedState";
 
 /* -------------------------------------------------------------------------- */
 /*  Section shell                                                              */
@@ -52,10 +53,10 @@ export function Section({
   description,
   children,
 }: {
-  number: number
-  title: string
-  description?: string
-  children: ReactNode
+  number: number;
+  title: string;
+  description?: string;
+  children: ReactNode;
 }) {
   return (
     <Card>
@@ -72,7 +73,7 @@ export function Section({
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -90,17 +91,17 @@ export function TextField({
   className,
   inputMode,
 }: {
-  name: string
-  label: string
-  errors?: FieldErrors
-  type?: string
-  placeholder?: string
-  required?: boolean
-  defaultValue?: string
-  className?: string
-  inputMode?: "text" | "numeric" | "email" | "tel"
+  name: string;
+  label: string;
+  errors?: FieldErrors;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  defaultValue?: string;
+  className?: string;
+  inputMode?: "text" | "numeric" | "email" | "tel";
 }) {
-  const error = errors?.[name]
+  const error = errors?.[name];
   return (
     <Field data-invalid={error ? true : undefined} className={className}>
       <FieldLabel htmlFor={name}>
@@ -118,7 +119,7 @@ export function TextField({
       />
       {error ? <FieldError>{error}</FieldError> : null}
     </Field>
-  )
+  );
 }
 
 export function TextAreaField({
@@ -129,14 +130,14 @@ export function TextAreaField({
   rows = 3,
   defaultValue,
 }: {
-  name: string
-  label: string
-  errors?: FieldErrors
-  placeholder?: string
-  rows?: number
-  defaultValue?: string
+  name: string;
+  label: string;
+  errors?: FieldErrors;
+  placeholder?: string;
+  rows?: number;
+  defaultValue?: string;
 }) {
-  const error = errors?.[name]
+  const error = errors?.[name];
   return (
     <Field data-invalid={error ? true : undefined}>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
@@ -150,7 +151,7 @@ export function TextAreaField({
       />
       {error ? <FieldError>{error}</FieldError> : null}
     </Field>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -163,43 +164,56 @@ export function CheckboxGroup({
   description,
   options,
   columns = 2,
-  defaultValues, // 👈 nuevo
+  defaultValues,
 }: {
-  name: string
-  legend: string
-  description?: string
-  options: Option[]
-  columns?: 1 | 2 | 3
-  defaultValues?: string[] // 👈 nuevo
+  name: string;
+  legend: string;
+  description?: string;
+  options: Option[];
+  columns?: 1 | 2 | 3;
+  defaultValues?: string[];
 }) {
+  const [selected, setSelected] = useSyncedState<string[]>(defaultValues ?? []);
+
   const cols =
-    columns === 3 ? "sm:grid-cols-3" : columns === 2 ? "sm:grid-cols-2" : "sm:grid-cols-1"
+    columns === 3
+      ? "sm:grid-cols-3"
+      : columns === 2
+        ? "sm:grid-cols-2"
+        : "sm:grid-cols-1";
+
   return (
     <FieldSet>
       <FieldLegend variant="label">{legend}</FieldLegend>
       {description ? <FieldDescription>{description}</FieldDescription> : null}
       <div className={`grid grid-cols-1 gap-2.5 ${cols}`}>
         {options.map((option) => {
-          const id = `${name}-${option.value}`
+          const id = `${name}-${option.value}`;
           return (
             <Field key={option.value} orientation="horizontal">
               <Checkbox
                 id={id}
                 name={name}
                 value={option.value}
-                defaultChecked={defaultValues?.includes(option.value)} // 👈
+                checked={selected.includes(option.value)}
+                onCheckedChange={(checked) =>
+                  setSelected((prev) =>
+                    checked
+                      ? [...new Set([...prev, option.value])]
+                      : prev.filter((v) => v !== option.value),
+                  )
+                }
               />
               <FieldLabel htmlFor={id} className="font-normal">
                 {option.label}
               </FieldLabel>
             </Field>
-          )
+          );
         })}
       </div>
     </FieldSet>
-  )
+  );
 }
-
 /* -------------------------------------------------------------------------- */
 /*  Radio group field                                                          */
 /* -------------------------------------------------------------------------- */
@@ -212,20 +226,24 @@ export function RadioField({
   orientation = "horizontal",
   defaultValue,
 }: {
-  name: string
-  legend: string
-  options: Option[]
-  errors?: FieldErrors
-  orientation?: "horizontal" | "vertical"
-  defaultValue?: string
+  name: string;
+  legend: string;
+  options: Option[];
+  errors?: FieldErrors;
+  orientation?: "horizontal" | "vertical";
+  defaultValue?: string;
 }) {
-  const error = errors?.[name]
+  const error = errors?.[name];
+  // "" = sin selección (nunca undefined, así Base UI lo trata siempre como controlado)
+  const [value, setValue] = useSyncedState<string>(defaultValue ?? "");
+
   return (
     <FieldSet data-invalid={error ? true : undefined}>
       <FieldLegend variant="label">{legend}</FieldLegend>
       <RadioGroup
         name={name}
-        defaultValue={defaultValue}
+        value={value}
+        onValueChange={(v) => setValue(String(v))}
         aria-invalid={error ? true : undefined}
         className={
           orientation === "horizontal"
@@ -234,20 +252,24 @@ export function RadioField({
         }
       >
         {options.map((option) => {
-          const id = `${name}-${option.value}`
+          const id = `${name}-${option.value}`;
           return (
-            <Field key={option.value} orientation="horizontal" className="w-auto">
+            <Field
+              key={option.value}
+              orientation="horizontal"
+              className="w-auto"
+            >
               <RadioGroupItem id={id} value={option.value} />
               <FieldLabel htmlFor={id} className="font-normal">
                 {option.label}
               </FieldLabel>
             </Field>
-          )
+          );
         })}
       </RadioGroup>
       {error ? <FieldError>{error}</FieldError> : null}
     </FieldSet>
-  )
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -255,21 +277,88 @@ export function RadioField({
 /* -------------------------------------------------------------------------- */
 
 export type PatologiaDefault = {
-  tipo: string       // enum de Prisma, ej "HUMEDAD_ASCENDENTE_CAPILARIDAD"
-  presente: boolean
-  severidad: string | null
+  tipo: string; // enum de Prisma, ej "HUMEDAD_ASCENDENTE_CAPILARIDAD"
+  presente: boolean;
+  severidad: string | null;
+};
+
+function PatologiaRow({
+  row,
+  defaultEstado,
+  defaultNivel,
+}: {
+  row: { value: string; label: string };
+  defaultEstado?: string;
+  defaultNivel?: string;
+}) {
+  const [estado, setEstado] = useSyncedState<string>(defaultEstado ?? "");
+  const [nivel, setNivel] = useSyncedState<string>(defaultNivel ?? "");
+
+  return (
+    <div className="grid grid-cols-[1.6fr_1fr_1.4fr] items-center gap-3 border-b border-border py-3 last:border-b-0">
+      <span className="text-sm font-medium text-pretty">{row.label}</span>
+
+      <RadioGroup
+        name={`pat_${row.value}_estado`}
+        value={estado}
+        onValueChange={(v) => setEstado(String(v))}
+        className="flex gap-4"
+      >
+        <Field orientation="horizontal" className="w-auto">
+          <RadioGroupItem id={`pat_${row.value}_estado-si`} value="si" />
+          <FieldLabel
+            htmlFor={`pat_${row.value}_estado-si`}
+            className="font-normal"
+          >
+            Sí
+          </FieldLabel>
+        </Field>
+        <Field orientation="horizontal" className="w-auto">
+          <RadioGroupItem id={`pat_${row.value}_estado-no`} value="no" />
+          <FieldLabel
+            htmlFor={`pat_${row.value}_estado-no`}
+            className="font-normal"
+          >
+            No
+          </FieldLabel>
+        </Field>
+      </RadioGroup>
+
+      <RadioGroup
+        name={`pat_${row.value}_nivel`}
+        value={nivel}
+        onValueChange={(v) => setNivel(String(v))}
+        className="flex flex-wrap gap-3"
+      >
+        {severidadOptions.map((sev) => (
+          <Field key={sev.value} orientation="horizontal" className="w-auto">
+            <RadioGroupItem
+              id={`pat_${row.value}_nivel-${sev.value}`}
+              value={sev.value}
+            />
+            <FieldLabel
+              htmlFor={`pat_${row.value}_nivel-${sev.value}`}
+              className="font-normal"
+            >
+              {sev.label}
+            </FieldLabel>
+          </Field>
+        ))}
+      </RadioGroup>
+    </div>
+  );
 }
 
 export function PatologiaTable({
   defaultPatologias,
-  patologiaEnumByValue, // patologiaMap: { humedad_ascendente: "HUMEDAD_ASCENDENTE_CAPILARIDAD", ... }
-  severidadEnumReverse, // { LEVE: "leve", MEDIA: "media", ALTA: "alta" }
+  patologiaEnumByValue,
+  severidadEnumReverse,
 }: {
-  defaultPatologias?: PatologiaDefault[]
-  patologiaEnumByValue: Record<string, string>
-  severidadEnumReverse: Record<string, string>
+  defaultPatologias?: PatologiaDefault[];
+  patologiaEnumByValue: Record<string, string>;
+  severidadEnumReverse: Record<string, string>;
 }) {
-  const byTipo = new Map(defaultPatologias?.map((p) => [p.tipo, p]) ?? [])
+  const byTipo = new Map(defaultPatologias?.map((p) => [p.tipo, p]) ?? []);
 
   return (
     <div className="overflow-x-auto">
@@ -281,74 +370,41 @@ export function PatologiaTable({
         </div>
         <div className="flex flex-col">
           {patologiaRows.map((row) => {
-            const enumValue = patologiaEnumByValue[row.value]
-            const existing = byTipo.get(enumValue)
-            const defaultEstado = existing ? (existing.presente ? "si" : "no") : undefined
-            const defaultNivel = existing?.severidad
-              ? severidadEnumReverse[existing.severidad]
-              : undefined
-
+            const existing = byTipo.get(patologiaEnumByValue[row.value]);
             return (
-              <div
+              <PatologiaRow
                 key={row.value}
-                className="grid grid-cols-[1.6fr_1fr_1.4fr] items-center gap-3 border-b border-border py-3 last:border-b-0"
-              >
-                <span className="text-sm font-medium text-pretty">{row.label}</span>
-                <RadioGroup
-                  name={`pat_${row.value}_estado`}
-                  defaultValue={defaultEstado} // 👈
-                  className="flex gap-4"
-                >
-                  <Field orientation="horizontal" className="w-auto">
-                    <RadioGroupItem id={`pat_${row.value}_estado-si`} value="si" />
-                    <FieldLabel htmlFor={`pat_${row.value}_estado-si`} className="font-normal">
-                      Sí
-                    </FieldLabel>
-                  </Field>
-                  <Field orientation="horizontal" className="w-auto">
-                    <RadioGroupItem id={`pat_${row.value}_estado-no`} value="no" />
-                    <FieldLabel htmlFor={`pat_${row.value}_estado-no`} className="font-normal">
-                      No
-                    </FieldLabel>
-                  </Field>
-                </RadioGroup>
-                <RadioGroup
-                  name={`pat_${row.value}_nivel`}
-                  defaultValue={defaultNivel} // 👈
-                  className="flex flex-wrap gap-3"
-                >
-                  {severidadOptions.map((sev) => (
-                    <Field key={sev.value} orientation="horizontal" className="w-auto">
-                      <RadioGroupItem id={`pat_${row.value}_nivel-${sev.value}`} value={sev.value} />
-                      <FieldLabel htmlFor={`pat_${row.value}_nivel-${sev.value}`} className="font-normal">
-                        {sev.label}
-                      </FieldLabel>
-                    </Field>
-                  ))}
-                </RadioGroup>
-              </div>
-            )
+                row={row}
+                defaultEstado={
+                  existing ? (existing.presente ? "si" : "no") : undefined
+                }
+                defaultNivel={
+                  existing?.severidad
+                    ? severidadEnumReverse[existing.severidad]
+                    : undefined
+                }
+              />
+            );
           })}
         </div>
       </div>
     </div>
-  )
+  );
 }
 /* -------------------------------------------------------------------------- */
 /*  5. Affected sectors (dinámico)                                             */
 /* -------------------------------------------------------------------------- */
 
-
 export type SectorAfectadoDraft = {
-  ambienteNombre: string
-  esExterior: boolean
-  elemento: string
-  sectorElemento: string
-  tiposPatologia: string[]
-  colorMancha: string[]
-  tamanio: string
-  observaciones: string
-}
+  ambienteNombre: string;
+  esExterior: boolean;
+  elemento: string;
+  sectorElemento: string;
+  tiposPatologia: string[];
+  colorMancha: string[];
+  tamanio: string;
+  observaciones: string;
+};
 
 const EMPTY_SECTOR: SectorAfectadoDraft = {
   ambienteNombre: "",
@@ -359,10 +415,10 @@ const EMPTY_SECTOR: SectorAfectadoDraft = {
   colorMancha: [],
   tamanio: "",
   observaciones: "",
-}
+};
 
 function toggleInArray(arr: string[], value: string) {
-  return arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value]
+  return arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
 }
 
 // Botón "clickeable" tipo chip, para las listas de selección
@@ -371,9 +427,9 @@ function ToggleChip({
   onClick,
   children,
 }: {
-  active: boolean
-  onClick: () => void
-  children: React.ReactNode
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
 }) {
   return (
     <button
@@ -387,38 +443,39 @@ function ToggleChip({
     >
       {children}
     </button>
-  )
+  );
 }
 
 export function AmbientesTable({
   defaultSectores = [],
 }: {
-  defaultSectores?: SectorAfectadoDraft[]
+  defaultSectores?: SectorAfectadoDraft[];
 }) {
-  const [sectores, setSectores] = useState<SectorAfectadoDraft[]>(defaultSectores) // 👈 antes: []
-  const [draft, setDraft] = useState<SectorAfectadoDraft>(EMPTY_SECTOR)
-  const [error, setError] = useState<string | null>(null)
+  const [sectores, setSectores] =
+    useState<SectorAfectadoDraft[]>(defaultSectores); // 👈 antes: []
+  const [draft, setDraft] = useState<SectorAfectadoDraft>(EMPTY_SECTOR);
+  const [error, setError] = useState<string | null>(null);
 
   const sectorOptions = draft.elemento
-    ? sectorElementoOptionsByElemento[draft.elemento] ?? []
-    : []
+    ? (sectorElementoOptionsByElemento[draft.elemento] ?? [])
+    : [];
 
   function handleAgregar() {
     if (!draft.ambienteNombre.trim()) {
-      setError("Nombrá el ambiente (ej. Ambiente 1, Cocina, Patio).")
-      return
+      setError("Nombrá el ambiente (ej. Ambiente 1, Cocina, Patio).");
+      return;
     }
     if (draft.tiposPatologia.length === 0) {
-      setError("Marcá al menos un tipo de patología.")
-      return
+      setError("Marcá al menos un tipo de patología.");
+      return;
     }
-    setSectores((prev) => [...prev, draft])
-    setDraft(EMPTY_SECTOR)
-    setError(null)
+    setSectores((prev) => [...prev, draft]);
+    setDraft(EMPTY_SECTOR);
+    setError(null);
   }
 
   function handleQuitar(index: number) {
-    setSectores((prev) => prev.filter((_, i) => i !== index))
+    setSectores((prev) => prev.filter((_, i) => i !== index));
   }
 
   return (
@@ -426,28 +483,67 @@ export function AmbientesTable({
       {/* Inputs ocultos para el FormData nativo */}
       {sectores.map((s, i) => (
         <div key={i}>
-          <input type="hidden" name={`sectores[${i}][ambienteNombre]`} value={s.ambienteNombre} />
-          <input type="hidden" name={`sectores[${i}][esExterior]`} value={s.esExterior ? "on" : ""} />
-          <input type="hidden" name={`sectores[${i}][elemento]`} value={s.elemento} />
-          <input type="hidden" name={`sectores[${i}][sectorElemento]`} value={s.sectorElemento} />
+          <input
+            type="hidden"
+            name={`sectores[${i}][ambienteNombre]`}
+            value={s.ambienteNombre}
+          />
+          <input
+            type="hidden"
+            name={`sectores[${i}][esExterior]`}
+            value={s.esExterior ? "on" : ""}
+          />
+          <input
+            type="hidden"
+            name={`sectores[${i}][elemento]`}
+            value={s.elemento}
+          />
+          <input
+            type="hidden"
+            name={`sectores[${i}][sectorElemento]`}
+            value={s.sectorElemento}
+          />
           {s.tiposPatologia.map((tp) => (
-            <input key={tp} type="hidden" name={`sectores[${i}][tiposPatologia]`} value={tp} />
+            <input
+              key={tp}
+              type="hidden"
+              name={`sectores[${i}][tiposPatologia]`}
+              value={tp}
+            />
           ))}
           {s.colorMancha.map((c) => (
-            <input key={c} type="hidden" name={`sectores[${i}][colorMancha]`} value={c} />
+            <input
+              key={c}
+              type="hidden"
+              name={`sectores[${i}][colorMancha]`}
+              value={c}
+            />
           ))}
-          <input type="hidden" name={`sectores[${i}][tamanio]`} value={s.tamanio} />
-          <input type="hidden" name={`sectores[${i}][observaciones]`} value={s.observaciones} />
+          <input
+            type="hidden"
+            name={`sectores[${i}][tamanio]`}
+            value={s.tamanio}
+          />
+          <input
+            type="hidden"
+            name={`sectores[${i}][observaciones]`}
+            value={s.observaciones}
+          />
         </div>
       ))}
 
       {/* Lista de sectores cargados */}
       {sectores.length === 0 ? (
-        <p className="text-sm text-muted-foreground">Todavía no cargaste sectores afectados.</p>
+        <p className="text-sm text-muted-foreground">
+          Todavía no cargaste sectores afectados.
+        </p>
       ) : (
         <div className="flex flex-col gap-2.5">
           {sectores.map((s, i) => (
-            <div key={i} className="flex items-start justify-between gap-3 rounded-md border border-border bg-background p-3">
+            <div
+              key={i}
+              className="flex items-start justify-between gap-3 rounded-md border border-border bg-background p-3"
+            >
               <div className="flex flex-col gap-1">
                 <p className="flex items-center gap-1.5 text-sm font-medium">
                   <MapPinIcon className="size-3.5 text-muted-foreground" />
@@ -455,24 +551,43 @@ export function AmbientesTable({
                 </p>
                 <p className="text-sm text-foreground">
                   {[
-                    elementoOptions.find((e: { value: string }) => e.value === s.elemento)?.label,
-                    sectorElementoOptionsByElemento[s.elemento]?.find((se: { value: string }) => se.value === s.sectorElemento)?.label,
+                    elementoOptions.find(
+                      (e: { value: string }) => e.value === s.elemento,
+                    )?.label,
+                    sectorElementoOptionsByElemento[s.elemento]?.find(
+                      (se: { value: string }) => se.value === s.sectorElemento,
+                    )?.label,
                   ]
                     .filter(Boolean)
                     .join(" — ")}
                 </p>
                 <p className="text-sm text-foreground">
                   {s.tiposPatologia
-                    .map((tp) => tipoPatologiaSectorOptions.find((o: { value: string }) => o.value === tp)?.label)
+                    .map(
+                      (tp) =>
+                        tipoPatologiaSectorOptions.find(
+                          (o: { value: string }) => o.value === tp,
+                        )?.label,
+                    )
                     .join(", ")}
                   {s.colorMancha.length > 0
                     ? ` (${s.colorMancha.map((c) => colorManchaOptions.find((o: { value: string }) => o.value === c)?.label).join(", ")})`
                     : ""}
                   {s.tamanio ? ` · ${s.tamanio}` : ""}
                 </p>
-                {s.observaciones ? <p className="text-sm text-muted-foreground">{s.observaciones}</p> : null}
+                {s.observaciones ? (
+                  <p className="text-sm text-muted-foreground">
+                    {s.observaciones}
+                  </p>
+                ) : null}
               </div>
-              <Button type="button" variant="ghost" size="icon" onClick={() => handleQuitar(i)} aria-label="Quitar sector">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => handleQuitar(i)}
+                aria-label="Quitar sector"
+              >
                 <Trash2Icon className="size-4 text-destructive" />
               </Button>
             </div>
@@ -489,14 +604,18 @@ export function AmbientesTable({
               id="draft_ambienteNombre"
               placeholder="Ej: Ambiente 1, Cocina, Patio"
               value={draft.ambienteNombre}
-              onChange={(e) => setDraft((d) => ({ ...d, ambienteNombre: e.target.value }))}
+              onChange={(e) =>
+                setDraft((d) => ({ ...d, ambienteNombre: e.target.value }))
+              }
             />
           </Field>
           <Field orientation="horizontal" className="items-center pt-6">
             <Checkbox
               id="draft_esExterior"
               checked={draft.esExterior}
-              onCheckedChange={(v) => setDraft((d) => ({ ...d, esExterior: !!v }))}
+              onCheckedChange={(v) =>
+                setDraft((d) => ({ ...d, esExterior: !!v }))
+              }
             />
             <FieldLabel htmlFor="draft_esExterior" className="font-normal">
               Es un sector exterior
@@ -510,7 +629,9 @@ export function AmbientesTable({
               <ToggleChip
                 key={preset}
                 active={draft.ambienteNombre === preset}
-                onClick={() => setDraft((d) => ({ ...d, ambienteNombre: preset }))}
+                onClick={() =>
+                  setDraft((d) => ({ ...d, ambienteNombre: preset }))
+                }
               >
                 {preset}
               </ToggleChip>
@@ -519,14 +640,20 @@ export function AmbientesTable({
         ) : null}
 
         <FieldSet>
-          <FieldLegend variant="label">Ubicación en elemento de la arquitectura</FieldLegend>
+          <FieldLegend variant="label">
+            Ubicación en elemento de la arquitectura
+          </FieldLegend>
           <div className="flex flex-wrap gap-2">
-            {elementoOptions.map((opt: { value:  any ; label:  any }) => (
+            {elementoOptions.map((opt: { value: any; label: any }) => (
               <ToggleChip
                 key={opt.value}
                 active={draft.elemento === opt.value}
                 onClick={() =>
-                  setDraft((d) => ({ ...d, elemento: opt.value, sectorElemento: "" }))
+                  setDraft((d) => ({
+                    ...d,
+                    elemento: opt.value,
+                    sectorElemento: "",
+                  }))
                 }
               >
                 {opt.label}
@@ -537,13 +664,17 @@ export function AmbientesTable({
 
         {sectorOptions.length > 0 ? (
           <FieldSet>
-            <FieldLegend variant="label">Ubicación en sector del elemento</FieldLegend>
+            <FieldLegend variant="label">
+              Ubicación en sector del elemento
+            </FieldLegend>
             <div className="flex flex-wrap gap-2">
-              {sectorOptions.map((opt: { value:  any ; label:  any }) => (
+              {sectorOptions.map((opt: { value: any; label: any }) => (
                 <ToggleChip
                   key={opt.value}
                   active={draft.sectorElemento === opt.value}
-                  onClick={() => setDraft((d) => ({ ...d, sectorElemento: opt.value }))}
+                  onClick={() =>
+                    setDraft((d) => ({ ...d, sectorElemento: opt.value }))
+                  }
                 >
                   {opt.label}
                 </ToggleChip>
@@ -555,17 +686,25 @@ export function AmbientesTable({
         <FieldSet>
           <FieldLegend variant="label">Tipo de patología</FieldLegend>
           <div className="flex flex-wrap gap-2">
-            {tipoPatologiaSectorOptions.map((opt: { value: any; label: any }) => (
-              <ToggleChip
-                key={opt.value}
-                active={draft.tiposPatologia.includes(opt.value)}
-                onClick={() =>
-                  setDraft((d) => ({ ...d, tiposPatologia: toggleInArray(d.tiposPatologia, opt.value) }))
-                }
-              >
-                {opt.label}
-              </ToggleChip>
-            ))}
+            {tipoPatologiaSectorOptions.map(
+              (opt: { value: any; label: any }) => (
+                <ToggleChip
+                  key={opt.value}
+                  active={draft.tiposPatologia.includes(opt.value)}
+                  onClick={() =>
+                    setDraft((d) => ({
+                      ...d,
+                      tiposPatologia: toggleInArray(
+                        d.tiposPatologia,
+                        opt.value,
+                      ),
+                    }))
+                  }
+                >
+                  {opt.label}
+                </ToggleChip>
+              ),
+            )}
           </div>
         </FieldSet>
 
@@ -578,7 +717,10 @@ export function AmbientesTable({
                   key={opt.value}
                   active={draft.colorMancha.includes(opt.value as string)}
                   onClick={() =>
-                    setDraft((d) => ({ ...d, colorMancha: toggleInArray(d.colorMancha, opt.value) }))
+                    setDraft((d) => ({
+                      ...d,
+                      colorMancha: toggleInArray(d.colorMancha, opt.value),
+                    }))
                   }
                 >
                   {opt.label}
@@ -590,20 +732,28 @@ export function AmbientesTable({
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Field>
-            <FieldLabel htmlFor="draft_tamanio">Tamaño de la patología</FieldLabel>
+            <FieldLabel htmlFor="draft_tamanio">
+              Tamaño de la patología
+            </FieldLabel>
             <Input
               id="draft_tamanio"
               placeholder="Ej: 40cm x 15cm"
               value={draft.tamanio}
-              onChange={(e) => setDraft((d) => ({ ...d, tamanio: e.target.value }))}
+              onChange={(e) =>
+                setDraft((d) => ({ ...d, tamanio: e.target.value }))
+              }
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="draft_observaciones">Observaciones (opcional)</FieldLabel>
+            <FieldLabel htmlFor="draft_observaciones">
+              Observaciones (opcional)
+            </FieldLabel>
             <Input
               id="draft_observaciones"
               value={draft.observaciones}
-              onChange={(e) => setDraft((d) => ({ ...d, observaciones: e.target.value }))}
+              onChange={(e) =>
+                setDraft((d) => ({ ...d, observaciones: e.target.value }))
+              }
             />
           </Field>
         </div>
@@ -616,5 +766,5 @@ export function AmbientesTable({
         </Button>
       </div>
     </div>
-  )
+  );
 }
