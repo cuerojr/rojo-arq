@@ -357,7 +357,7 @@ export function InformeDetalle({ informe }: { informe: Informe }) {
             title="Inspección General del Inmueble"
             step="Sección 04"
           />
-          <div className="mt-5 grid gap-6 md:grid-cols-2">
+          <div className="mt-5 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
                 <Home
