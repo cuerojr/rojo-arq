@@ -153,7 +153,6 @@ function SeveridadBadge({ severidad }: { severidad: Severidad | null }) {
 
 export function InformeDetalle({ informe }: { informe: Informe }) {
   const { cliente, inmueble, registroFotografico, hipotesisPreliminar } = informe;
-  console.log("🚀 ~ InformeDetalle ~ informe:", informe)
   
   const patologiasPresentes = informe.patologias?.filter(
     (p: { presente: any }) => p.presente,
