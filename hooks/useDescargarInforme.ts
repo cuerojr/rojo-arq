@@ -380,10 +380,10 @@ function buildContent(
                   text: `${patologias}${colores}${s.tamanio ? ` · ${s.tamanio}` : ""}`,
                   fontSize: 8.5,
                 },
-                ...(s.observaciones
+                ...(s.tamanioPatologia
                   ? [
                       {
-                        text: s.observaciones,
+                        text: s.tamanioPatologia,
                         fontSize: 8.5,
                         color: COLORS.textMuted,
                         margin: [0, 2, 0, 0],
